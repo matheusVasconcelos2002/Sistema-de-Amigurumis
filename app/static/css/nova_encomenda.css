@@ -1,0 +1,1137 @@
+/* =========================================================
+   NOVA ENCOMENDA
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --roxo: #6a3d83;
+    --roxo-hover: #8b5aa3;
+    --roxo-escuro: #4e2d61;
+
+    --fundo: #f7f5f8;
+    --branco: #ffffff;
+
+    --texto: #29232b;
+    --texto-suave: #77717b;
+
+    --borda: #e3dce7;
+
+    --erro: #a13f3f;
+    --sucesso: #28734b;
+}
+
+
+body.nova_encomenda {
+    margin: 0;
+    min-height: 100vh;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    background: var(--fundo);
+    color: var(--texto);
+}
+
+
+/* =========================================================
+   BARRA SUPERIOR
+========================================================= */
+
+.barra_superior {
+    position: fixed;
+    inset: 0 0 auto 0;
+
+    width: 100%;
+    height: 68px;
+
+    padding: 0 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--roxo);
+
+    box-shadow:
+        0 3px 12px rgba(47, 35, 55, 0.16);
+
+    z-index: 1000;
+}
+
+
+.topo_esquerda {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+
+.btn_menu {
+    width: 42px;
+    height: 42px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+
+    font-size: 23px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.btn_menu:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: scale(1.03);
+}
+
+
+.titulo_topo {
+    color: white;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+.nome_sistema {
+    color: white;
+
+    font-size: 15px;
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   SOBREPOSIÇÃO DO MENU
+========================================================= */
+
+.sobreposicao_menu {
+    position: fixed;
+    inset: 0;
+
+    background: rgba(25, 18, 29, 0.45);
+
+    opacity: 0;
+    visibility: hidden;
+
+    z-index: 1900;
+
+    transition:
+        opacity 0.25s ease,
+        visibility 0.25s ease;
+}
+
+
+/*
+   O script existente abre o menu adicionando
+   .menu_aberto no menu lateral.
+*/
+body:has(.menu_lateral.menu_aberto)
+.sobreposicao_menu {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/* =========================================================
+   MENU LATERAL
+========================================================= */
+
+.menu_lateral {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 270px;
+    height: 100vh;
+
+    padding: 18px 14px 14px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: var(--roxo);
+    color: white;
+
+    box-shadow:
+        7px 0 24px rgba(47, 35, 55, 0.22);
+
+    overflow-y: auto;
+
+    transform: translateX(-105%);
+
+    transition:
+        transform 0.25s ease;
+
+    z-index: 2000;
+}
+
+
+.menu_lateral.menu_aberto {
+    transform: translateX(0);
+}
+
+
+.btn_fechar_menu {
+    align-self: flex-end;
+
+    width: 40px;
+    height: 40px;
+
+    margin-bottom: 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: 0;
+    border-radius: 9px;
+
+    background: transparent;
+    color: white;
+
+    font-size: 23px;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.btn_fechar_menu:hover {
+    background: rgba(255, 255, 255, 0.13);
+    transform: rotate(90deg);
+}
+
+
+/* =========================================================
+   PERFIL DO MENU
+========================================================= */
+
+.perfil_menu {
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    margin: 0 4px 18px;
+    padding: 10px;
+
+    border-radius: 13px;
+
+    background: rgba(255, 255, 255, 0.06);
+}
+
+
+.foto_perfil_menu {
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+
+    background: #eee5f3;
+
+    font-size: 23px;
+}
+
+
+.foto_perfil_menu img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+.dados_perfil_menu {
+    min-width: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+}
+
+
+.dados_perfil_menu strong {
+    overflow: hidden;
+
+    color: white;
+
+    font-size: 14px;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.dados_perfil_menu span {
+    color: rgba(255, 255, 255, 0.72);
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   NAVEGAÇÃO
+========================================================= */
+
+.navegacao_menu {
+    display: flex;
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+
+.menu_item {
+    width: 100%;
+    min-height: 43px;
+
+    padding: 10px 12px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 11px;
+
+    border-radius: 10px;
+
+    color: white;
+    text-decoration: none;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.menu_icone {
+    width: 22px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    justify-content: center;
+
+    font-size: 17px;
+}
+
+
+.menu_texto {
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+.menu_item:hover {
+    background: var(--roxo-hover);
+    color: white;
+
+    transform: translateX(3px);
+}
+
+
+.menu_item.ativo {
+    background: var(--roxo-hover);
+
+    box-shadow:
+        0 4px 12px rgba(47, 35, 55, 0.18);
+}
+
+
+.menu_indisponivel {
+    opacity: 0.55;
+}
+
+
+.menu_indisponivel:hover {
+    transform: none;
+
+    cursor: default;
+
+    background: rgba(255, 255, 255, 0.08);
+}
+
+
+.menu_rodape {
+    margin-top: auto;
+    padding-top: 14px;
+
+    border-top:
+        1px solid rgba(255, 255, 255, 0.20);
+}
+
+
+.menu_sair:hover {
+    background: #8b3f4d;
+}
+
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
+
+.conteudo_nova_encomenda {
+    width: 100%;
+    min-height: 100vh;
+
+    padding: 105px 24px 50px;
+}
+
+
+.cabecalho_pagina,
+.formulario_encomenda,
+.mensagens_flash {
+    width: min(980px, 100%);
+
+    margin-left: auto;
+    margin-right: auto;
+}
+
+
+.cabecalho_pagina {
+    margin-bottom: 28px;
+}
+
+
+.rotulo_pagina {
+    color: var(--roxo);
+
+    font-size: 11px;
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+}
+
+
+.cabecalho_pagina h1 {
+    margin: 6px 0 8px;
+
+    color: var(--roxo-escuro);
+
+    font-size: 32px;
+    line-height: 1.15;
+}
+
+
+.cabecalho_pagina p {
+    margin: 0;
+
+    color: var(--texto-suave);
+
+    font-size: 15px;
+}
+
+
+/* =========================================================
+   MENSAGENS
+========================================================= */
+
+.mensagens_flash {
+    margin-bottom: 20px;
+}
+
+
+.mensagem_flash {
+    padding: 13px 16px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.mensagem_flash.sucesso {
+    background: #e9f7ef;
+    color: var(--sucesso);
+
+    border: 1px solid #bde5cd;
+}
+
+
+.mensagem_flash.erro {
+    background: #fff0f0;
+    color: var(--erro);
+
+    border: 1px solid #f0c4c4;
+}
+
+
+/* =========================================================
+   CARDS
+========================================================= */
+
+.card_formulario {
+    margin-bottom: 22px;
+    padding: 26px;
+
+    background: var(--branco);
+
+    border: 1px solid var(--borda);
+    border-radius: 18px;
+
+    box-shadow:
+        0 5px 18px rgba(57, 38, 66, 0.05);
+}
+
+
+.cabecalho_card {
+    margin-bottom: 24px;
+}
+
+
+.cabecalho_card > div {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+}
+
+
+.numero_card {
+    width: 38px;
+    height: 38px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background: #f0e7f4;
+    color: var(--roxo);
+
+    font-size: 13px;
+    font-weight: 800;
+}
+
+
+.cabecalho_card h2 {
+    margin: 0 0 4px;
+
+    color: #4e2d61;
+
+    font-size: 18px;
+}
+
+
+.cabecalho_card p {
+    margin: 0;
+
+    color: var(--texto-suave);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   CAMPOS
+========================================================= */
+
+.grade_campos {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+
+.campo_largo {
+    grid-column: 1 / -1;
+}
+
+
+.campo label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: #4b444e;
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+.campo label span {
+    color: var(--erro);
+}
+
+
+.campo input,
+.campo select {
+    width: 100%;
+    height: 46px;
+
+    padding: 0 13px;
+
+    border: 1px solid #d8d0dc;
+    border-radius: 10px;
+
+    background: white;
+    color: var(--texto);
+
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+
+    transition: 0.2s ease;
+}
+
+
+.campo input:focus,
+.campo select:focus {
+    border-color: var(--roxo-hover);
+
+    box-shadow:
+        0 0 0 3px rgba(139, 90, 163, 0.12);
+}
+
+
+.campo input::placeholder {
+    color: #aaa2ad;
+}
+
+
+/* =========================================================
+   FORMA DE RECEBIMENTO
+========================================================= */
+
+.forma_recebimento {
+    margin-top: 24px;
+    padding: 20px;
+
+    border: 1px solid #e5dce8;
+    border-radius: 14px;
+
+    background: #faf8fb;
+}
+
+
+.titulo_secao h3 {
+    margin: 0 0 5px;
+
+    color: var(--roxo-escuro);
+
+    font-size: 15px;
+}
+
+
+.titulo_secao span {
+    color: var(--texto-suave);
+
+    font-size: 12px;
+}
+
+
+.opcoes_recebimento {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    gap: 12px;
+
+    margin-top: 16px;
+}
+
+
+.opcao_recebimento {
+    min-height: 78px;
+
+    padding: 13px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    border: 1px solid #ddd4e1;
+    border-radius: 11px;
+
+    background: white;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.opcao_recebimento:hover {
+    border-color: var(--roxo-hover);
+    background: #fbf8fd;
+}
+
+
+.opcao_recebimento input {
+    width: 18px;
+    height: 18px;
+
+    flex-shrink: 0;
+
+    accent-color: var(--roxo);
+}
+
+
+.opcao_recebimento span {
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.opcao_recebimento strong {
+    color: #403943;
+
+    font-size: 13px;
+}
+
+
+.opcao_recebimento small {
+    color: var(--texto-suave);
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   ITENS
+========================================================= */
+
+#lista_amigurumis {
+    display: flex;
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+
+.item_encomenda {
+    padding: 20px;
+
+    border: 1px solid #e2dbe5;
+    border-radius: 15px;
+
+    background: #faf9fb;
+}
+
+
+.item_encomenda:hover {
+    border-color: #cdbbd5;
+
+    box-shadow:
+        0 4px 14px rgba(69, 42, 81, 0.06);
+}
+
+
+.cabecalho_item {
+    margin-bottom: 20px;
+    padding-bottom: 13px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    border-bottom: 1px solid #e7e0e9;
+}
+
+
+.item_rotulo {
+    color: var(--roxo);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1.2px;
+}
+
+
+.cabecalho_item h3 {
+    margin: 4px 0 0;
+
+    color: #59366b;
+
+    font-size: 17px;
+}
+
+
+.btn_remover_amigurumi {
+    padding: 8px 13px;
+
+    border: 1px solid #e5bcbc;
+    border-radius: 8px;
+
+    background: #fff5f5;
+    color: var(--erro);
+
+    font-size: 12px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.btn_remover_amigurumi:hover {
+    border-color: var(--erro);
+
+    background: var(--erro);
+    color: white;
+}
+
+
+/* =========================================================
+   BOTÃO ADICIONAR
+========================================================= */
+
+.btn_adicionar_amigurumi {
+    width: 100%;
+    min-height: 48px;
+
+    margin-top: 18px;
+
+    border: 1px dashed #a789b3;
+    border-radius: 11px;
+
+    background: #faf7fc;
+    color: #633b75;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.btn_adicionar_amigurumi:hover {
+    background: #f2eaf5;
+    border-color: #765087;
+}
+
+
+/* =========================================================
+   AÇÕES
+========================================================= */
+
+.acoes_formulario {
+    display: flex;
+    justify-content: flex-end;
+
+    gap: 12px;
+
+    margin-top: 4px;
+}
+
+
+.btn_secundario,
+.btn_registrar_encomenda {
+    min-height: 48px;
+
+    padding: 0 22px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 11px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+
+.btn_secundario {
+    border: 1px solid #d8d0dc;
+
+    background: white;
+    color: #514a54;
+}
+
+
+.btn_secundario:hover {
+    background: #f5f2f6;
+}
+
+
+.btn_registrar_encomenda {
+    min-width: 230px;
+
+    border: 0;
+
+    background: var(--roxo);
+    color: white;
+
+    box-shadow:
+        0 5px 12px rgba(106, 61, 131, 0.18);
+}
+
+
+.btn_registrar_encomenda:hover {
+    background: #58316e;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   MODAL
+========================================================= */
+
+.modal_confirmacao {
+    position: fixed;
+    inset: 0;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(36, 25, 41, 0.55);
+
+    z-index: 3000;
+}
+
+
+.modal_confirmacao.modal_aberto {
+    display: flex;
+}
+
+
+.caixa_confirmacao {
+    width: min(420px, 100%);
+
+    padding: 30px;
+
+    border-radius: 18px;
+
+    background: white;
+
+    text-align: center;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.22);
+}
+
+
+.icone_confirmacao {
+    width: 52px;
+    height: 52px;
+
+    margin: 0 auto 15px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #fff0f0;
+
+    font-size: 23px;
+}
+
+
+.caixa_confirmacao h2 {
+    margin: 0 0 10px;
+
+    color: #382f3b;
+
+    font-size: 20px;
+}
+
+
+.caixa_confirmacao p {
+    margin: 0;
+
+    color: var(--texto-suave);
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+.acoes_confirmacao {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+
+.btn_cancelar_remocao,
+.btn_confirmar_remocao {
+    flex: 1;
+
+    height: 44px;
+
+    border-radius: 9px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.btn_cancelar_remocao {
+    border: 1px solid #d8d0dc;
+
+    background: white;
+    color: #514a54;
+}
+
+
+.btn_confirmar_remocao {
+    border: 1px solid var(--erro);
+
+    background: var(--erro);
+    color: white;
+}
+
+
+/* =========================================================
+   RODAPÉ
+========================================================= */
+
+.rodape {
+    padding: 24px;
+
+    text-align: center;
+
+    color: #837b86;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .nome_sistema {
+        display: none;
+    }
+
+    .grade_campos {
+        grid-template-columns: 1fr;
+    }
+
+    .campo_largo {
+        grid-column: auto;
+    }
+
+    .opcoes_recebimento {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+@media (max-width: 600px) {
+
+    .barra_superior {
+        padding: 0 16px;
+    }
+
+    .titulo_topo {
+        font-size: 18px;
+    }
+
+    .conteudo_nova_encomenda {
+        padding: 94px 12px 35px;
+    }
+
+    .card_formulario {
+        padding: 18px;
+
+        border-radius: 14px;
+    }
+
+    .cabecalho_item {
+        align-items: flex-start;
+    }
+
+    .btn_remover_amigurumi {
+        flex-shrink: 0;
+    }
+
+    .acoes_formulario {
+        flex-direction: column-reverse;
+    }
+
+    .btn_secundario,
+    .btn_registrar_encomenda {
+        width: 100%;
+    }
+
+    .acoes_confirmacao {
+        flex-direction: column;
+    }
+}
+
+
+@media (max-width: 380px) {
+
+    .menu_lateral {
+        width: 88vw;
+    }
+
+    .cabecalho_pagina h1 {
+        font-size: 27px;
+    }
+}

@@ -1,0 +1,1089 @@
+/* =========================================================
+
+CLIENTES
+   ========================================================= */
+
+
+/* =========================================================
+   01. ÁREA PRINCIPAL
+   ========================================================= */
+
+.tela_clientes {
+    min-height: 100vh;
+}
+
+.tela_clientes .conteudo_principal {
+
+    width: 100%;
+
+    min-height: 100vh;
+
+    margin-left: 0;
+
+    padding:
+        35px
+        30px
+        45px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   02. CABEÇALHO
+   ========================================================= */
+
+.tela_clientes .cabecalho_pagina {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin:
+        0 auto 25px;
+
+    max-width: 1250px;
+}
+
+.tela_clientes .rotulo_pagina {
+
+    display: inline-block;
+
+    margin-bottom: 6px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    opacity: 0.7;
+}
+
+.tela_clientes .cabecalho_pagina h1 {
+
+    margin: 0 0 6px;
+
+    color: var(--cor-texto);
+
+    font-size: 30px;
+
+    font-weight: 700;
+}
+
+.tela_clientes .cabecalho_pagina p {
+
+    margin: 0;
+
+    color: var(--cor-texto-secundario);
+
+    font-size: 15px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   03. BOTÃO NOVO CLIENTE
+   ========================================================= */
+
+.tela_clientes .btn_principal {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding:
+        0
+        20px;
+
+    border:
+        1px solid transparent;
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        var(--cor-primaria);
+
+    color:
+        var(--cor-branca);
+
+    text-decoration: none;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        transform var(--transicao),
+        background-color var(--transicao),
+        box-shadow var(--transicao);
+}
+
+.tela_clientes .btn_principal:hover {
+
+    background-color:
+        var(--cor-primaria-escura);
+
+    box-shadow:
+        var(--sombra-hover);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   04. MENSAGENS
+   ========================================================= */
+
+.tela_clientes .mensagens {
+
+    width: 100%;
+
+    max-width: 1250px;
+
+    margin:
+        0 auto 20px;
+}
+
+.tela_clientes .mensagem {
+
+    padding:
+        13px
+        16px;
+
+    margin-bottom: 10px;
+
+    border-radius:
+        var(--raio-medio);
+
+    font-size: 14px;
+
+    line-height: 1.4;
+}
+
+.tela_clientes .mensagem:last-child {
+
+    margin-bottom: 0;
+}
+
+.tela_clientes .mensagem.sucesso {
+
+    background-color: #e8f7ee;
+
+    color: #18794e;
+
+    border:
+        1px solid #a8dfbf;
+}
+
+.tela_clientes .mensagem.erro {
+
+    background-color: #fde8e8;
+
+    color: #b42318;
+
+    border:
+        1px solid #f5b5b5;
+}
+
+.tela_clientes .mensagem.info {
+
+    background-color: #eef5ff;
+
+    color: #245ea8;
+
+    border:
+        1px solid #b8d2f2;
+}
+
+
+/* =========================================================
+   05. CARD DE CONTROLE
+   ========================================================= */
+
+.tela_clientes .card_clientes {
+
+    width: 100%;
+
+    max-width: 1250px;
+
+    margin:
+        0 auto 22px;
+
+    padding:
+        25px;
+
+    box-sizing: border-box;
+
+    background-color:
+        var(--cor-branca);
+
+    border:
+        1px solid var(--cor-borda);
+
+    border-radius:
+        var(--raio-grande);
+
+    box-shadow:
+        var(--sombra-card);
+}
+
+
+/* =========================================================
+   06. ABAS
+   ========================================================= */
+
+.tela_clientes .abas_clientes {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-bottom: 22px;
+
+    padding-bottom: 5px;
+
+    border-bottom:
+        1px solid var(--cor-borda-clara);
+
+    overflow-x: auto;
+
+    scrollbar-width: thin;
+}
+
+.tela_clientes .aba_cliente {
+
+    position: relative;
+
+    flex-shrink: 0;
+
+    padding:
+        11px
+        18px;
+
+    border: none;
+
+    border-radius:
+        9px
+        9px
+        0
+        0;
+
+    background-color:
+        transparent;
+
+    color:
+        var(--cor-texto);
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        background-color var(--transicao),
+        color var(--transicao);
+}
+
+.tela_clientes .aba_cliente:hover {
+
+    background-color:
+        var(--cor-fundo-claro);
+}
+
+.tela_clientes .aba_cliente.ativa {
+
+    background-color:
+        var(--cor-primaria-clara);
+
+    color:
+        var(--cor-primaria-escura);
+
+    font-weight: 700;
+}
+
+.tela_clientes .aba_cliente.ativa::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 12px;
+    right: 12px;
+
+    bottom: -6px;
+
+    height: 3px;
+
+    border-radius: 3px;
+
+    background-color:
+        var(--cor-primaria);
+}
+
+
+/* =========================================================
+   07. PESQUISA
+   ========================================================= */
+
+.tela_clientes .area_pesquisa {
+
+    width: 100%;
+}
+
+.tela_clientes .area_pesquisa label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color:
+        var(--cor-texto);
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+.tela_clientes .area_pesquisa input {
+
+    width: 100%;
+
+    height: 48px;
+
+    padding:
+        0
+        14px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid var(--cor-borda);
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        var(--cor-branca);
+
+    color:
+        var(--cor-texto);
+
+    font-family: inherit;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color var(--transicao),
+        box-shadow var(--transicao);
+}
+
+.tela_clientes .area_pesquisa input:focus {
+
+    border-color:
+        var(--cor-primaria);
+
+    box-shadow:
+        0 0 0 3px var(--cor-primaria-clara);
+}
+
+.tela_clientes .area_pesquisa input::placeholder {
+
+    color:
+        var(--cor-texto-claro);
+}
+
+
+/* =========================================================
+   08. TÍTULO DA LISTA
+   ========================================================= */
+
+.tela_clientes .titulo_secao {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 22px;
+}
+
+.tela_clientes .titulo_secao h2 {
+
+    margin: 0 0 5px;
+
+    color:
+        var(--cor-texto);
+
+    font-size: 20px;
+
+    font-weight: 700;
+}
+
+.tela_clientes .titulo_secao p {
+
+    margin: 0;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size: 13px;
+
+    line-height: 1.4;
+}
+
+.tela_clientes .contador_clientes {
+
+    min-width: 40px;
+
+    height: 40px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding:
+        0
+        10px;
+
+    border-radius:
+        var(--raio-redondo);
+
+    background-color:
+        var(--cor-primaria-clara);
+
+    color:
+        var(--cor-primaria-escura);
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   09. LISTA
+   ========================================================= */
+
+.tela_clientes .lista_clientes {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            auto-fit,
+            minmax(300px, 1fr)
+        );
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   10. CARD INDIVIDUAL
+   ========================================================= */
+
+.tela_clientes .cliente_card {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 18px;
+
+    padding:
+        20px;
+
+    border:
+        1px solid var(--cor-borda);
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        var(--cor-branca);
+
+    transition:
+        transform var(--transicao),
+        box-shadow var(--transicao),
+        border-color var(--transicao);
+}
+
+.tela_clientes .cliente_card:hover {
+
+    transform:
+        translateY(-2px);
+
+    box-shadow:
+        var(--sombra-hover);
+
+    border-color:
+        var(--cor-primaria-clara);
+}
+
+
+/* =========================================================
+   11. INFORMAÇÕES
+   ========================================================= */
+
+.tela_clientes .cliente_informacoes {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    min-width: 0;
+}
+
+.tela_clientes .cliente_avatar {
+
+    width: 50px;
+    height: 50px;
+
+    min-width: 50px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius:
+        var(--raio-redondo);
+
+    background-color:
+        var(--cor-primaria-clara);
+
+    color:
+        var(--cor-primaria-escura);
+
+    font-size: 22px;
+}
+
+.tela_clientes .cliente_dados {
+
+    min-width: 0;
+}
+
+.tela_clientes .cliente_dados h3 {
+
+    margin:
+        0 0 7px;
+
+    color:
+        var(--cor-texto);
+
+    font-size: 16px;
+
+    font-weight: 700;
+
+    word-break: break-word;
+}
+
+.tela_clientes .cliente_dados p {
+
+    margin:
+        4px 0;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size: 13px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   12. AÇÕES
+   ========================================================= */
+
+.tela_clientes .cliente_acoes {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+.tela_clientes .btn_secundario,
+.tela_clientes .btn_excluir {
+
+    min-height: 38px;
+
+    padding:
+        0
+        13px;
+
+    border-radius:
+        var(--raio-pequeno);
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background-color var(--transicao),
+        transform var(--transicao);
+}
+
+.tela_clientes .btn_secundario {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+}
+
+.tela_clientes .btn_secundario:hover,
+.tela_clientes .btn_excluir:hover {
+
+    transform:
+        translateY(-1px);
+}
+
+.tela_clientes .btn_excluir {
+
+    border:
+        1px solid #e4b4b4;
+
+    background-color:
+        #fff5f5;
+
+    color:
+        #b42318;
+}
+
+.tela_clientes .btn_excluir:hover {
+
+    background-color:
+        #fde8e8;
+}
+
+
+/* =========================================================
+   13. ESTADO VAZIO
+   ========================================================= */
+
+.tela_clientes .estado_vazio {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 280px;
+
+    padding:
+        35px
+        20px;
+
+    text-align: center;
+}
+
+.tela_clientes .icone_estado_vazio {
+
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 15px;
+
+    border-radius:
+        var(--raio-redondo);
+
+    background-color:
+        var(--cor-primaria-clara);
+
+    font-size: 30px;
+}
+
+.tela_clientes .estado_vazio h2 {
+
+    margin:
+        0 0 8px;
+
+    color:
+        var(--cor-texto);
+
+    font-size: 20px;
+}
+
+.tela_clientes .estado_vazio p {
+
+    max-width: 430px;
+
+    margin:
+        0 0 20px;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   14. AVISO
+   ========================================================= */
+
+.tela_clientes .aviso_clientes {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    width: 100%;
+
+    max-width: 1250px;
+
+    margin:
+        5px auto 25px;
+
+    padding:
+        17px
+        20px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid var(--cor-borda);
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        var(--cor-fundo-claro);
+}
+
+.tela_clientes .icone_aviso {
+
+    flex-shrink: 0;
+
+    font-size: 18px;
+}
+
+.tela_clientes .aviso_clientes strong {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color:
+        var(--cor-texto);
+
+    font-size: 14px;
+}
+
+.tela_clientes .aviso_clientes p {
+
+    margin: 0;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   15. RODAPÉ
+   ========================================================= */
+
+.tela_clientes .rodape_sistema {
+
+    width: 100%;
+
+    padding:
+        20px;
+
+    text-align: center;
+}
+
+.tela_clientes .rodape_direitos {
+
+    margin: 0;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size: 13px;
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   16. TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .tela_clientes
+    .conteudo_principal {
+
+        padding:
+            90px
+            20px
+            40px;
+    }
+
+    .tela_clientes
+    .cabecalho_pagina {
+
+        align-items:
+            flex-start;
+    }
+
+    .tela_clientes
+    .lista_clientes {
+
+        grid-template-columns:
+            1fr;
+    }
+}
+
+
+/* =========================================================
+   17. CELULAR
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .tela_clientes
+    .conteudo_principal {
+
+        padding:
+            82px
+            15px
+            35px;
+    }
+
+    .tela_clientes
+    .cabecalho_pagina {
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+    }
+
+    .tela_clientes
+    .cabecalho_pagina
+    .btn_principal {
+
+        width: 100%;
+    }
+
+    .tela_clientes
+    .card_clientes {
+
+        padding:
+            20px;
+    }
+
+    .tela_clientes
+    .cliente_card {
+
+        flex-direction:
+            column;
+
+        align-items:
+            stretch;
+    }
+
+    .tela_clientes
+    .cliente_acoes {
+
+        width: 100%;
+    }
+
+    .tela_clientes
+    .btn_secundario,
+    .tela_clientes
+    .btn_excluir {
+
+        flex: 1;
+    }
+}
+
+
+/* =========================================================
+   18. CELULARES PEQUENOS
+   ========================================================= */
+
+@media (max-width: 500px) {
+
+    .tela_clientes
+    .conteudo_principal {
+
+        padding:
+            80px
+            12px
+            30px;
+    }
+
+    .tela_clientes
+    .cabecalho_pagina h1 {
+
+        font-size:
+            25px;
+    }
+
+    .tela_clientes
+    .cabecalho_pagina p {
+
+        font-size:
+            14px;
+    }
+
+    .tela_clientes
+    .abas_clientes {
+
+        gap: 4px;
+
+        margin-right:
+            -2px;
+
+        padding-bottom:
+            4px;
+    }
+
+    .tela_clientes
+    .aba_cliente {
+
+        padding:
+            10px
+            14px;
+
+        font-size:
+            14px;
+    }
+
+    .tela_clientes
+    .card_clientes {
+
+        padding:
+            16px;
+
+        border-radius:
+            var(--raio-medio);
+    }
+
+    .tela_clientes
+    .titulo_secao {
+
+        align-items:
+            flex-start;
+    }
+
+    .tela_clientes
+    .cliente_informacoes {
+
+        align-items:
+            flex-start;
+    }
+
+    .tela_clientes
+    .cliente_avatar {
+
+        width:
+            44px;
+
+        height:
+            44px;
+
+        min-width:
+            44px;
+
+        font-size:
+            19px;
+    }
+
+    .tela_clientes
+    .cliente_acoes {
+
+        flex-direction:
+            column;
+    }
+
+    .tela_clientes
+    .btn_secundario,
+    .tela_clientes
+    .btn_excluir {
+
+        width:
+            100%;
+    }
+
+    .tela_clientes
+    .estado_vazio {
+
+        min-height:
+            240px;
+
+        padding:
+            30px
+            15px;
+    }
+
+    .tela_clientes
+    .estado_vazio h2 {
+
+        font-size:
+            19px;
+    }
+}

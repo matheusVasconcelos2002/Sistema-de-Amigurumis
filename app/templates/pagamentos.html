@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Pagamentos</title>
+
+
+    <!-- CSS GERAL -->
+
+    <link rel="stylesheet" href="{{ url_for(
+            'static',
+            filename='css/style.css'
+        ) }}">
+
+
+    <!-- CSS DA TELA -->
+
+    <link rel="stylesheet" href="{{ url_for(
+            'static',
+            filename='css/pagamentos.css'
+        ) }}">
+
+
+    <!-- CSS DO MENU -->
+
+    <link rel="stylesheet" href="{{ url_for(
+            'static',
+            filename='css/menu.css'
+        ) }}">
+
+</head>
+
+
+<body class="tela_pagamentos">
+
+
+    {% include "_menu.html" %}
+
+
+    <main class="conteudo_principal">
+
+
+        <!-- =====================================================
+             CABEÇALHO
+        ====================================================== -->
+
+        <header class="cabecalho_pagina">
+
+            <div>
+
+                <span class="subtitulo_pagina">
+                    Controle financeiro
+                </span>
+
+                <h1>
+                    💰 Pagamentos
+                </h1>
+
+                <p>
+                    Controle os valores recebidos,
+                    pagamentos parciais e pendências
+                    dos seus pedidos.
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- =====================================================
+             MENSAGENS
+        ====================================================== -->
+
+        {% with mensagens = get_flashed_messages(
+        with_categories=true
+        ) %}
+
+        {% if mensagens %}
+
+        <div class="mensagens_flash">
+
+            {% for categoria, mensagem in mensagens %}
+
+            <div class="mensagem_flash {{ categoria }}">
+                {{ mensagem }}
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+        {% endwith %}
+
+
+        <!-- =====================================================
+             RESUMO
+        ====================================================== -->
+
+        <section class="resumo_pagamentos">
+
+
+            <div class="resumo_card">
+
+                <div class="resumo_icone">
+                    💰
+                </div>
+
+                <div>
+
+                    <span>
+                        Total recebido
+                    </span>
+
+                    <strong>
+                        R$
+                        {{ "%.2f"|format(
+                        total_recebido|float
+                        )|replace(".", ",") }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="resumo_card">
+
+                <div class="resumo_icone">
+                    ⏳
+                </div>
+
+                <div>
+
+                    <span>
+                        Total restante
+                    </span>
+
+                    <strong>
+                        R$
+                        {{ "%.2f"|format(
+                        total_restante|float
+                        )|replace(".", ",") }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="resumo_card">
+
+                <div class="resumo_icone">
+                    📋
+                </div>
+
+                <div>
+
+                    <span>
+                        Itens com pagamento
+                    </span>
+
+                    <strong>
+                        {{ pagamentos|length }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             LEGENDA
+        ====================================================== -->
+
+        <section class="legenda_pagamentos">
+
+            <div class="legenda_item">
+
+                <span class="legenda_ponto pendente"></span>
+
+                Pendente
+
+            </div>
+
+
+            <div class="legenda_item">
+
+                <span class="legenda_ponto parcial"></span>
+
+                Parcial
+
+            </div>
+
+
+            <div class="legenda_item">
+
+                <span class="legenda_ponto pago"></span>
+
+                Pago
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             TABELA
+        ====================================================== -->
+
+        <section class="card_pagamentos">
+
+
+            <div class="titulo_tabela">
+
+                <div>
+
+                    <h2>
+                        Controle financeiro
+                    </h2>
+
+                    <p>
+                        Registre valores e acompanhe
+                        o saldo de cada item.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="tabela_container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Cliente
+                            </th>
+
+                            <th>
+                                Amigurumi
+                            </th>
+
+                            <th>
+                                Qtd.
+                            </th>
+
+                            <th>
+                                Valor unitário
+                            </th>
+
+                            <th>
+                                Total
+                            </th>
+
+                            <th>
+                                Recebido
+                            </th>
+
+                            <th>
+                                Restante
+                            </th>
+
+                            <th>
+                                Produção
+                            </th>
+
+                            <th>
+                                Pagamento
+                            </th>
+
+                            <th>
+                                Entrega
+                            </th>
+
+                            <th>
+                                Ação
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        {% if pagamentos %}
+
+
+                        {% for pagamento in pagamentos %}
+
+                        {% set item = pagamento.item_pedido %}
+                        {% set pedido = item.pedido %}
+
+                        <tr data-financeiro data-total="{{ pagamento.valor_total }}"
+                            data-recebido="{{ pagamento.total_recebido }}"
+                            data-devolvido="{{ pagamento.total_devolvido }}">
+
+
+                            <!-- CLIENTE -->
+
+                            <td>
+
+                                <div class="cliente_tabela">
+
+                                    <strong>
+                                        {{ pedido.cliente_nome_snapshot }}
+                                    </strong>
+
+                                    <small>
+                                        Pedido #{{ pedido.id }}
+                                    </small>
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- AMIGURUMI -->
+
+                            <td>
+
+                                <div class="amigurumi_tabela">
+
+                                    <span class="icone_amigurumi">
+                                        🧸
+                                    </span>
+
+                                    <strong>
+                                        {{ item.amigurumi.produto }}
+                                    </strong>
+
+                                </div>
+
+                            </td>
+
+
+                            <!-- QUANTIDADE -->
+
+                            <td>
+                                {{ item.quantidade }}
+                            </td>
+
+
+                            <!-- VALOR UNITÁRIO -->
+
+                            <td class="valor">
+
+                                R$
+
+                                {{ "%.2f"|format(
+                                item.preco_unitario|float
+                                )|replace(".", ",") }}
+
+                            </td>
+
+
+                            <!-- TOTAL -->
+
+                            <td class="valor valor_total">
+
+                                R$
+
+                                {{ "%.2f"|format(
+                                pagamento.valor_total|float
+                                )|replace(".", ",") }}
+
+                            </td>
+
+
+                            <!-- RECEBIDO -->
+
+                            <td class="valor valor_pago">
+
+                                R$
+
+                                {{ "%.2f"|format(
+                                pagamento.total_recebido|float
+                                )|replace(".", ",") }}
+
+                            </td>
+
+
+                            <!-- RESTANTE -->
+
+                            <td class="valor">
+
+                                {% if pagamento.total_restante > 0 %}
+
+                                <span class="valor_restante">
+
+                                    R$
+
+                                    {{ "%.2f"|format(
+                                    pagamento.total_restante|float
+                                    )|replace(".", ",") }}
+
+                                </span>
+
+                                {% else %}
+
+                                <span class="valor_quitado">
+                                    R$ 0,00
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <!-- PRODUÇÃO -->
+
+                            <td>
+
+                                <span class="
+                                                status_pedido
+                                                status-{{ item.status.value }}
+                                            ">
+
+                                    {% if item.status.value == 'a_fazer' %}
+
+                                    ⏳ A fazer
+
+                                    {% elif item.status.value == 'sendo_feito' %}
+
+                                    🧶 Sendo feito
+
+                                    {% elif item.status.value == 'finalizado' %}
+
+                                    ✅ Finalizado
+
+                                    {% elif item.status.value == 'entregue' %}
+
+                                    ✓ Entregue
+
+                                    {% elif item.status.value == 'cancelado' %}
+
+                                    ❌ Cancelado
+
+                                    {% endif %}
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- PAGAMENTO -->
+
+                            <td>
+
+                                <span class="
+                                                status_pagamento
+                                                status-{{ pagamento.status.value }}
+                                            ">
+
+                                    {% if pagamento.status.value == 'pendente' %}
+
+                                    ⏳ Pendente
+
+                                    {% elif pagamento.status.value == 'parcial' %}
+
+                                    🟡 Parcial
+
+                                    {% elif pagamento.status.value == 'pago' %}
+
+                                    🟢 Pago
+
+                                    {% endif %}
+
+                                </span>
+
+                            </td>
+
+
+                            <!-- ENTREGA -->
+
+                            <td>
+
+                                {% if item.data_entrega %}
+
+                                <span class="status_entrega no_prazo">
+                                    ✓ Entregue
+                                </span>
+
+                                <small>
+                                    {{ item.data_entrega.strftime('%d/%m/%Y') }}
+                                </small>
+
+
+                                {% elif item.data_prevista_entrega %}
+
+                                {% if item.data_prevista_entrega < data_hoje %} <span class="status_entrega atrasado">
+                                    ⚠️ Atrasado
+                                    </span>
+
+                                    {% else %}
+
+                                    <span class="status_entrega no_prazo">
+                                        ✓ No prazo
+                                    </span>
+
+                                    {% endif %}
+
+                                    <small>
+                                        Prevista:
+                                        {{ item.data_prevista_entrega.strftime('%d/%m/%Y') }}
+                                    </small>
+
+
+                                    {% else %}
+
+                                    <span>
+                                        Sem data
+                                    </span>
+
+                                    {% endif %}
+
+                            </td>
+
+
+                            <!-- AÇÕES -->
+
+                            <td class="celula_acao">
+
+
+                                {% if pagamento.total_restante > 0 %}
+
+                                <button type="button" class="btn_pagamento" data-abrir-pagamento data-modo="receber"
+                                    data-pagamento-id="{{ pagamento.id }}" data-url="{{ url_for(
+                                                    'pagamentos.receber',
+                                                    pagamento_id=pagamento.id
+                                                ) }}" data-maximo="{{ pagamento.total_restante }}"
+                                    data-cliente="{{ pedido.cliente_nome_snapshot }}"
+                                    data-amigurumi="{{ item.amigurumi.produto }}">
+                                    💰 Registrar
+                                </button>
+
+                                {% else %}
+
+                                <span class="pagamento_confirmado">
+                                    ✓ Concluído
+                                </span>
+
+                                {% endif %}
+
+
+                                {% if pagamento.total_recebido > 0 %}
+
+                                <button type="button" class="btn_devolucao" data-abrir-pagamento data-modo="devolver"
+                                    data-pagamento-id="{{ pagamento.id }}" data-url="{{ url_for(
+                                                    'pagamentos.devolver',
+                                                    pagamento_id=pagamento.id
+                                                ) }}" data-maximo="{{ pagamento.total_recebido }}"
+                                    data-cliente="{{ pedido.cliente_nome_snapshot }}"
+                                    data-amigurumi="{{ item.amigurumi.produto }}">
+                                    ↩ Devolver
+                                </button>
+
+                                {% endif %}
+
+
+                                <a href="{{ url_for(
+                                                'pagamentos.historico',
+                                                pagamento_id=pagamento.id
+                                            ) }}" class="btn_historico">
+                                    Histórico
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="11" class="sem_resultados">
+
+                                <div class="estado_vazio">
+
+                                    <div class="estado_vazio_icone">
+                                        💰
+                                    </div>
+
+                                    <h3>
+                                        Nenhum pagamento encontrado
+                                    </h3>
+
+                                    <p>
+                                        Os pagamentos dos seus pedidos
+                                        aparecerão aqui.
+                                    </p>
+
+                                </div>
+
+                            </td>
+
+                        </tr>
+
+                        {% endif %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             EXPLICAÇÃO
+        ====================================================== -->
+
+        <section class="aviso_pagamento">
+
+            <span class="aviso_icone">
+                ℹ️
+            </span>
+
+            <div>
+
+                <strong>
+                    Como funciona o registro
+                </strong>
+
+                <p>
+                    Você pode registrar pagamentos
+                    em partes. O sistema acumula os
+                    valores recebidos até atingir
+                    o total do item.
+                </p>
+
+                <p>
+                    Caso seja necessário devolver
+                    parte do dinheiro ao cliente,
+                    a devolução também fica registrada
+                    no histórico financeiro.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         MODAL DE PAGAMENTO
+    ====================================================== -->
+
+    <div id="modal_pagamento" class="modal_pagamento" hidden>
+
+        <div class="modal_pagamento_sobreposicao" data-fechar-pagamento></div>
+
+
+        <section class="modal_pagamento_conteudo" role="dialog" aria-modal="true"
+            aria-labelledby="titulo_modal_pagamento">
+
+            <button type="button" class="modal_fechar" data-fechar-pagamento aria-label="Fechar">
+                ×
+            </button>
+
+
+            <span id="rotulo_modal_pagamento" class="modal_rotulo">
+                Recebimento
+            </span>
+
+
+            <h2 id="titulo_modal_pagamento">
+                Registrar pagamento
+            </h2>
+
+
+            <p id="descricao_modal_pagamento" class="modal_descricao">
+                Informe o valor recebido.
+            </p>
+
+
+            <div class="modal_resumo">
+
+                <div>
+
+                    <span>
+                        Cliente
+                    </span>
+
+                    <strong id="modal_cliente">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Amigurumi
+                    </span>
+
+                    <strong id="modal_amigurumi">
+                        -
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span id="modal_label_limite">
+                        Valor restante
+                    </span>
+
+                    <strong id="modal_valor_limite">
+                        R$ 0,00
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <form id="form_pagamento" method="POST">
+
+                <div class="campo_modal">
+
+                    <label for="valor_pagamento">
+                        Valor
+                    </label>
+
+                    <input type="number" id="valor_pagamento" name="valor" min="0.01" step="0.01" inputmode="decimal"
+                        required>
+
+                    <small id="mensagem_limite">
+                        Informe um valor válido.
+                    </small>
+
+                </div>
+
+
+                <div class="campo_modal">
+
+                    <label for="data_movimentacao">
+                        Data
+                    </label>
+
+                    <input type="date" id="data_movimentacao" name="data_movimentacao" value="{{ data_hoje }}" required>
+
+                </div>
+
+
+                <div class="campo_modal">
+
+                    <label for="observacao_pagamento">
+                        Observação
+                    </label>
+
+                    <textarea id="observacao_pagamento" name="observacao" rows="3" maxlength="500"
+                        placeholder="Opcional"></textarea>
+
+                </div>
+
+
+                <div class="modal_acoes">
+
+                    <button type="button" class="btn_modal_secundario" data-fechar-pagamento>
+                        Cancelar
+                    </button>
+
+
+                    <button type="submit" class="btn_modal_principal" id="btn_confirmar_pagamento">
+                        Confirmar
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+    </div>
+
+
+    <script src="{{ url_for(
+            'static',
+            filename='script.js'
+        ) }}"></script>
+
+    <!-- =====================================================
+         JAVASCRIPT DO MENU
+    ====================================================== -->
+
+    <script src="{{ url_for(
+            'static',
+            filename='js/menu.js'
+        ) }}" defer></script>
+
+        
+    <script src="{{ url_for(
+            'static',
+            filename='js/pagamentos.js'
+        ) }}"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Configurações</title>
+
+
+    <!-- CSS GLOBAL -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+
+    <!-- CSS DA PÁGINA -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/configuracoes.css') }}"
+    >
+
+
+    <!-- CSS DO MENU -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/menu.css') }}"
+    >
+
+</head>
+
+
+<body class="tela_configuracoes">
+
+
+    <!-- =====================================================
+         MENU
+    ====================================================== -->
+
+    {% include "_menu.html" %}
+
+
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="conteudo_configuracoes">
+
+
+        <!-- =================================================
+             CABEÇALHO
+        ================================================== -->
+
+        <section class="cabecalho_configuracoes">
+
+            <div>
+
+                <span class="rotulo_configuracoes">
+                    CONTA
+                </span>
+
+
+                <h1>
+                    Configurações
+                </h1>
+
+
+                <p>
+                    Gerencie sua conta, segurança e dados do sistema.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('main.dashboard') }}"
+                class="voltar_configuracoes"
+            >
+                ← Voltar para o Dashboard
+            </a>
+
+        </section>
+
+
+
+        <!-- =================================================
+             MENSAGENS
+        ================================================== -->
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+            {% if mensagens %}
+
+                <div class="mensagens_flash">
+
+                    {% for categoria, mensagem in mensagens %}
+
+                        <div class="mensagem_flash {{ categoria }}">
+                            {{ mensagem }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+
+        <!-- =================================================
+             LISTA DE CONFIGURAÇÕES
+        ================================================== -->
+
+        <section class="lista_configuracoes">
+
+
+            <!-- =================================================
+                 DADOS PESSOAIS
+            ================================================== -->
+
+            <details class="item_configuracao">
+
+                <summary>
+
+                    <div class="icone_configuracao">
+                        👤
+                    </div>
+
+
+                    <div class="texto_configuracao">
+
+                        <strong>
+                            Dados pessoais
+                        </strong>
+
+                        <span>
+                            Nome e telefone da sua conta.
+                        </span>
+
+                    </div>
+
+                </summary>
+
+
+                <div class="conteudo_configuracao">
+
+
+                    <div class="opcao_configuracao">
+
+                        <div>
+
+                            <strong>
+                                Nome
+                            </strong>
+
+                            <p>
+                                {{ usuario.nome if usuario else "Não informado" }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="opcao_configuracao">
+
+                        <div>
+
+                            <strong>
+                                Telefone
+                            </strong>
+
+                            <p>
+                                {{ usuario.telefone if usuario else "Não informado" }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="aviso_seguranca">
+
+                        🔐 Alterações nos dados pessoais poderão
+                        exigir confirmação de identidade.
+
+                    </div>
+
+
+                </div>
+
+            </details>
+
+
+
+            <!-- =================================================
+                 E-MAIL
+            ================================================== -->
+
+            <details class="item_configuracao">
+
+                <summary>
+
+                    <div class="icone_configuracao">
+                        📧
+                    </div>
+
+
+                    <div class="texto_configuracao">
+
+                        <strong>
+                            E-mail
+                        </strong>
+
+                        <span>
+                            Gerencie o e-mail utilizado na sua conta.
+                        </span>
+
+                    </div>
+
+                </summary>
+
+
+                <div class="conteudo_configuracao">
+
+
+                    <div class="informacao_configuracao">
+
+                        <span>
+                            E-mail atual
+                        </span>
+
+
+                        <strong>
+                            {{ usuario.email if usuario else "Não informado" }}
+                        </strong>
+
+                    </div>
+
+
+
+                    <div class="opcao_configuracao">
+
+                        <div>
+
+                            <strong>
+                                Alterar e-mail
+                            </strong>
+
+                            <p>
+                                O novo endereço deverá ser confirmado
+                                antes de substituir o atual.
+                            </p>
+
+                        </div>
+
+
+                        <a
+                            href="#"
+                            class="botao_configuracao"
+                        >
+                            Alterar e-mail
+                        </a>
+
+                    </div>
+
+
+
+                    <div class="aviso_seguranca">
+
+                        🔐 Para alterar o e-mail, será necessário
+                        confirmar sua identidade e validar o novo
+                        endereço.
+
+                    </div>
+
+
+                </div>
+
+            </details>
+
+
+
+            <!-- =================================================
+                 SEGURANÇA
+            ================================================== -->
+
+            <details class="item_configuracao">
+
+                <summary>
+
+                    <div class="icone_configuracao">
+                        🔐
+                    </div>
+
+
+                    <div class="texto_configuracao">
+
+                        <strong>
+                            Segurança
+                        </strong>
+
+                        <span>
+                            Senha, autenticação em dois fatores
+                            e sessões.
+                        </span>
+
+                    </div>
+
+                </summary>
+
+
+                <div class="conteudo_configuracao">
+
+
+                    <!-- SENHA -->
+
+                    <div class="opcao_configuracao">
+
+                        <div>
+
+                            <strong>
+                                🔑 Senha
+                            </strong>
+
+                            <p>
+                                Altere a senha da sua conta com
+                                confirmação de segurança.
+                            </p>
+
+                        </div>
+
+
+                        <a
+                            href="#"
+                            class="botao_configuracao"
+                        >
+                            Alterar senha
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- 2FA -->
+
+                    <div class="opcao_configuracao">
+
+                        <div>
+
+                            <strong>
+                                🛡️ Autenticação em dois fatores
+                            </strong>
+
+                            <p>
+                                Adicione uma segunda etapa de
+                                autenticação para proteger sua conta.
+                            </p>
+
+                        </div>
+
+
+                        <span class="status_configuracao">
+
+                            Não configurado
+
+                        </span>
+
+                    </div>
+
+
+
+                    <!-- SESSÕES -->
+
+                    <div class="opcao_configuracao">
+
+                        <div>
+
+                            <strong>
+                                💻 Sessões
+                            </strong>
+
+                            <p>
+                                Consulte os dispositivos conectados
+                                e encerre sessões que você não reconhece.
+                            </p>
+
+                        </div>
+
+
+                        <a
+                            href="#"
+                            class="botao_configuracao"
+                        >
+                            Gerenciar sessões
+                        </a>
+
+                    </div>
+
+
+
+                    <div class="aviso_seguranca destaque">
+
+                        🛡️ Alterações sensíveis, como senha,
+                        e-mail e telefone, poderão exigir
+                        autenticação em dois fatores.
+
+                    </div>
+
+
+                </div>
+
+            </details>
+
+
+
+            <!-- =================================================
+                 DADOS
+            ================================================== -->
+
+            <details class="item_configuracao">
+
+                <summary>
+
+                    <div class="icone_configuracao">
+                        📦
+                    </div>
+
+
+                    <div class="texto_configuracao">
+
+                        <strong>
+                            Dados
+                        </strong>
+
+                        <span>
+                            Exporte uma cópia dos seus dados.
+                        </span>
+
+                    </div>
+
+                </summary>
+
+
+                <div class="conteudo_configuracao">
+
+
+                    <div class="opcao_configuracao">
+
+                        <div>
+
+                            <strong>
+                                Exportação dos dados
+                            </strong>
+
+                            <p>
+                                Exporte seus dados antes de realizar
+                                alterações importantes ou excluir sua conta.
+                            </p>
+
+                        </div>
+
+
+                        <a
+                            href="#"
+                            class="botao_configuracao"
+                        >
+                            Exportar dados
+                        </a>
+
+                    </div>
+
+
+
+                    <div class="informacoes_exportacao">
+
+                        <strong>
+                            A exportação poderá incluir:
+                        </strong>
+
+
+                        <ul>
+
+                            <li>
+                                Clientes
+                            </li>
+
+                            <li>
+                                Pedidos
+                            </li>
+
+                            <li>
+                                Pagamentos
+                            </li>
+
+                            <li>
+                                Dados da conta
+                            </li>
+
+                            <li>
+                                Imagens e vídeos dos amigurumis
+                            </li>
+
+                        </ul>
+
+                    </div>
+
+
+                </div>
+
+            </details>
+
+
+
+            <!-- =================================================
+                 CONTA / ÁREA DE PERIGO
+            ================================================== -->
+
+            <details
+                class="item_configuracao configuracao_perigo"
+            >
+
+                <summary>
+
+                    <div class="icone_configuracao">
+                        ⚠️
+                    </div>
+
+
+                    <div class="texto_configuracao">
+
+                        <strong>
+                            Conta
+                        </strong>
+
+                        <span>
+                            Exclusão da conta e dos dados.
+                        </span>
+
+                    </div>
+
+                </summary>
+
+
+                <div class="conteudo_configuracao">
+
+
+                    <div class="aviso_perigo">
+
+                        <strong>
+                            Excluir minha conta
+                        </strong>
+
+
+                        <p>
+                            A exclusão da conta é uma ação sensível.
+                            Antes de continuar, você deverá exportar
+                            seus dados.
+                        </p>
+
+
+                        <p>
+                            Após a confirmação, será necessário realizar
+                            uma nova autenticação para concluir a exclusão.
+                        </p>
+
+                    </div>
+
+
+                    <a
+                        href="#"
+                        class="botao_perigo"
+                    >
+                        Excluir minha conta
+                    </a>
+
+
+                </div>
+
+            </details>
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/script.js') }}"
+        defer
+    ></script>
+
+
+    <script
+        src="{{ url_for('static', filename='js/configuracoes.js') }}"
+        defer
+    ></script>
+
+
+    <script
+        src="{{ url_for('static', filename='js/menu.js') }}"
+        defer
+    ></script>
+
+
+</body>
+
+</html>

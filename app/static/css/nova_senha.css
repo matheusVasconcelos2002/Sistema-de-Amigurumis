@@ -1,0 +1,411 @@
+/* =========================================================
+   TELA: NOVA SENHA
+   Arquivo: nova_senha.css
+   ========================================================= */
+
+
+/* =========================================================
+   ESTRUTURA PRINCIPAL
+   ========================================================= */
+
+.tela_nova_senha {
+    width: 100%;
+    min-height: 100vh;
+}
+
+body.tela_nova_senha {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   ÁREA PRINCIPAL
+   ========================================================= */
+
+.tela_nova_senha main {
+    flex: 1;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+
+    padding: 40px 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.tela_nova_senha .card_nova_senha {
+    width: 100%;
+    max-width: 450px;
+
+    padding: 40px 35px;
+
+    box-sizing: border-box;
+
+    background-color: #ffffff;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 20px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.tela_nova_senha .logo_nova_senha {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 25px;
+}
+
+.tela_nova_senha .logo_nova_senha img {
+    display: block;
+
+    width: auto;
+
+    max-width: 180px;
+    max-height: 100px;
+
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   TÍTULO
+   ========================================================= */
+
+.tela_nova_senha .card_nova_senha h1 {
+    margin: 0 0 10px;
+
+    font-size: 28px;
+
+    font-weight: 700;
+
+    line-height: 1.25;
+}
+
+
+/* =========================================================
+   TEXTO PRINCIPAL
+   ========================================================= */
+
+.tela_nova_senha .texto_nova_senha {
+    margin: 0 auto 25px;
+
+    max-width: 380px;
+
+    font-size: 14px;
+
+    line-height: 1.55;
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   MENSAGENS
+   ========================================================= */
+
+.tela_nova_senha .mensagem_erro,
+.tela_nova_senha .mensagem_sucesso,
+.tela_nova_senha .mensagem {
+    width: 100%;
+
+    margin-bottom: 18px;
+
+    padding: 12px 14px;
+
+    box-sizing: border-box;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+
+    line-height: 1.45;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   FORMULÁRIO
+   ========================================================= */
+
+.tela_nova_senha .formulario_nova_senha {
+    width: 100%;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   CAMPOS
+   ========================================================= */
+
+.tela_nova_senha .campo {
+    width: 100%;
+
+    margin-bottom: 18px;
+}
+
+.tela_nova_senha .campo label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+/* =========================================================
+   CAMPO DE SENHA
+   ========================================================= */
+
+.tela_nova_senha .campo_senha {
+    position: relative;
+
+    width: 100%;
+}
+
+.tela_nova_senha .campo_senha input {
+    width: 100%;
+
+    min-height: 46px;
+
+    padding: 0 48px 0 13px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 9px;
+
+    background-color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.tela_nova_senha .campo_senha input::placeholder {
+    opacity: 0.5;
+}
+
+.tela_nova_senha .campo_senha input:hover {
+    border-color: #cccccc;
+}
+
+.tela_nova_senha .campo_senha input:focus {
+    outline: none;
+
+    border-color: #999999;
+
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+}
+
+
+/* =========================================================
+   BOTÃO MOSTRAR SENHA
+   ========================================================= */
+
+.tela_nova_senha .btn_mostrar_senha {
+    position: absolute;
+
+    top: 50%;
+    right: 5px;
+
+    width: 38px;
+    height: 38px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background-color: transparent;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    opacity: 0.65;
+
+    transition:
+        background-color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.tela_nova_senha .btn_mostrar_senha:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+
+    opacity: 1;
+}
+
+.tela_nova_senha .btn_mostrar_senha:focus {
+    outline: none;
+
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   BOTÃO CRIAR NOVA SENHA
+   ========================================================= */
+
+.tela_nova_senha .btn_resetar {
+    width: 100%;
+
+    min-height: 46px;
+
+    margin-top: 5px;
+
+    padding: 0 20px;
+
+    border: none;
+
+    border-radius: 9px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.tela_nova_senha .btn_resetar:hover {
+    transform: translateY(-1px);
+
+    opacity: 0.93;
+}
+
+.tela_nova_senha .btn_resetar:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   LINK VOLTAR PARA LOGIN
+   ========================================================= */
+
+.tela_nova_senha .voltar_login {
+    display: inline-block;
+
+    margin-top: 22px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: opacity 0.2s ease;
+}
+
+.tela_nova_senha .voltar_login:hover {
+    opacity: 0.7;
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE — TABLET/CELULAR
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .tela_nova_senha main {
+        padding: 30px 15px;
+    }
+
+    .tela_nova_senha .card_nova_senha {
+        padding: 32px 22px;
+
+        border-radius: 16px;
+    }
+
+    .tela_nova_senha .logo_nova_senha img {
+        max-width: 155px;
+        max-height: 85px;
+    }
+
+    .tela_nova_senha .card_nova_senha h1 {
+        font-size: 24px;
+    }
+
+    .tela_nova_senha .texto_nova_senha {
+        font-size: 13px;
+    }
+
+    .tela_nova_senha .campo_senha input {
+        min-height: 45px;
+    }
+
+    .tela_nova_senha .btn_resetar {
+        min-height: 45px;
+    }
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE — CELULAR PEQUENO
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .tela_nova_senha main {
+        padding: 20px 12px;
+    }
+
+    .tela_nova_senha .card_nova_senha {
+        padding: 28px 18px;
+    }
+
+    .tela_nova_senha .card_nova_senha h1 {
+        font-size: 22px;
+    }
+
+    .tela_nova_senha .logo_nova_senha img {
+        max-width: 140px;
+    }
+}

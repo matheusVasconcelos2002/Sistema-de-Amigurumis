@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Clientes</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
+    
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+
+</head>
+
+<body class="tela_clientes">
+
+    {% include "_menu.html" %}
+
+    <main class="conteudo_principal">
+
+        <section class="cabecalho_pagina">
+
+            <div>
+
+                <span class="rotulo_pagina">
+                    CLIENTES
+                </span>
+
+                <h1>
+                    Clientes
+                </h1>
+
+                <p>
+                    Gerencie os clientes cadastrados no sistema.
+                </p>
+
+            </div>
+
+            <a href="{{ url_for('clientes.novo') }}" class="btn_principal">
+                + Novo cliente
+            </a>
+
+        </section>
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+        {% if mensagens %}
+
+        <section class="mensagens">
+
+            {% for categoria, mensagem in mensagens %}
+
+            <div class="mensagem {{ categoria }}">
+                {{ mensagem }}
+            </div>
+
+            {% endfor %}
+
+        </section>
+
+        {% endif %}
+
+        {% endwith %}
+
+        <section class="card_clientes">
+
+            <div class="abas_clientes">
+
+                <button type="button" class="aba_cliente ativa" id="aba_ativos">
+                    Ativos
+                </button>
+
+                <button type="button" class="aba_cliente" id="aba_excluidos">
+                    Excluídos
+                </button>
+
+            </div>
+
+            <div class="area_pesquisa">
+
+                <label for="pesquisa_cliente">
+                    Pesquisar cliente
+                </label>
+
+                <input type="search" id="pesquisa_cliente" name="pesquisa_cliente"
+                    placeholder="Digite o nome ou telefone do cliente" autocomplete="off">
+
+            </div>
+
+        </section>
+
+        <section class="card_clientes" id="listaAtivos">
+
+            <div class="titulo_secao">
+
+                <div>
+
+                    <h2>
+                        Clientes ativos
+                    </h2>
+
+                    <p>
+                        Clientes cadastrados atualmente no sistema.
+                    </p>
+
+                </div>
+
+                <span class="contador_clientes">
+                    {{ clientes|length if clientes else 0 }}
+                </span>
+
+            </div>
+
+            {% if clientes %}
+
+            <div class="lista_clientes">
+
+                {% for cliente in clientes %}
+
+                <article class="cliente_card">
+
+                    <div class="cliente_informacoes">
+
+                        <div class="cliente_avatar">
+                            👤
+                        </div>
+
+                        <div class="cliente_dados">
+
+                            <h3>
+                                {{ cliente.nome }}
+                            </h3>
+
+                            <p>
+                                📞 {{ cliente.telefone }}
+                            </p>
+
+                            <p>
+                                📍
+                                {{ cliente.cidade }}
+                                -
+                                {{ cliente.estado }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="cliente_acoes">
+
+                        <a href="{{ url_for(
+                                        'clientes.editar',
+                                        cliente_id=cliente.id
+                                    ) }}" class="btn_secundario">
+                            Editar
+                        </a>
+
+                        <form action="{{ url_for(
+                                        'clientes.excluir',
+                                        cliente_id=cliente.id
+                                    ) }}" method="POST">
+
+                            <button type="submit" class="btn_excluir">
+                                Excluir
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="estado_vazio">
+
+                <div class="icone_estado_vazio">
+                    👥
+                </div>
+
+                <h2>
+                    Nenhum cliente cadastrado
+                </h2>
+
+                <p>
+                    Cadastre seu primeiro cliente para começar
+                    a registrar suas encomendas.
+                </p>
+
+                <a href="{{ url_for('clientes.novo') }}" class="btn_principal">
+                    + Cadastrar primeiro cliente
+                </a>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+        <section class="card_clientes" id="listaExcluidos">
+
+            <div class="titulo_secao">
+
+                <div>
+
+                    <h2>
+                        Clientes excluídos
+                    </h2>
+
+                    <p>
+                        Clientes que foram movidos para a lixeira.
+                    </p>
+
+                </div>
+
+                <span class="contador_clientes">
+                    {{ clientes_excluidos|length if clientes_excluidos else 0 }}
+                </span>
+
+            </div>
+
+            {% if clientes_excluidos %}
+
+            <div class="lista_clientes">
+
+                {% for cliente in clientes_excluidos %}
+
+                <article class="cliente_card">
+
+                    <div class="cliente_informacoes">
+
+                        <div class="cliente_avatar">
+                            👤
+                        </div>
+
+                        <div class="cliente_dados">
+
+                            <h3>
+                                {{ cliente.nome }}
+                            </h3>
+
+                            <p>
+                                📞 {{ cliente.telefone }}
+                            </p>
+
+                            <p>
+                                📍
+                                {{ cliente.cidade }}
+                                -
+                                {{ cliente.estado }}
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                    <div class="cliente_acoes">
+
+                        <form action="{{ url_for(
+                                        'clientes.restaurar',
+                                        cliente_id=cliente.id
+                                    ) }}" method="POST">
+
+                            <button type="submit" class="btn_restaurar">
+                                Restaurar
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </article>
+
+                {% endfor %}
+
+            </div>
+
+            {% else %}
+
+            <div class="estado_vazio">
+
+                <div class="icone_estado_vazio">
+                    🗑️
+                </div>
+
+                <h2>
+                    Nenhum cliente excluído
+                </h2>
+
+                <p>
+                    A lixeira de clientes está vazia.
+                </p>
+
+            </div>
+
+            {% endif %}
+
+        </section>
+
+        <section class="aviso_clientes">
+
+            <span class="icone_aviso">
+                ℹ️
+            </span>
+
+            <div>
+
+                <strong>
+                    Sobre clientes excluídos
+                </strong>
+
+                <p>
+                    Clientes excluídos não serão apagados
+                    permanentemente. Eles poderão ser restaurados
+                    posteriormente pela aba "Excluídos".
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="rodape_sistema">
+
+        <p class="rodape_direitos">
+            Sistema de Encomendas de Amigurumis
+        </p>
+
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/clientes.js') }}" defer></script>
+
+    <script src="{{ url_for('static', filename='js/menu.js') }}" defer></script>
+
+</body>
+
+</html>

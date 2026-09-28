@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Suporte - Amigurumis</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/menu.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/suporte.css') }}"
+    >
+</head>
+
+<body class="tela_suporte">
+
+    {% include "_menu.html" %}
+
+    <main class="conteudo_suporte">
+
+        <section class="cabecalho_suporte">
+
+            <span class="icone_suporte">🛠️</span>
+
+            <div>
+                <h1>Suporte</h1>
+
+                <p>
+                    Precisa de ajuda com o sistema?
+                    Entre em contato diretamente comigo.
+                </p>
+            </div>
+
+        </section>
+
+
+        <section class="card_suporte">
+
+            <div class="icone_card_suporte">
+                💬
+            </div>
+
+            <div class="conteudo_card_suporte">
+
+                <h2>
+                    Como podemos ajudar?
+                </h2>
+
+                <p>
+                    Se você encontrou algum problema, tem alguma
+                    dúvida ou precisa de orientação para utilizar
+                    o sistema, entre em contato comigo.
+                </p>
+
+                <p>
+                    Para que eu possa ajudar mais rapidamente,
+                    procure informar o que aconteceu, em qual
+                    tela você estava e, se possível, descreva
+                    a ação que estava realizando quando o
+                    problema ocorreu.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <section class="contato_suporte">
+
+            <div class="cabecalho_contato">
+
+                <span class="icone_contato">📧</span>
+
+                <div>
+                    <h2>Entre em contato</h2>
+
+                    <p>
+                        Clique no botão abaixo para enviar
+                        uma mensagem diretamente para mim.
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="dados_contato">
+
+                <span class="rotulo_contato">
+                    E-mail de suporte
+                </span>
+
+                <a
+                    href="{{ suporte.link_contato }}"
+                    class="email_suporte"
+                >
+                    {{ suporte.email }}
+                </a>
+
+            </div>
+
+
+            <a
+                href="{{ suporte.link_contato }}"
+                class="botao_suporte"
+            >
+                <span>✉️</span>
+                Entrar em contato
+            </a>
+
+        </section>
+
+
+        <section class="orientacao_suporte">
+
+            <div class="icone_orientacao">
+                💡
+            </div>
+
+            <div>
+
+                <h2>
+                    Antes de entrar em contato
+                </h2>
+
+                <p>
+                    Ao enviar sua mensagem, procure informar
+                    o que aconteceu, em qual tela você estava
+                    e o que estava tentando fazer. Se houver
+                    uma mensagem de erro, envie também o texto
+                    ou uma captura de tela.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="rodape_suporte">
+
+        <p>
+            Sistema de Amigurumis
+        </p>
+
+        <span>
+            Suporte e atendimento
+        </span>
+
+    </footer>
+
+
+    <script
+        src="{{ url_for('static', filename='js/script.js') }}"
+    ></script>
+
+    <script
+        src="{{ url_for('static', filename='js/menu.js') }}"
+    ></script>
+
+    <script
+        src="{{ url_for('static', filename='js/suporte.js') }}"
+    ></script>
+
+</body>
+
+</html>

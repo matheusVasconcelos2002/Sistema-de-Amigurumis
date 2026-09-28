@@ -1,0 +1,579 @@
+/* =========================================================
+   TELA: E-MAIL ENVIADO
+========================================================= */
+
+/* =========================================================
+   ESTRUTURA GERAL
+========================================================= */
+
+body.tela_email_enviado {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    box-sizing: border-box;
+}
+
+/* =========================================================
+   ÁREA PRINCIPAL
+========================================================= */
+
+body.tela_email_enviado main.tela_email_enviado {
+    width: 100%;
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+body.tela_email_enviado .card_email {
+    width: 100%;
+    max-width: 520px;
+
+    padding: 40px 35px;
+
+    box-sizing: border-box;
+
+    background-color: #ffffff;
+
+    border: 1px solid #eeeeee;
+    border-radius: 20px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+body.tela_email_enviado .logo {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 25px;
+}
+
+body.tela_email_enviado .logo img {
+    display: block;
+
+    width: 105px;
+    height: 105px;
+
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   ÍCONE DE SUCESSO
+========================================================= */
+
+body.tela_email_enviado .icone_sucesso {
+    width: 72px;
+    height: 72px;
+
+    margin: 0 auto 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background-color: #e8f7ed;
+    color: #2e9b57;
+
+    font-size: 38px;
+    font-weight: 700;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   CONTEÚDO
+========================================================= */
+
+body.tela_email_enviado .conteudo_email {
+    width: 100%;
+}
+
+body.tela_email_enviado .conteudo_email h1 {
+    margin: 0 0 15px;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    line-height: 1.25;
+
+    color: #302a32;
+}
+
+body.tela_email_enviado .texto_principal {
+    max-width: 430px;
+
+    margin: 0 auto 20px;
+
+    font-size: 15px;
+    line-height: 1.6;
+
+    color: #6f6671;
+}
+
+
+/* =========================================================
+   AVISO SOBRE SPAM
+========================================================= */
+
+body.tela_email_enviado .aviso_email {
+    width: 100%;
+
+    margin: 0 auto 20px;
+    padding: 15px 18px;
+
+    box-sizing: border-box;
+
+    border-radius: 12px;
+
+    background-color: #fff8e8;
+    border: 1px solid #f0d99a;
+}
+
+body.tela_email_enviado .aviso_email p {
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    color: #6f6671;
+}
+
+body.tela_email_enviado .aviso_email strong {
+    font-weight: 700;
+
+    color: #554d55;
+}
+
+
+/* =========================================================
+   VALIDADE DO LINK
+========================================================= */
+
+body.tela_email_enviado .validade_link {
+    margin: 0 0 25px;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    color: #6f6671;
+}
+
+body.tela_email_enviado .validade_link strong {
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   BOTÃO VOLTAR
+========================================================= */
+
+body.tela_email_enviado .btn_voltar {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 46px;
+
+    padding: 0 24px;
+
+    box-sizing: border-box;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+body.tela_email_enviado .btn_voltar:hover {
+    transform: translateY(-1px);
+
+    opacity: 0.92;
+}
+
+body.tela_email_enviado .btn_voltar:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   RODAPÉ
+========================================================= */
+
+body.tela_email_enviado .rodape {
+    width: 100%;
+
+    flex-shrink: 0;
+
+    padding: 20px 20px 24px;
+
+    box-sizing: border-box;
+
+    background: transparent;
+}
+
+body.tela_email_enviado .rodape_conteudo {
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+    text-align: center;
+}
+
+body.tela_email_enviado .rodape_linha {
+    display: block;
+
+    width: 100%;
+    max-width: 390px;
+
+    height: 1px;
+
+    margin: 0 auto 12px;
+
+    background-color: #e1d8d2;
+}
+
+body.tela_email_enviado .rodape_mensagem {
+    max-width: 550px;
+
+    margin: 0 auto 10px;
+
+    font-size: 12px;
+    line-height: 1.5;
+
+    color: #8a8380;
+}
+
+body.tela_email_enviado .rodape_email {
+    display: inline-block;
+
+    margin-bottom: 10px;
+
+    color: #765c7a;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition: opacity 0.2s ease;
+}
+
+body.tela_email_enviado .rodape_email:hover {
+    opacity: 0.7;
+}
+
+body.tela_email_enviado .rodape_direitos {
+    margin: 0;
+
+    font-size: 11px;
+
+    color: #8a8380;
+}
+
+
+/* =========================================================
+   TABLETS
+========================================================= */
+
+@media (max-width: 800px) {
+
+    body.tela_email_enviado main.tela_email_enviado {
+        padding: 35px 18px;
+    }
+
+    body.tela_email_enviado .card_email {
+        max-width: 500px;
+
+        padding: 36px 30px;
+    }
+}
+
+
+/* =========================================================
+   CELULARES
+========================================================= */
+
+@media (max-width: 600px) {
+
+    body.tela_email_enviado main.tela_email_enviado {
+        padding: 28px 15px 25px;
+    }
+
+    body.tela_email_enviado .card_email {
+        width: 100%;
+        max-width: 100%;
+
+        padding: 32px 22px;
+
+        border-radius: 16px;
+    }
+
+
+    /* -----------------------------------------
+       LOGO
+    ----------------------------------------- */
+
+    body.tela_email_enviado .logo {
+        margin-bottom: 22px;
+    }
+
+    body.tela_email_enviado .logo img {
+        width: 105px;
+        height: 105px;
+    }
+
+
+    /* -----------------------------------------
+       ÍCONE
+    ----------------------------------------- */
+
+    body.tela_email_enviado .icone_sucesso {
+        width: 64px;
+        height: 64px;
+
+        margin-bottom: 18px;
+
+        font-size: 32px;
+    }
+
+
+    /* -----------------------------------------
+       TÍTULO
+    ----------------------------------------- */
+
+    body.tela_email_enviado .conteudo_email h1 {
+        font-size: 24px;
+    }
+
+
+    /* -----------------------------------------
+       TEXTO
+    ----------------------------------------- */
+
+    body.tela_email_enviado .texto_principal {
+        font-size: 14px;
+    }
+
+
+    /* -----------------------------------------
+       AVISO
+    ----------------------------------------- */
+
+    body.tela_email_enviado .aviso_email {
+        padding: 14px;
+    }
+
+    body.tela_email_enviado .aviso_email p {
+        font-size: 13px;
+    }
+
+
+    /* -----------------------------------------
+       VALIDADE
+    ----------------------------------------- */
+
+    body.tela_email_enviado .validade_link {
+        font-size: 13px;
+    }
+
+
+    /* -----------------------------------------
+       BOTÃO
+    ----------------------------------------- */
+
+    body.tela_email_enviado .btn_voltar {
+        width: 100%;
+    }
+
+
+    /* -----------------------------------------
+       RODAPÉ
+    ----------------------------------------- */
+
+    body.tela_email_enviado .rodape {
+        padding: 18px 15px 22px;
+    }
+
+    body.tela_email_enviado .rodape_linha {
+        max-width: 100%;
+
+        margin-bottom: 11px;
+    }
+
+    body.tela_email_enviado .rodape_mensagem {
+        font-size: 11px;
+    }
+
+    body.tela_email_enviado .rodape_email {
+        font-size: 12px;
+    }
+
+    body.tela_email_enviado .rodape_direitos {
+        font-size: 10px;
+    }
+}
+
+
+/* =========================================================
+   CELULARES PEQUENOS
+========================================================= */
+
+@media (max-width: 400px) {
+
+    body.tela_email_enviado main.tela_email_enviado {
+        padding: 20px 12px 20px;
+    }
+
+    body.tela_email_enviado .card_email {
+        padding: 28px 18px;
+
+        border-radius: 15px;
+    }
+
+
+    /* -----------------------------------------
+       LOGO
+    ----------------------------------------- */
+
+    body.tela_email_enviado .logo img {
+        width: 95px;
+        height: 95px;
+    }
+
+
+    /* -----------------------------------------
+       ÍCONE
+    ----------------------------------------- */
+
+    body.tela_email_enviado .icone_sucesso {
+        width: 58px;
+        height: 58px;
+
+        font-size: 29px;
+    }
+
+
+    /* -----------------------------------------
+       TÍTULO
+    ----------------------------------------- */
+
+    body.tela_email_enviado .conteudo_email h1 {
+        font-size: 22px;
+    }
+
+
+    /* -----------------------------------------
+       TEXTO
+    ----------------------------------------- */
+
+    body.tela_email_enviado .texto_principal {
+        font-size: 13px;
+    }
+
+
+    /* -----------------------------------------
+       AVISO
+    ----------------------------------------- */
+
+    body.tela_email_enviado .aviso_email p {
+        font-size: 12px;
+    }
+
+
+/* =========================================================
+   RODAPÉ
+========================================================= */
+
+body.tela_email_enviado .rodape {
+    width: 100%;
+    flex-shrink: 0;
+
+    padding: 18px 20px 24px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+}
+
+
+body.tela_email_enviado .rodape_conteudo {
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+body.tela_email_enviado .rodape_linha {
+    display: block;
+
+    width: 150px;
+    height: 1px;
+
+    margin: 0 auto 10px;
+
+    background-color: #d8d1cc;
+
+    opacity: 0.8;
+}
+
+
+body.tela_email_enviado .rodape_direitos {
+    margin: 0;
+
+    text-align: center;
+
+    font-size: 11px;
+    line-height: 1.4;
+
+    color: #8a8380;
+}

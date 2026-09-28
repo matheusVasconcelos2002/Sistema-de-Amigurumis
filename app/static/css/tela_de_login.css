@@ -1,0 +1,587 @@
+/* =========================================================
+   TELA DE LOGIN
+   ========================================================= */
+
+
+/* =========================================================
+   01. ESTRUTURA PRINCIPAL
+   ========================================================= */
+
+.tela_login {
+    width: 100%;
+    min-height: 100vh;
+}
+
+
+main.tela_login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: calc(100vh - 180px);
+
+    padding: 40px 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   02. CARD DE LOGIN
+   ========================================================= */
+
+.tela_login .card_login {
+    width: 100%;
+    max-width: 430px;
+
+    padding: 40px 35px;
+
+    box-sizing: border-box;
+
+    background-color: #ffffff;
+
+    border: 1px solid #eeeeee;
+    border-radius: 20px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+/* =========================================================
+   03. LOGO
+   ========================================================= */
+
+.tela_login .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 24px;
+}
+
+
+.tela_login .logo img {
+    display: block;
+
+    width: 130px;
+    height: 130px;
+
+    max-width: 100%;
+
+    object-fit: contain;
+}
+
+/* =========================================================
+   FOTO DA ÚLTIMA CONTA UTILIZADA
+   ========================================================= */
+
+.tela_login .logo .foto_login {
+    border-radius: 50%;
+
+    object-fit: cover;
+
+    border: 3px solid #957E98;
+
+    box-shadow:
+        0 5px 16px rgba(75, 58, 78, 0.18);
+}
+
+/* =========================================================
+   04. CABEÇALHO
+   ========================================================= */
+
+.tela_login .cabecalho_login {
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+
+.tela_login .cabecalho_login h1 {
+    margin: 0 0 8px;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    line-height: 1.25;
+}
+
+
+.tela_login .cabecalho_login p {
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   05. MENSAGENS
+   ========================================================= */
+
+.tela_login .mensagem_erro,
+.tela_login .mensagem_sucesso,
+.tela_login .mensagem {
+    width: 100%;
+
+    margin-bottom: 18px;
+    padding: 12px 14px;
+
+    box-sizing: border-box;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+    line-height: 1.45;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   06. FORMULÁRIO
+   ========================================================= */
+
+.tela_login .form_login {
+    width: 100%;
+}
+
+
+.tela_login .campo_formulario {
+    width: 100%;
+
+    margin-bottom: 18px;
+}
+
+
+.tela_login .campo_formulario label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+
+.tela_login .campo_formulario input {
+    width: 100%;
+
+    min-height: 46px;
+
+    padding: 0 13px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dddddd;
+    border-radius: 9px;
+
+    background-color: #ffffff;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+
+.tela_login .campo_formulario input::placeholder {
+    opacity: 0.5;
+}
+
+
+.tela_login .campo_formulario input:hover {
+    border-color: #cccccc;
+}
+
+
+.tela_login .campo_formulario input:focus {
+    outline: none;
+
+    border-color: #957E98;
+
+    box-shadow:
+        0 0 0 3px rgba(149, 126, 152, 0.15);
+}
+
+
+/* =========================================================
+   07. CAMPO DE SENHA
+   ========================================================= */
+
+.tela_login .campo_senha {
+    position: relative;
+
+    width: 100%;
+}
+
+
+.tela_login .campo_senha input {
+    padding-right: 48px;
+}
+
+
+.tela_login .btn_mostrar_senha {
+    position: absolute;
+
+    top: 50%;
+    right: 5px;
+
+    width: 38px;
+    height: 38px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 7px;
+
+    background-color: transparent;
+
+    font-size: 17px;
+
+    cursor: pointer;
+
+    opacity: 0.65;
+
+    transition:
+        background-color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+.tela_login .btn_mostrar_senha:hover {
+    background-color: rgba(149, 126, 152, 0.08);
+
+    opacity: 1;
+}
+
+
+.tela_login .btn_mostrar_senha:focus {
+    outline: none;
+
+    box-shadow:
+        0 0 0 2px rgba(149, 126, 152, 0.15);
+}
+
+
+/* =========================================================
+   08. BOTÃO ENTRAR
+   ========================================================= */
+
+.tela_login .btn_principal {
+    width: 100%;
+
+    min-height: 46px;
+
+    margin-top: 5px;
+
+    padding: 0 20px;
+
+    border: none;
+    border-radius: 9px;
+
+    background-color: #957E98;
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.tela_login .btn_principal:hover {
+    background-color: #765C7A;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 14px rgba(75, 58, 78, 0.16);
+}
+
+
+.tela_login .btn_principal:active {
+    transform: translateY(0);
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   09. LINKS
+   ========================================================= */
+
+.tela_login .links_login {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+
+.tela_login .links_login a {
+    color: #765C7A;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+.tela_login .links_login a:hover {
+    color: #957E98;
+
+    opacity: 0.8;
+
+    text-decoration: underline;
+}
+
+
+/* =========================================================
+   10. RODAPÉ
+   ========================================================= */
+
+body.tela_login .rodape {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    margin: 0;
+
+    background-color: transparent;
+}
+
+
+body.tela_login .rodape .rodape_conteudo {
+    width: 100%;
+    max-width: 900px;
+
+    margin: 0 auto;
+
+    padding: 22px 20px 28px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+}
+
+
+body.tela_login .rodape .rodape_linha {
+    display: block;
+
+    width: 55px;
+    height: 1px;
+
+    margin: 0 auto 15px;
+
+    background-color: #957E98;
+
+    opacity: 0.35;
+}
+
+
+body.tela_login .rodape .rodape_mensagem {
+    max-width: 560px;
+
+    margin: 0 auto 8px;
+
+    color: #6F6671;
+
+    font-size: 12px;
+
+    line-height: 1.5;
+
+    opacity: 0.8;
+}
+
+
+body.tela_login .rodape .rodape_email {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    color: #765C7A;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+
+body.tela_login .rodape .rodape_email:hover {
+    color: #957E98;
+
+    opacity: 0.8;
+
+    text-decoration: underline;
+}
+
+
+body.tela_login .rodape .rodape_direitos {
+    margin: 0;
+
+    color: #8B828D;
+
+    font-size: 11px;
+
+    opacity: 0.75;
+}
+
+
+/* =========================================================
+   11. RESPONSIVIDADE — TABLET
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    main.tela_login {
+        min-height: calc(100vh - 160px);
+
+        padding: 30px 15px;
+    }
+
+
+    .tela_login .card_login {
+        padding: 32px 22px;
+
+        border-radius: 16px;
+    }
+
+
+    .tela_login .logo {
+        margin-bottom: 20px;
+    }
+
+
+    .tela_login .logo img {
+        width: 115px;
+        height: 115px;
+    }
+
+
+    .tela_login .cabecalho_login h1 {
+        font-size: 24px;
+    }
+
+
+    .tela_login .cabecalho_login p {
+        font-size: 13px;
+    }
+
+
+    .tela_login .campo_formulario input {
+        min-height: 45px;
+    }
+
+
+    .tela_login .btn_principal {
+        min-height: 45px;
+    }
+
+
+    body.tela_login .rodape .rodape_conteudo {
+        padding: 20px 15px 25px;
+    }
+
+
+    body.tela_login .rodape .rodape_mensagem {
+        max-width: 400px;
+
+        font-size: 11px;
+    }
+
+
+    body.tela_login .rodape .rodape_email {
+        font-size: 11px;
+    }
+
+
+    body.tela_login .rodape .rodape_direitos {
+        font-size: 10px;
+    }
+}
+
+
+/* =========================================================
+   12. RESPONSIVIDADE — CELULARES PEQUENOS
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    main.tela_login {
+        padding: 20px 12px;
+    }
+
+
+    .tela_login .card_login {
+        padding: 28px 18px;
+    }
+
+
+    .tela_login .logo {
+        margin-bottom: 18px;
+    }
+
+
+    .tela_login .logo img {
+        width: 100px;
+        height: 100px;
+    }
+
+
+    .tela_login .cabecalho_login h1 {
+        font-size: 22px;
+    }
+
+
+    .tela_login .links_login {
+        gap: 9px;
+    }
+
+
+    body.tela_login .rodape .rodape_conteudo {
+        padding: 18px 12px 22px;
+    }
+
+
+    body.tela_login .rodape .rodape_mensagem {
+        max-width: 320px;
+
+        font-size: 10px;
+    }
+}

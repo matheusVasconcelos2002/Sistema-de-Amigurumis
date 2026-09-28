@@ -1,0 +1,757 @@
+/* ==========================================================
+   RELATÓRIOS
+   Estilos exclusivos da página de relatórios
+========================================================== */
+
+
+/* ==========================================================
+   ESTRUTURA GERAL
+========================================================== */
+
+body.relatorio {
+    min-height: 100vh;
+}
+
+.relatorio .conteudo_principal {
+    width: 100%;
+    box-sizing: border-box;
+    padding-top: 95px;
+}
+
+
+/* ==========================================================
+   CABEÇALHO DA PÁGINA
+========================================================== */
+
+.relatorio .cabecalho_pagina {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+
+    margin-bottom: 25px;
+}
+
+.relatorio .subtitulo_pagina {
+    display: inline-block;
+
+    margin-bottom: 6px;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    color: #8b5e3c;
+}
+
+.relatorio .cabecalho_pagina h1 {
+    margin: 0;
+
+    font-size: 30px;
+    font-weight: 700;
+
+    color: #333;
+}
+
+.relatorio .cabecalho_pagina p {
+    margin: 8px 0 0;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    color: #777;
+}
+
+
+/* ==========================================================
+   MENSAGENS
+========================================================== */
+
+.relatorio .mensagens_flash {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+.relatorio .mensagem_flash {
+    padding: 12px 15px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.relatorio .mensagem_flash.erro {
+    border: 1px solid #e3b5b5;
+    background: #fff1f1;
+    color: #a33;
+}
+
+.relatorio .mensagem_flash.sucesso {
+    border: 1px solid #b8dcbc;
+    background: #f0faf1;
+    color: #34703a;
+}
+
+
+/* ==========================================================
+   CARD DE FILTROS
+========================================================== */
+
+.relatorio .card_filtros {
+    width: 100%;
+
+    margin-bottom: 25px;
+    padding: 25px;
+
+    box-sizing: border-box;
+
+    background: #fff;
+
+    border: 1px solid #e8e2de;
+    border-radius: 16px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.relatorio .titulo_card {
+    margin-bottom: 22px;
+}
+
+.relatorio .titulo_card h2 {
+    margin: 0;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #333;
+}
+
+.relatorio .titulo_card p {
+    margin: 6px 0 0;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    color: #777;
+}
+
+
+/* ==========================================================
+   FORMULÁRIO DE FILTROS
+========================================================== */
+
+.relatorio .form_filtros {
+    display: grid;
+
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+
+    gap: 18px;
+}
+
+.relatorio .campo_filtro {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+.relatorio .campo_largo {
+    grid-column: span 1;
+}
+
+.relatorio .campo_filtro label {
+    font-size: 13px;
+    font-weight: 600;
+
+    color: #444;
+}
+
+.relatorio .campo_filtro input,
+.relatorio .campo_filtro select {
+    width: 100%;
+
+    min-height: 44px;
+
+    padding: 0 12px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dcd6d1;
+    border-radius: 9px;
+
+    background: #fff;
+
+    color: #333;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.relatorio .campo_filtro input:hover,
+.relatorio .campo_filtro select:hover {
+    border-color: #c9b7a9;
+}
+
+.relatorio .campo_filtro input:focus,
+.relatorio .campo_filtro select:focus {
+    border-color: #a97852;
+
+    box-shadow: 0 0 0 3px rgba(169, 120, 82, 0.12);
+}
+
+
+/* ==========================================================
+   CHECKBOX DE ATRASADOS
+========================================================== */
+
+.relatorio .campo_checkbox {
+    display: flex;
+    align-items: center;
+
+    min-height: 44px;
+}
+
+.relatorio .campo_checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    color: #555;
+
+    cursor: pointer;
+}
+
+.relatorio .campo_checkbox input {
+    width: 17px;
+    height: 17px;
+
+    cursor: pointer;
+
+    accent-color: #8b5e3c;
+}
+
+
+/* ==========================================================
+   BOTÕES DOS FILTROS
+========================================================== */
+
+.relatorio .botoes_filtro {
+    grid-column: 1 / -1;
+
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 5px;
+}
+
+.relatorio .btn_filtrar,
+.relatorio .btn_limpar,
+.relatorio .btn_exportar {
+    min-height: 42px;
+
+    padding: 0 17px;
+
+    box-sizing: border-box;
+
+    border-radius: 9px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* ==========================================================
+   BOTÃO FILTRAR
+========================================================== */
+
+.relatorio .btn_filtrar {
+    border: 1px solid #8b5e3c;
+
+    background: #8b5e3c;
+
+    color: #fff;
+}
+
+.relatorio .btn_filtrar:hover {
+    background: #754b30;
+    border-color: #754b30;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================================
+   BOTÃO LIMPAR
+========================================================== */
+
+.relatorio .btn_limpar {
+    border: 1px solid #d7c4b5;
+
+    background: #fff;
+
+    color: #6f4930;
+}
+
+.relatorio .btn_limpar:hover {
+    background: #f8f1ec;
+
+    border-color: #b99578;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================================
+   BOTÃO EXPORTAR EXCEL
+========================================================== */
+
+/*
+   Este é o único botão verde da página.
+*/
+
+.relatorio .btn_exportar {
+    border: 1px solid #2e8b57;
+
+    background: #2e8b57;
+
+    color: #fff;
+}
+
+.relatorio .btn_exportar:hover {
+    background: #247346;
+
+    border-color: #247346;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 4px 12px rgba(46, 139, 87, 0.22);
+}
+
+.relatorio .btn_exportar:active {
+    transform: translateY(0);
+}
+
+
+/* ==========================================================
+   RESUMO
+========================================================== */
+
+.relatorio .resumo {
+    display: grid;
+
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+
+    gap: 16px;
+
+    margin-bottom: 25px;
+}
+
+.relatorio .card_resumo {
+    min-height: 110px;
+
+    padding: 20px;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    background: #fff;
+
+    border: 1px solid #e8e2de;
+    border-radius: 14px;
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.relatorio .card_resumo h3 {
+    margin: 0;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    color: #777;
+}
+
+.relatorio .card_resumo strong {
+    display: block;
+
+    margin-top: 12px;
+
+    font-size: 24px;
+    font-weight: 700;
+
+    color: #333;
+}
+
+
+/* ==========================================================
+   CARD DE RESULTADOS
+========================================================== */
+
+.relatorio .card_resultados {
+    width: 100%;
+
+    padding: 25px;
+
+    box-sizing: border-box;
+
+    background: #fff;
+
+    border: 1px solid #e8e2de;
+    border-radius: 16px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.relatorio .card_resultados .titulo_card {
+    margin-bottom: 20px;
+}
+
+
+/* ==========================================================
+   TABELA
+========================================================== */
+
+.relatorio .tabela_container {
+    width: 100%;
+
+    overflow-x: auto;
+
+    border: 1px solid #eee7e2;
+    border-radius: 12px;
+}
+
+.relatorio .tabela_container table {
+    width: 100%;
+
+    min-width: 1200px;
+
+    border-collapse: collapse;
+
+    font-size: 13px;
+}
+
+.relatorio .tabela_container th {
+    padding: 13px 12px;
+
+    background: #faf7f4;
+
+    border-bottom: 1px solid #e5ddd7;
+
+    color: #555;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    text-align: left;
+
+    white-space: nowrap;
+}
+
+.relatorio .tabela_container td {
+    padding: 13px 12px;
+
+    border-bottom: 1px solid #eee9e5;
+
+    color: #555;
+
+    vertical-align: middle;
+
+    white-space: nowrap;
+}
+
+.relatorio .tabela_container tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.relatorio .tabela_container tbody tr:hover {
+    background: #fdfaf8;
+}
+
+
+/* ==========================================================
+   STATUS
+========================================================== */
+
+.relatorio .status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 27px;
+
+    padding: 0 9px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* Status de pedido */
+
+.relatorio .status_pendente {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.relatorio .status_pronto {
+    background: #e8f5e9;
+    color: #39733f;
+}
+
+.relatorio .status_entregue {
+    background: #e2f4e8;
+    color: #287545;
+}
+
+
+/* Status de pagamento */
+
+.relatorio .pagamento_pago {
+    background: #e2f4e8;
+    color: #287545;
+}
+
+.relatorio .pagamento_parcial {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.relatorio .pagamento_pendente {
+    background: #f1f1f1;
+    color: #666;
+}
+
+
+/* Status de atraso */
+
+.relatorio .atraso_ok {
+    background: #e2f4e8;
+    color: #287545;
+}
+
+.relatorio .atraso_sim {
+    background: #fde8e8;
+    color: #a33;
+}
+
+.relatorio .atraso_nao {
+    background: #f1f1f1;
+    color: #666;
+}
+
+
+/* ==========================================================
+   VALORES FINANCEIROS
+========================================================== */
+
+.relatorio .tabela_container td:nth-child(6),
+.relatorio .tabela_container td:nth-child(7),
+.relatorio .tabela_container td:nth-child(8),
+.relatorio .tabela_container td:nth-child(9),
+.relatorio .tabela_container td:nth-child(10) {
+    font-variant-numeric: tabular-nums;
+}
+
+
+/* ==========================================================
+   ESTADO SEM RESULTADOS
+========================================================== */
+
+.relatorio .sem_resultados {
+    padding: 60px 25px !important;
+
+    text-align: center;
+
+    white-space: normal !important;
+}
+
+.relatorio .sem_resultados_icone {
+    margin-bottom: 15px;
+
+    font-size: 42px;
+}
+
+.relatorio .sem_resultados strong {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 16px;
+
+    color: #444;
+}
+
+.relatorio .sem_resultados p {
+    margin: 0;
+
+    font-size: 13px;
+    line-height: 1.5;
+
+    color: #888;
+}
+
+
+/* ==========================================================
+   RODAPÉ
+========================================================== */
+
+.relatorio .rodape {
+    margin-top: 30px;
+    padding: 20px 0;
+
+    text-align: center;
+}
+
+.relatorio .rodape_direitos {
+    margin: 0;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #888;
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+========================================================== */
+
+@media (max-width: 1100px) {
+
+    .relatorio .form_filtros {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .relatorio .resumo {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+
+/* ==========================================================
+   TABLETS
+========================================================== */
+
+@media (max-width: 768px) {
+
+    .relatorio .cabecalho_pagina h1 {
+        font-size: 26px;
+    }
+
+    .relatorio .card_filtros,
+    .relatorio .card_resultados {
+        padding: 20px;
+    }
+
+    .relatorio .form_filtros {
+        grid-template-columns: 1fr;
+    }
+
+    .relatorio .campo_largo {
+        grid-column: auto;
+    }
+
+    .relatorio .botoes_filtro {
+        grid-column: auto;
+
+        justify-content: stretch;
+
+        flex-wrap: wrap;
+    }
+
+    .relatorio .btn_filtrar,
+    .relatorio .btn_limpar,
+    .relatorio .btn_exportar {
+        flex: 1;
+    }
+
+    .relatorio .resumo {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* ==========================================================
+   CELULARES
+========================================================== */
+
+@media (max-width: 480px) {
+
+    .relatorio .cabecalho_pagina h1 {
+        font-size: 23px;
+    }
+
+    .relatorio .cabecalho_pagina p {
+        font-size: 13px;
+    }
+
+    .relatorio .card_filtros,
+    .relatorio .card_resultados {
+        padding: 16px;
+    }
+
+    .relatorio .resumo {
+        grid-template-columns: 1fr;
+    }
+
+    .relatorio .card_resumo {
+        min-height: 95px;
+    }
+
+    .relatorio .botoes_filtro {
+        flex-direction: column;
+    }
+
+    .relatorio .btn_filtrar,
+    .relatorio .btn_limpar,
+    .relatorio .btn_exportar {
+        width: 100%;
+        flex: none;
+    }
+
+    .relatorio .tabela_container table {
+        min-width: 1100px;
+    }
+
+    .relatorio .sem_resultados {
+        padding: 45px 15px !important;
+    }
+}

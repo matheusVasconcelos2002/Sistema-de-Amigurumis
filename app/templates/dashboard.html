@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | Amigurumis</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body class="tela_dashboard">
+
+    <div class="dashboard">
+
+        {% include "_menu.html" %}
+
+        <main class="conteudo_dashboard">
+
+            <header class="cabecalho_dashboard">
+
+                <div class="titulo_dashboard">
+                    <span class="icone_titulo">🏠</span>
+
+                    <div>
+                        <h1>Dashboard</h1>
+                        <p>Visão geral das suas encomendas</p>
+                    </div>
+                </div>
+
+            </header>
+
+
+            <section class="resumo_dashboard">
+
+                <div class="card_resumo">
+                    <div class="icone_resumo">📦</div>
+
+                    <div>
+                        <span class="titulo_resumo">
+                            Encomendas em andamento
+                        </span>
+
+                        <strong>
+                            {{ total_pedidos if total_pedidos is defined else 0 }}
+                        </strong>
+                    </div>
+                </div>
+
+
+                <div class="card_resumo">
+                    <div class="icone_resumo">🧶</div>
+
+                    <div>
+                        <span class="titulo_resumo">
+                            Em produção
+                        </span>
+
+                        <strong>
+                            {{ pedidos_producao if pedidos_producao is defined else 0 }}
+                        </strong>
+                    </div>
+                </div>
+
+
+                <div class="card_resumo">
+                    <div class="icone_resumo">✅</div>
+
+                    <div>
+                        <span class="titulo_resumo">
+                            Finalizadas
+                        </span>
+
+                        <strong>
+                            {{ pedidos_finalizados if pedidos_finalizados is defined else 0 }}
+                        </strong>
+                    </div>
+                </div>
+
+
+                <div class="card_resumo">
+                    <div class="icone_resumo">💰</div>
+
+                    <div>
+                        <span class="titulo_resumo">
+                            Pagamentos pendentes
+                        </span>
+
+                        <strong>
+                            {{ pagamentos_pendentes if pagamentos_pendentes is defined else 0 }}
+                        </strong>
+                    </div>
+                </div>
+
+            </section>
+
+
+            <section class="secao_dashboard">
+
+                <div class="cabecalho_secao">
+
+                    <div>
+                        <h2>Encomendas em andamento</h2>
+
+                        <p>
+                            Acompanhe as encomendas que estão sendo produzidas.
+                        </p>
+                    </div>
+
+                    <a href="{{ url_for('pedidos.listar') }}" class="botao_secundario">
+                        Ver pedidos
+                    </a>
+
+                </div>
+
+
+                {% if pedidos %}
+
+                <div class="lista_pedidos_dashboard">
+
+                    {% for pedido in pedidos %}
+
+                    <article class="pedido_dashboard">
+
+                        <div class="pedido_dashboard_cabecalho">
+
+                            <div>
+                                <span class="pedido_codigo">
+                                    Pedido #{{ pedido.id }}
+                                </span>
+
+                                <h3>
+                                    {{ pedido.nome }}
+                                </h3>
+                            </div>
+
+                            <span class="status_pedido">
+                                {{ pedido.status if pedido.status is defined else 'Em andamento' }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="pedido_dashboard_informacoes">
+
+                            <div>
+                                <span>Cliente</span>
+
+                                <strong>
+                                    {{ pedido.cliente_nome if pedido.cliente_nome is defined else pedido.cliente.nome }}
+                                </strong>
+                            </div>
+
+
+                            <div>
+                                <span>Data do pedido</span>
+
+                                <strong>
+                                    {{ pedido.data_pedido.strftime('%d/%m/%Y') if pedido.data_pedido else '-' }}
+                                </strong>
+                            </div>
+
+
+                            {% if pedido.data_prevista_entrega is defined and pedido.data_prevista_entrega %}
+
+                            <div>
+                                <span>Entrega prevista</span>
+
+                                <strong>
+                                    {{ pedido.data_prevista_entrega.strftime('%d/%m/%Y') }}
+                                </strong>
+                            </div>
+
+                            {% endif %}
+
+                        </div>
+
+                    </article>
+
+                    {% endfor %}
+
+                </div>
+
+                {% else %}
+
+                <div class="estado_vazio">
+
+                    <span class="icone_vazio">📦</span>
+
+                    <h3>Nenhuma encomenda em andamento</h3>
+
+                    <p>
+                        Quando você cadastrar novas encomendas,
+                        elas aparecerão aqui.
+                    </p>
+
+                    <a href="{{ url_for('pedidos.novo') }}" class="botao_principal">
+                        Nova encomenda
+                    </a>
+
+                </div>
+
+                {% endif %}
+
+            </section>
+
+
+            <section class="secao_dashboard">
+
+                <div class="cabecalho_secao">
+
+                    <div>
+                        <h2>Acesso rápido</h2>
+
+                        <p>
+                            Acesse rapidamente as principais funções.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <div class="atalhos_dashboard">
+
+                    <a href="{{ url_for('clientes.listar') }}" class="atalho_dashboard">
+                        <span>👥</span>
+
+                        <div>
+                            <strong>Clientes</strong>
+                            <small>Gerenciar clientes</small>
+                        </div>
+                    </a>
+
+
+                    <a href="{{ url_for('amigurumis.listar') }}" class="atalho_dashboard">
+                        <span>🧸</span>
+
+                        <div>
+                            <strong>Amigurumis</strong>
+                            <small>Gerenciar modelos</small>
+                        </div>
+                    </a>
+
+
+                    <a href="{{ url_for('pedidos.novo') }}" class="atalho_dashboard">
+                        <span>➕</span>
+
+                        <div>
+                            <strong>Nova encomenda</strong>
+                            <small>Cadastrar pedido</small>
+                        </div>
+                    </a>
+
+
+                    <a href="{{ url_for('pedidos.listar') }}" class="atalho_dashboard">
+                        <span>📦</span>
+
+                        <div>
+                            <strong>Pedidos</strong>
+                            <small>Acompanhar pedidos</small>
+                        </div>
+                    </a>
+
+
+                    <a href="{{ url_for('pagamentos.listar') }}" class="atalho_dashboard">
+                        <span>💰</span>
+
+                        <div>
+                            <strong>Pagamentos</strong>
+                            <small>Controlar pagamentos</small>
+                        </div>
+                    </a>
+
+
+                    <a href="{{ url_for('relatorios.listar') }}" class="atalho_dashboard">
+                        <span>📊</span>
+
+                        <div>
+                            <strong>Relatórios</strong>
+                            <small>Consultar informações</small>
+                        </div>
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <section class="secao_dashboard">
+
+                <div class="cabecalho_secao">
+
+                    <div>
+                        <h2>Pedidos finalizados</h2>
+
+                        <p>
+                            Consulte os pedidos que já foram concluídos.
+                        </p>
+                    </div>
+
+                    <a href="{{ url_for('pedidos.finalizados') }}" class="botao_secundario">
+                        Ver pedidos
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <footer class="rodape_dashboard">
+
+                <p>
+                    
+                    Sistema de Amigurumis
+                </p>
+            </footer>
+
+        </main>
+
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+    
+    <script src="{{ url_for('static', filename='js/menu.js') }}" defer></script>
+
+</body>
+
+</html>

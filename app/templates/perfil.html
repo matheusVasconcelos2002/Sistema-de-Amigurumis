@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Meu Perfil</title>
+    
+    <!-- CSS GERAL -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!--CSS ESPECIFICO DA PÁGINA-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/perfil.css')}}">
+
+</head>
+
+
+<body class="tela_perfil">
+
+    <main class="perfil_pagina">
+
+
+        <!-- ==================================================
+             CABEÇALHO
+        =================================================== -->
+
+        <header class="perfil_cabecalho">
+
+            <div>
+
+                <span class="rotulo_perfil">
+                    CONTA
+                </span>
+
+                <h1>
+                    Meu perfil
+                </h1>
+
+                <p>
+                    Gerencie suas informações pessoais.
+                </p>
+
+            </div>
+
+
+            <a href="{{ url_for('main.dashboard') }}" class="voltar_perfil">
+                ← Voltar para o Dashboard
+            </a>
+
+        </header>
+
+
+
+        <!-- ==================================================
+             MENSAGENS
+        =================================================== -->
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+        {% if mensagens %}
+
+        <div class="mensagens_perfil">
+
+            {% for categoria, mensagem in mensagens %}
+
+            {% if categoria == "erro" %}
+
+            <div class="mensagem_erro" role="alert">
+                {{ mensagem }}
+            </div>
+
+            {% elif categoria == "sucesso" %}
+
+            <div class="mensagem_sucesso" role="alert">
+                {{ mensagem }}
+            </div>
+
+            {% else %}
+
+            <div class="mensagem" role="alert">
+                {{ mensagem }}
+            </div>
+
+            {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+        {% endwith %}
+
+
+
+        <!-- ==================================================
+             CONTEÚDO DO PERFIL
+        =================================================== -->
+
+        <section class="perfil_conteudo">
+
+
+            <!-- ==================================================
+                 FOTO DE PERFIL
+            =================================================== -->
+
+            <section class="card_perfil">
+
+                <div class="titulo_card_perfil">
+
+                    <div class="icone_card_perfil">
+                        👤
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Foto de perfil
+                        </h2>
+
+                        <p>
+                            Escolha uma foto para identificar
+                            sua conta.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="foto_perfil_area">
+
+
+                    <!-- FOTO ATUAL -->
+
+                    <div class="foto_perfil_container">
+
+                        {% if usuario.foto_perfil %}
+
+                        <img src="{{ url_for(
+                                    'static',
+                                    filename='fotos_perfil/' ~ usuario.foto_perfil
+                                ) }}" alt="Foto de perfil" class="foto_perfil">
+
+                        {% else %}
+
+                        <div class="avatar_padrao">
+                            👤
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+
+
+                    <!-- ALTERAÇÃO DA FOTO -->
+
+                    <form action="{{ url_for('perfil.atualizar_foto') }}" method="POST" enctype="multipart/form-data" class="form_foto">
+
+                        <label for="foto_perfil">
+                            Escolher nova foto
+                        </label>
+
+                        <input type="file" id="foto_perfil" name="foto_perfil" accept=".jpg,.jpeg,.png,.webp">
+
+                        <small>
+                            JPG, JPEG, PNG ou WEBP.
+                            Tamanho Máximo: 20 MB.
+                        </small>
+
+                        <button type="submit" class="btn_secundario">
+                            Salvar foto
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </section>
+
+
+
+            <!-- ==================================================
+                 INFORMAÇÕES PESSOAIS
+            =================================================== -->
+
+            <section class="card_perfil">
+
+                <div class="titulo_card_perfil">
+
+                    <div class="icone_card_perfil">
+                        📝
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Informações pessoais
+                        </h2>
+
+                        <p>
+                            Mantenha seus dados atualizados.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <form action="{{ url_for('perfil.atualizar') }}" method="POST" class="form_perfil">
+
+
+                    <!-- NOME -->
+
+                    <div class="campo_formulario">
+
+                        <label for="nome">
+                            Nome
+                        </label>
+
+                        <input type="text" id="nome" name="nome" value="{{ usuario.nome }}" maxlength="150"
+                            autocomplete="name" required>
+
+                    </div>
+
+
+
+                    <!-- TELEFONE -->
+
+                    <div class="campo_formulario">
+
+                        <label for="telefone">
+                            Telefone
+                        </label>
+
+                        <input type="tel" id="telefone" name="telefone" value="{{ usuario.telefone }}" maxlength="20"
+                            autocomplete="tel" placeholder="(92) 99999-9999" required>
+
+                        <small>
+                            Alterações no telefone poderão exigir
+                            confirmação de segurança.
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- E-MAIL -->
+
+                    <div class="campo_formulario">
+
+                        <label for="email">
+                            E-mail
+                        </label>
+
+                        <input type="email" id="email" name="email" value="{{ usuario.email }}" maxlength="255"
+                            autocomplete="email" required>
+
+                        <small>
+                            Alterações no e-mail poderão exigir
+                            confirmação de segurança.
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- BOTÃO -->
+
+                    <div class="acoes_perfil">
+
+                        <button type="submit" class="btn_principal">
+                            Salvar alterações
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </section>
+
+
+
+            <!-- ==================================================
+                 INFORMAÇÃO DE SEGURANÇA
+            =================================================== -->
+
+            <section class="aviso_seguranca">
+
+                <span class="icone_aviso">
+                    🔐
+                </span>
+
+                <div>
+
+                    <strong>
+                        Segurança da conta
+                    </strong>
+
+                    <p>
+                        Alterações de informações importantes,
+                        como e-mail e telefone, poderão exigir
+                        um código de confirmação.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+        </section>
+
+    </main>
+
+
+
+    <!-- ==================================================
+         RODAPÉ
+    =================================================== -->
+
+    <footer class="rodape_sistema">
+
+        <div class="rodape_conteudo">
+
+            <span class="rodape_linha"></span>
+
+
+            <p class="rodape_direitos">
+                Sistema de Amigurumis
+            </p>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- ==================================================
+         JAVASCRIPT
+    =================================================== -->
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+</body>
+
+</html>

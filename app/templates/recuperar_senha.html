@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Recuperar senha</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <!-- CSS ESPECÍFICO DA PÁGINA -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/recuperar_senha.css') }}">
+
+</head>
+
+<body class="tela_recuperar_senha">
+
+    <main class="tela_login">
+
+        <section class="card_login">
+
+            <div class="logo">
+
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo do Sistema de Amigurumis">
+
+            </div>
+
+            <div class="cabecalho_login">
+
+                <h1>Recuperar senha</h1>
+
+                <p>
+                    Informe seu e-mail para receber o link
+                    de recuperação.
+                </p>
+
+            </div>
+
+            {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+            {% if mensagens %}
+
+            {% for categoria, mensagem in mensagens %}
+
+            {% if categoria == "erro" %}
+
+            <div class="mensagem_erro" role="alert">
+                {{ mensagem }}
+            </div>
+
+            {% elif categoria == "sucesso" %}
+
+            <div class="mensagem_sucesso" role="alert">
+                {{ mensagem }}
+            </div>
+
+            {% else %}
+
+            <div class="mensagem" role="alert">
+                {{ mensagem }}
+            </div>
+
+            {% endif %}
+
+            {% endfor %}
+
+            {% endif %}
+
+            {% endwith %}
+
+            <form action="{{ url_for('auth.recuperar_senha') }}" method="POST" class="form_login">
+
+                <div class="campo_formulario">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input type="email" id="email" name="email" placeholder="Digite seu e-mail cadastrado"
+                        autocomplete="email" value="{{ email or '' }}" required>
+
+                </div>
+
+                <button type="submit" class="btn_principal">
+                    Enviar link
+                </button>
+
+            </form>
+
+            <div class="links_login">
+
+                <a href="{{ url_for('auth.login') }}">
+                    Voltar para o login
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="rodape">
+
+        <div class="rodape_conteudo">
+
+            <span class="rodape_linha"></span>
+
+            <p class="rodape_direitos">
+                Sistema de Amigurumis
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+
+</html>

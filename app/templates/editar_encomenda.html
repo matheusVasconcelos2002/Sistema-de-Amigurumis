@@ -1,0 +1,1068 @@
+<!-- =========================================================
+     TELA: EDITAR ENCOMENDA
+
+     Esta tela é responsável por editar os dados de uma
+     encomenda específica.
+
+     Fluxo:
+     selecionar_edicao_pedido.html
+            ↓
+     Usuário escolhe uma encomenda
+            ↓
+     editar_encomenda.html
+            ↓
+     Usuário altera os dados
+            ↓
+     Salvar alterações
+
+     Esta tela recebe o ID da encomenda pela rota:
+
+     /pedidos/<pedido_id>/editar
+
+     IMPORTANTE:
+     Esta tela NÃO serve para selecionar uma encomenda.
+     Ela trabalha somente com a encomenda que já foi
+     selecionada anteriormente.
+========================================================= -->
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Editar Encomenda</title>
+
+
+    <!-- CSS GERAL -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+
+    <!-- CSS ESPECÍFICO -->
+    <link
+    rel="stylesheet"
+    href="{{ url_for('static', filename='css/editar_encomenda.css') }}"
+    >
+    
+    <!-- CSS MENU-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+
+</head>
+
+
+<body class="tela_editar_encomenda">
+
+
+    {% include "_menu.html" %}
+
+
+    <main class="conteudo_principal">
+
+
+        <!-- =====================================================
+             CABEÇALHO
+        ====================================================== -->
+
+        <header class="cabecalho_pagina">
+
+            <div>
+
+                <span class="subtitulo_pagina">
+                    Encomendas
+                </span>
+
+                <h1>
+                    Editar encomenda
+                </h1>
+
+                <p>
+                    Atualize os dados desta encomenda.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('pedidos.selecionar_edicao') }}"
+                class="botao_secundario"
+            >
+                ← Voltar
+            </a>
+
+        </header>
+
+
+        <!-- =====================================================
+             MENSAGENS
+        ====================================================== -->
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+            {% if mensagens %}
+
+                <div class="mensagens_flash">
+
+                    {% for categoria, mensagem in mensagens %}
+
+                        <div class="mensagem_flash {{ categoria }}">
+                            {{ mensagem }}
+                        </div>
+
+                    {% endfor %}
+
+                </div>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- =====================================================
+             VERIFICAÇÃO DO PEDIDO
+        ====================================================== -->
+
+        {% if pedido %}
+
+
+        <!-- =====================================================
+             FORMULÁRIO
+        ====================================================== -->
+
+        <form
+            action="{{ url_for('pedidos.editar', pedido_id=pedido.id) }}"
+            method="POST"
+            class="formulario_encomenda"
+        >
+
+
+            <!-- =================================================
+                 DADOS DA ENCOMENDA
+            ================================================== -->
+
+            <section class="card_formulario">
+
+
+                <div class="cabecalho_card">
+
+                    <div>
+
+                        <h2>
+                            Informações da encomenda
+                        </h2>
+
+                        <p>
+                            Informações principais desta encomenda.
+                        </p>
+
+                    </div>
+
+
+                    <span class="identificador_encomenda">
+                        Encomenda #{{ pedido.id }}
+                    </span>
+
+                </div>
+
+
+                <div class="grade_formulario">
+
+
+                    <!-- NOME -->
+
+                    <div class="campo_formulario campo_largo">
+
+                        <label for="nome">
+
+                            Nome da encomenda
+
+                            <span class="campo_obrigatorio">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            maxlength="200"
+                            value="{{ pedido.nome or '' }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- CLIENTE -->
+
+                    <div class="campo_formulario">
+
+                        <label for="cliente_id">
+
+                            Cliente
+
+                            <span class="campo_obrigatorio">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <select
+                            id="cliente_id"
+                            name="cliente_id"
+                            required
+                        >
+
+                            {% for cliente in clientes %}
+
+                                <option
+                                    value="{{ cliente.id }}"
+                                    {% if cliente.id == pedido.cliente_id %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    {{ cliente.nome }}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DATA DO PEDIDO -->
+
+                    <div class="campo_formulario">
+
+                        <label for="data_pedido">
+
+                            Data do pedido
+
+                            <span class="campo_obrigatorio">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="date"
+                            id="data_pedido"
+                            name="data_pedido"
+                            value="{{
+                                pedido.data_pedido.isoformat()
+                                if pedido.data_pedido
+                                else ''
+                            }}"
+                            required
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     FORMA DE RECEBIMENTO
+                ================================================== -->
+
+                <div class="campo_formulario">
+
+                    <label>
+
+                        Forma de recebimento
+
+                        <span class="campo_obrigatorio">
+                            *
+                        </span>
+
+                    </label>
+
+
+                    <div class="opcoes_recebimento">
+
+
+                        <!-- A DEFINIR -->
+
+                        <label class="opcao_recebimento">
+
+                            <input
+                                type="radio"
+                                name="forma_recebimento"
+                                value="a_definir"
+
+                                {% if
+                                    not pedido.forma_recebimento
+                                    or
+                                    pedido.forma_recebimento.value == 'a_definir'
+                                %}
+                                    checked
+                                {% endif %}
+                            >
+
+                            <span>
+
+                                <strong>
+                                    A definir
+                                </strong>
+
+                                <small>
+                                    Ainda não decidido
+                                </small>
+
+                            </span>
+
+                        </label>
+
+
+                        <!-- ENTREGA -->
+
+                        <label class="opcao_recebimento">
+
+                            <input
+                                type="radio"
+                                name="forma_recebimento"
+                                value="entrega"
+
+                                {% if
+                                    pedido.forma_recebimento
+                                    and
+                                    pedido.forma_recebimento.value == 'entrega'
+                                %}
+                                    checked
+                                {% endif %}
+                            >
+
+                            <span>
+
+                                <strong>
+                                    Entrega
+                                </strong>
+
+                                <small>
+                                    Entregar ao cliente
+                                </small>
+
+                            </span>
+
+                        </label>
+
+
+                        <!-- RETIRADA -->
+
+                        <label class="opcao_recebimento">
+
+                            <input
+                                type="radio"
+                                name="forma_recebimento"
+                                value="retirada"
+
+                                {% if
+                                    pedido.forma_recebimento
+                                    and
+                                    pedido.forma_recebimento.value == 'retirada'
+                                %}
+                                    checked
+                                {% endif %}
+                            >
+
+                            <span>
+
+                                <strong>
+                                    Retirada
+                                </strong>
+
+                                <small>
+                                    Cliente irá retirar
+                                </small>
+
+                            </span>
+
+                        </label>
+
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 ITENS DA ENCOMENDA
+            ====================================================== -->
+
+            <section class="card_formulario">
+
+
+                <div class="cabecalho_card">
+
+                    <div>
+
+                        <h2>
+                            Itens da encomenda
+                        </h2>
+
+                        <p>
+                            Atualize as informações dos itens desta encomenda.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="lista_amigurumis"
+                    class="lista_itens_encomenda"
+                >
+
+
+                    {% if pedido.itens %}
+
+
+                        {% for item in pedido.itens %}
+
+
+                            <article
+                                class="item_encomenda
+                                {% if item.status.value in ['entregue', 'cancelado'] %}
+                                    item_bloqueado
+                                {% endif %}"
+                                data-item-encomenda
+                            >
+
+
+                                <!-- =================================================
+                                     ID DO ITEM
+                                ================================================== -->
+
+                                <input
+                                    type="hidden"
+                                    name="item_id[]"
+                                    value="{{ item.id }}"
+                                >
+
+
+                                <!-- =================================================
+                                     CABEÇALHO DO ITEM
+                                ================================================== -->
+
+                                <div class="cabecalho_item_encomenda">
+
+                                    <div>
+
+                                        <span>
+                                            Item
+                                        </span>
+
+                                        <h3>
+                                            Amigurumi {{ loop.index }}
+                                        </h3>
+
+                                    </div>
+
+
+                                    <div class="status_item_container">
+
+                                        <span class="rotulo_status">
+                                            Status
+                                        </span>
+
+                                        <span
+                                            class="
+                                                status_item
+                                                status-{{ item.status.value }}
+                                            "
+                                        >
+
+                                            {% if item.status.value == 'a_fazer' %}
+
+                                                A fazer
+
+                                            {% elif item.status.value == 'sendo_feito' %}
+
+                                                Sendo feito
+
+                                            {% elif item.status.value == 'finalizado' %}
+
+                                                Finalizado
+
+                                            {% elif item.status.value == 'entregue' %}
+
+                                                Entregue
+
+                                            {% elif item.status.value == 'cancelado' %}
+
+                                                Cancelado
+
+                                            {% else %}
+
+                                                {{ item.status.value }}
+
+                                            {% endif %}
+
+                                        </span>
+
+                                    </div>
+
+                                </div>
+
+
+                                <!-- =================================================
+                                     CAMPOS DO ITEM
+                                ================================================== -->
+
+                                <div class="grade_formulario">
+
+
+                                    <!-- AMIGURUMI -->
+
+                                    <div class="campo_formulario campo_largo">
+
+                                        <label
+                                            for="amigurumi_id_{{ item.id }}"
+                                        >
+
+                                            Amigurumi
+
+                                            <span class="campo_obrigatorio">
+                                                *
+                                            </span>
+
+                                        </label>
+
+
+                                        <select
+                                            id="amigurumi_id_{{ item.id }}"
+                                            name="amigurumi_id[]"
+                                            required
+                                            {% if item.status.value in ['entregue', 'cancelado'] %}
+                                                disabled
+                                            {% endif %}
+                                        >
+
+                                            <option value="">
+                                                Selecione o amigurumi
+                                            </option>
+
+
+                                            {% for amigurumi in amigurumis %}
+
+                                                <option
+                                                    value="{{ amigurumi.id }}"
+
+                                                    {% if
+                                                        amigurumi.id
+                                                        ==
+                                                        item.amigurumi_id
+                                                    %}
+                                                        selected
+                                                    {% endif %}
+                                                >
+                                                    {{ amigurumi.produto }}
+                                                </option>
+
+                                            {% endfor %}
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <!-- QUANTIDADE -->
+
+                                    <div class="campo_formulario">
+
+                                        <label
+                                            for="quantidade_{{ item.id }}"
+                                        >
+
+                                            Quantidade
+
+                                            <span class="campo_obrigatorio">
+                                                *
+                                            </span>
+
+                                        </label>
+
+
+                                        <input
+                                            type="number"
+                                            id="quantidade_{{ item.id }}"
+                                            name="quantidade[]"
+                                            min="1"
+                                            step="1"
+                                            value="{{ item.quantidade }}"
+                                            required
+                                            {% if item.status.value in ['entregue', 'cancelado'] %}
+                                                disabled
+                                            {% endif %}
+                                        >
+
+                                    </div>
+
+
+                                    <!-- TAMANHO -->
+
+                                    <div class="campo_formulario">
+
+                                        <label
+                                            for="tamanho_{{ item.id }}"
+                                        >
+
+                                            Tamanho (cm)
+
+                                            <span class="campo_obrigatorio">
+                                                *
+                                            </span>
+
+                                        </label>
+
+
+                                        <input
+                                            type="number"
+                                            id="tamanho_{{ item.id }}"
+                                            name="tamanho[]"
+                                            min="0.01"
+                                            step="0.01"
+                                            value="{{ item.tamanho }}"
+                                            required
+                                            {% if item.status.value in ['entregue', 'cancelado'] %}
+                                                disabled
+                                            {% endif %}
+                                        >
+
+                                    </div>
+
+
+                                    <!-- TIPO -->
+
+                                    <div class="campo_formulario">
+
+                                        <label
+                                            for="tipo_{{ item.id }}"
+                                        >
+
+                                            Tipo
+
+                                            <span class="campo_obrigatorio">
+                                                *
+                                            </span>
+
+                                        </label>
+
+
+                                        <input
+                                            type="text"
+                                            id="tipo_{{ item.id }}"
+                                            name="tipo[]"
+                                            maxlength="100"
+                                            value="{{ item.tipo or '' }}"
+                                            required
+                                            placeholder="Ex.: chaveiro, pelúcia..."
+                                            {% if item.status.value in ['entregue', 'cancelado'] %}
+                                                disabled
+                                            {% endif %}
+                                        >
+
+                                    </div>
+
+
+                                    <!-- PREÇO -->
+
+                                    <div class="campo_formulario">
+
+                                        <label
+                                            for="preco_unitario_{{ item.id }}"
+                                        >
+
+                                            Preço unitário
+
+                                            <span class="campo_obrigatorio">
+                                                *
+                                            </span>
+
+                                        </label>
+
+
+                                        <input
+                                            type="number"
+                                            id="preco_unitario_{{ item.id }}"
+                                            name="preco_unitario[]"
+                                            min="0.01"
+                                            step="0.01"
+                                            value="{{ item.preco_unitario }}"
+                                            required
+                                            placeholder="Ex.: 35.00"
+                                            {% if item.status.value in ['entregue', 'cancelado'] %}
+                                                disabled
+                                            {% endif %}
+                                        >
+
+                                    </div>
+
+
+                                    <!-- DATA PREVISTA -->
+
+                                    <div class="campo_formulario">
+
+                                        <label
+                                            for="data_prevista_entrega_{{ item.id }}"
+                                        >
+
+                                            Data prevista de entrega
+
+                                            <span class="campo_obrigatorio">
+                                                *
+                                            </span>
+
+                                        </label>
+
+
+                                        <input
+                                            type="date"
+                                            id="data_prevista_entrega_{{ item.id }}"
+                                            name="data_prevista_entrega[]"
+
+                                            value="{{
+                                                item.data_prevista_entrega.isoformat()
+                                                if item.data_prevista_entrega
+                                                else ''
+                                            }}"
+
+                                            required
+
+                                            {% if item.status.value in ['entregue', 'cancelado'] %}
+                                                disabled
+                                            {% endif %}
+                                        >
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <!-- =================================================
+                                     AVISO ITEM ENTREGUE
+                                ================================================== -->
+
+                                {% if item.status.value == 'entregue' %}
+
+                                    <div class="aviso_formulario">
+
+                                        <strong>
+                                            ℹ️ Item já entregue
+                                        </strong>
+
+                                        <p>
+                                            Este item já foi entregue ao cliente.
+                                            Seus dados não podem mais ser alterados.
+                                        </p>
+
+                                    </div>
+
+                                {% endif %}
+
+
+                                <!-- =================================================
+                                     AVISO ITEM CANCELADO
+                                ================================================== -->
+
+                                {% if item.status.value == 'cancelado' %}
+
+                                    <div class="aviso_formulario">
+
+                                        <strong>
+                                            ⚠️ Item cancelado
+                                        </strong>
+
+                                        <p>
+                                            Este item faz parte do histórico da
+                                            encomenda e não pode mais ser editado.
+                                        </p>
+
+                                    </div>
+
+                                {% endif %}
+
+
+                            </article>
+
+
+                        {% endfor %}
+
+
+                    {% else %}
+
+
+                        <!-- =================================================
+                             ESTADO VAZIO
+                        ================================================== -->
+
+                        <div class="estado_vazio">
+
+                            <div class="icone_estado_vazio">
+                                📦
+                            </div>
+
+                            <h3>
+                                Nenhum item encontrado
+                            </h3>
+
+                            <p>
+                                Esta encomenda não possui itens cadastrados.
+                            </p>
+
+                        </div>
+
+
+                    {% endif %}
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 ENDEREÇO HISTÓRICO
+            ====================================================== -->
+
+            <section class="card_info">
+
+
+                <div class="icone_info">
+                    📍
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Endereço da encomenda
+                    </h3>
+
+
+                    <p>
+                        Este é o endereço histórico registrado
+                        nesta encomenda.
+                    </p>
+
+
+                    <p>
+                        O endereço histórico não é alterado
+                        automaticamente quando o cadastro do cliente
+                        é modificado.
+                    </p>
+
+
+                    <div class="endereco_historico">
+
+
+                        {% if pedido.endereco_rua %}
+
+                            <strong>
+
+                                {{ pedido.endereco_rua }}
+
+                                {% if pedido.endereco_numero %}
+
+                                    , {{ pedido.endereco_numero }}
+
+                                {% endif %}
+
+                            </strong>
+
+                        {% endif %}
+
+
+                        {% if pedido.endereco_complemento %}
+
+                            <span>
+                                {{ pedido.endereco_complemento }}
+                            </span>
+
+                        {% endif %}
+
+
+                        {% if pedido.endereco_bairro %}
+
+                            <span>
+
+                                Bairro:
+                                {{ pedido.endereco_bairro }}
+
+                            </span>
+
+                        {% endif %}
+
+
+                        {% if
+                            pedido.endereco_cidade
+                            and
+                            pedido.endereco_estado
+                        %}
+
+                            <span>
+
+                                {{ pedido.endereco_cidade }}
+                                -
+                                {{ pedido.endereco_estado }}
+
+                            </span>
+
+                        {% endif %}
+
+
+                        {% if pedido.endereco_cep %}
+
+                            <span>
+
+                                CEP:
+                                {{ pedido.endereco_cep }}
+
+                            </span>
+
+                        {% endif %}
+
+
+                        {% if
+                            not pedido.endereco_rua
+                            and not pedido.endereco_numero
+                            and not pedido.endereco_complemento
+                            and not pedido.endereco_bairro
+                            and not pedido.endereco_cidade
+                            and not pedido.endereco_estado
+                            and not pedido.endereco_cep
+                        %}
+
+                            <span>
+                                Nenhum endereço histórico registrado.
+                            </span>
+
+                        {% endif %}
+
+
+                    </div>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- =====================================================
+                 AÇÕES
+            ====================================================== -->
+
+            <div class="acoes_formulario">
+
+
+                <a
+                    href="{{ url_for('pedidos.selecionar_edicao') }}"
+                    class="botao_secundario"
+                >
+                    Cancelar
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="botao_principal"
+                >
+                    💾 Salvar alterações
+                </button>
+
+
+            </div>
+
+
+        </form>
+
+
+        {% else %}
+
+
+            <!-- =====================================================
+                 PEDIDO NÃO ENCONTRADO
+            ====================================================== -->
+
+            <section class="estado_vazio">
+
+                <div class="icone_estado_vazio">
+                    📦
+                </div>
+
+                <h3>
+                    Encomenda não encontrada
+                </h3>
+
+                <p>
+                    Não foi possível localizar a encomenda solicitada.
+                </p>
+
+
+                <a
+                    href="{{ url_for('pedidos.listar') }}"
+                    class="botao_principal"
+                >
+                    Voltar para pedidos
+                </a>
+
+            </section>
+
+
+        {% endif %}
+
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT GERAL
+    ====================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/script.js') }}"
+        defer
+    ></script>
+
+
+    <!-- =====================================================
+         JAVASCRIPT DO MENU
+    ====================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/menu.js') }}"
+        defer
+    ></script>
+
+
+</body>
+
+</html>

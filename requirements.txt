@@ -1,0 +1,14 @@
+Flask
+Flask-SQLAlchemy
+python-dotenv
+Werkzeug
+XlsxWriter
+
+## Instalação das dependências
+
+As bibliotecas utilizadas pelo sistema estão listadas no arquivo `requirements.txt`.
+
+Para instalar todas as dependências, utilize o seguinte comando no terminal:
+
+##bash
+pip install -r requirements.txt

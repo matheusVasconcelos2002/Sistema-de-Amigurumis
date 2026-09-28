@@ -1,0 +1,1013 @@
+/* =========================================================
+   OFICIAL AMIGURUMIS V2
+   TELA: EDITAR CLIENTE
+   ========================================================= */
+
+
+/* =========================================================
+   01. CONTEÚDO PRINCIPAL
+   ========================================================= */
+
+.tela_editar_clientes {
+    min-height: 100vh;
+}
+
+.tela_editar_clientes
+.conteudo_editar_clientes,
+
+.tela_editar_clientes
+.conteudo_principal {
+
+    width: 100%;
+
+    max-width: 1200px;
+
+    margin:
+        0 auto;
+
+    padding:
+        35px
+        30px
+        50px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   02. CABEÇALHO
+   ========================================================= */
+
+.tela_editar_clientes
+.cabecalho_pagina {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom:
+        25px;
+}
+
+.tela_editar_clientes
+.cabecalho_pagina > div {
+
+    min-width: 0;
+}
+
+.tela_editar_clientes
+.icone_titulo {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    margin-bottom: 12px;
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        var(--cor-primaria-clara);
+
+    font-size: 22px;
+}
+
+.tela_editar_clientes
+.rotulo_pagina {
+
+    display: inline-block;
+
+    margin-bottom:
+        6px;
+
+    color:
+        var(--cor-primaria-escura);
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        1.5px;
+
+    text-transform:
+        uppercase;
+}
+
+.tela_editar_clientes
+.cabecalho_pagina h1 {
+
+    margin:
+        0 0 7px;
+
+    color:
+        var(--cor-texto);
+
+    font-size:
+        30px;
+
+    font-weight:
+        700;
+
+    line-height:
+        1.2;
+}
+
+.tela_editar_clientes
+.cabecalho_pagina p {
+
+    margin:
+        0;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size:
+        15px;
+
+    line-height:
+        1.5;
+}
+
+
+/* =========================================================
+   03. MENSAGENS
+   ========================================================= */
+
+.tela_editar_clientes
+.mensagens {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        10px;
+
+    margin-bottom:
+        20px;
+}
+
+.tela_editar_clientes
+.mensagem {
+
+    padding:
+        13px
+        16px;
+
+    border-radius:
+        var(--raio-medio);
+
+    font-size:
+        14px;
+
+    line-height:
+        1.4;
+}
+
+.tela_editar_clientes
+.mensagem.sucesso {
+
+    background-color:
+        #e8f7ee;
+
+    color:
+        #18794e;
+
+    border:
+        1px solid #a8dfbf;
+}
+
+.tela_editar_clientes
+.mensagem.erro {
+
+    background-color:
+        #fde8e8;
+
+    color:
+        #b42318;
+
+    border:
+        1px solid #f5b5b5;
+}
+
+
+/* =========================================================
+   04. CARD DO FORMULÁRIO
+   ========================================================= */
+
+.tela_editar_clientes
+.card_formulario {
+
+    width:
+        100%;
+
+    padding:
+        30px;
+
+    box-sizing:
+        border-box;
+
+    background-color:
+        var(--cor-branca);
+
+    border:
+        1px solid var(--cor-borda);
+
+    border-radius:
+        var(--raio-grande);
+
+    box-shadow:
+        var(--sombra-card);
+
+    margin-bottom:
+        25px;
+}
+
+
+/* =========================================================
+   05. TÍTULO DA SEÇÃO
+   ========================================================= */
+
+.tela_editar_clientes
+.titulo_secao {
+
+    padding-bottom:
+        20px;
+
+    margin-bottom:
+        25px;
+
+    border-bottom:
+        1px solid var(--cor-borda-clara);
+}
+
+.tela_editar_clientes
+.titulo_secao h2 {
+
+    margin:
+        0 0 6px;
+
+    color:
+        var(--cor-texto);
+
+    font-size:
+        20px;
+
+    font-weight:
+        700;
+}
+
+.tela_editar_clientes
+.titulo_secao p {
+
+    margin:
+        0;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size:
+        13px;
+
+    line-height:
+        1.5;
+}
+
+
+/* =========================================================
+   06. FORMULÁRIO
+   ========================================================= */
+
+.tela_editar_clientes
+.formulario_cliente {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        28px;
+}
+
+
+/* =========================================================
+   07. GRUPOS
+   ========================================================= */
+
+.tela_editar_clientes
+.grupo_formulario {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap:
+        20px;
+}
+
+.tela_editar_clientes
+.grupo_formulario > h3,
+
+.tela_editar_clientes
+.grupo_formulario > .descricao_grupo {
+
+    grid-column:
+        1 / -1;
+}
+
+.tela_editar_clientes
+.grupo_formulario h3 {
+
+    margin:
+        0;
+
+    color:
+        var(--cor-texto);
+
+    font-size:
+        17px;
+
+    font-weight:
+        700;
+}
+
+.tela_editar_clientes
+.descricao_grupo {
+
+    margin:
+        -12px 0 0;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size:
+        13px;
+
+    line-height:
+        1.5;
+}
+
+
+/* =========================================================
+   08. CAMPOS
+   ========================================================= */
+
+.tela_editar_clientes
+.campo_formulario {
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    gap:
+        8px;
+}
+
+.tela_editar_clientes
+.campo_formulario label {
+
+    color:
+        var(--cor-texto);
+
+    font-size:
+        14px;
+
+    font-weight:
+        700;
+}
+
+.tela_editar_clientes
+.campo_formulario label span {
+
+    margin-left:
+        3px;
+
+    color:
+        var(--cor-erro);
+
+    font-weight:
+        700;
+}
+
+
+/* =========================================================
+   09. INPUTS
+   ========================================================= */
+
+.tela_editar_clientes
+.campo_formulario input {
+
+    width:
+        100%;
+
+    min-height:
+        46px;
+
+    padding:
+        0 14px;
+
+    box-sizing:
+        border-box;
+
+    border:
+        1px solid var(--cor-borda);
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        var(--cor-branca);
+
+    color:
+        var(--cor-texto);
+
+    font-family:
+        inherit;
+
+    font-size:
+        14px;
+
+    outline:
+        none;
+
+    transition:
+        border-color var(--transicao),
+        box-shadow var(--transicao);
+}
+
+.tela_editar_clientes
+.campo_formulario input:hover {
+
+    border-color:
+        var(--cor-primaria-clara);
+}
+
+.tela_editar_clientes
+.campo_formulario input:focus {
+
+    border-color:
+        var(--cor-primaria);
+
+    box-shadow:
+        0 0 0 3px var(--cor-primaria-clara);
+}
+
+.tela_editar_clientes
+.campo_formulario input::placeholder {
+
+    color:
+        var(--cor-texto-claro);
+}
+
+.tela_editar_clientes
+.campo_formulario small {
+
+    color:
+        var(--cor-texto-claro);
+
+    font-size:
+        12px;
+
+    line-height:
+        1.5;
+}
+
+
+/* =========================================================
+   10. CEP
+   ========================================================= */
+
+.tela_editar_clientes
+.campo_cep {
+
+    grid-column:
+        1 / -1;
+}
+
+.tela_editar_clientes
+.campo_cep_linha {
+
+    display:
+        flex;
+
+    align-items:
+        stretch;
+
+    gap:
+        10px;
+}
+
+.tela_editar_clientes
+.campo_cep_linha input {
+
+    flex:
+        1;
+
+    min-width:
+        0;
+}
+
+.tela_editar_clientes
+.campo_cep_linha
+.btn_secundario {
+
+    flex-shrink:
+        0;
+
+    min-width:
+        125px;
+}
+
+
+/* =========================================================
+   11. BOTÕES
+   ========================================================= */
+
+.tela_editar_clientes
+.btn_principal,
+
+.tela_editar_clientes
+.btn_secundario {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    min-height:
+        44px;
+
+    padding:
+        0 20px;
+
+    box-sizing:
+        border-box;
+
+    border-radius:
+        var(--raio-medio);
+
+    font-family:
+        inherit;
+
+    font-size:
+        14px;
+
+    font-weight:
+        700;
+
+    text-decoration:
+        none;
+
+    cursor:
+        pointer;
+
+    transition:
+        background-color var(--transicao),
+        border-color var(--transicao),
+        color var(--transicao),
+        transform var(--transicao),
+        box-shadow var(--transicao);
+}
+
+.tela_editar_clientes
+.btn_principal:hover,
+
+.tela_editar_clientes
+.btn_secundario:hover {
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        var(--sombra-hover);
+}
+
+.tela_editar_clientes
+.btn_principal:active,
+
+.tela_editar_clientes
+.btn_secundario:active {
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   12. AÇÕES
+   ========================================================= */
+
+.tela_editar_clientes
+.acoes_formulario {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        flex-end;
+
+    gap:
+        12px;
+
+    padding-top:
+        5px;
+}
+
+
+/* =========================================================
+   13. AVISO
+   ========================================================= */
+
+.tela_editar_clientes
+.aviso_clientes {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    gap:
+        15px;
+
+    width:
+        100%;
+
+    padding:
+        20px 22px;
+
+    box-sizing:
+        border-box;
+
+    border:
+        1px solid #e8d8c7;
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        #fffaf5;
+}
+
+.tela_editar_clientes
+.icone_aviso {
+
+    width:
+        38px;
+
+    height:
+        38px;
+
+    min-width:
+        38px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        center;
+
+    border-radius:
+        var(--raio-pequeno);
+
+    background-color:
+        #f7eadb;
+
+    font-size:
+        18px;
+}
+
+.tela_editar_clientes
+.aviso_clientes strong {
+
+    display:
+        block;
+
+    margin-bottom:
+        6px;
+
+    color:
+        var(--cor-texto);
+
+    font-size:
+        14px;
+}
+
+.tela_editar_clientes
+.aviso_clientes p {
+
+    margin:
+        0;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size:
+        13px;
+
+    line-height:
+        1.5;
+}
+
+
+/* =========================================================
+   14. RODAPÉ
+   ========================================================= */
+
+.tela_editar_clientes
+.rodape_sistema {
+
+    width:
+        100%;
+
+    padding-top:
+        30px;
+}
+
+.tela_editar_clientes
+.rodape_direitos {
+
+    margin:
+        0;
+
+    text-align:
+        center;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size:
+        12px;
+
+    opacity:
+        0.6;
+}
+
+
+/* =========================================================
+   15. TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .tela_editar_clientes
+    .conteudo_editar_clientes,
+
+    .tela_editar_clientes
+    .conteudo_principal {
+
+        padding:
+            90px
+            20px
+            40px;
+    }
+
+    .tela_editar_clientes
+    .grupo_formulario {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .tela_editar_clientes
+    .campo_cep {
+
+        grid-column:
+            auto;
+    }
+}
+
+
+/* =========================================================
+   16. CELULAR
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .tela_editar_clientes
+    .conteudo_editar_clientes,
+
+    .tela_editar_clientes
+    .conteudo_principal {
+
+        padding:
+            82px
+            14px
+            35px;
+    }
+
+    .tela_editar_clientes
+    .cabecalho_pagina {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap:
+            15px;
+    }
+
+    .tela_editar_clientes
+    .cabecalho_pagina h1 {
+
+        font-size:
+            25px;
+    }
+
+    .tela_editar_clientes
+    .cabecalho_pagina p {
+
+        font-size:
+            14px;
+    }
+
+    .tela_editar_clientes
+    .cabecalho_pagina
+    .btn_secundario {
+
+        width:
+            100%;
+    }
+
+    .tela_editar_clientes
+    .card_formulario {
+
+        padding:
+            20px
+            16px;
+
+        border-radius:
+            var(--raio-medio);
+    }
+
+    .tela_editar_clientes
+    .titulo_secao {
+
+        margin-bottom:
+            20px;
+    }
+
+    .tela_editar_clientes
+    .titulo_secao h2 {
+
+        font-size:
+            18px;
+    }
+
+    .tela_editar_clientes
+    .formulario_cliente {
+
+        gap:
+            24px;
+    }
+
+    .tela_editar_clientes
+    .grupo_formulario {
+
+        gap:
+            18px;
+    }
+
+    .tela_editar_clientes
+    .campo_cep_linha {
+
+        flex-direction:
+            column;
+    }
+
+    .tela_editar_clientes
+    .campo_cep_linha
+    .btn_secundario {
+
+        width:
+            100%;
+    }
+
+    .tela_editar_clientes
+    .acoes_formulario {
+
+        flex-direction:
+            column-reverse;
+
+        align-items:
+            stretch;
+    }
+
+    .tela_editar_clientes
+    .acoes_formulario
+    .btn_principal,
+
+    .tela_editar_clientes
+    .acoes_formulario
+    .btn_secundario {
+
+        width:
+            100%;
+    }
+
+    .tela_editar_clientes
+    .aviso_clientes {
+
+        padding:
+            18px;
+    }
+}
+
+
+/* =========================================================
+   17. CELULARES PEQUENOS
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .tela_editar_clientes
+    .conteudo_editar_clientes,
+
+    .tela_editar_clientes
+    .conteudo_principal {
+
+        padding:
+            80px
+            12px
+            30px;
+    }
+
+    .tela_editar_clientes
+    .cabecalho_pagina h1 {
+
+        font-size:
+            22px;
+    }
+
+    .tela_editar_clientes
+    .card_formulario {
+
+        padding:
+            17px
+            13px;
+    }
+
+    .tela_editar_clientes
+    .campo_formulario input {
+
+        min-height:
+            44px;
+    }
+
+    .tela_editar_clientes
+    .aviso_clientes {
+
+        gap:
+            10px;
+    }
+
+    .tela_editar_clientes
+    .icone_aviso {
+
+        width:
+            34px;
+
+        height:
+            34px;
+
+        min-width:
+            34px;
+
+        font-size:
+            16px;
+    }
+}

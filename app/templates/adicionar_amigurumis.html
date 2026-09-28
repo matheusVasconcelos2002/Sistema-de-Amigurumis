@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Adicionar Amigurumi</title>
+
+
+    <!-- =====================================================
+         CSS GERAL
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/style.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         CSS DO MENU
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/menu.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         CSS DA PÁGINA
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/adicionar_amigurumis.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body class="tela_adicionar_amigurumi">
+
+
+    <!-- =====================================================
+         MENU LATERAL
+    ====================================================== -->
+
+    {% include "_menu.html" %}
+
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="conteudo_principal">
+
+
+        <!-- =================================================
+             CABEÇALHO
+        ================================================== -->
+
+        <section class="cabecalho_pagina">
+
+            <div>
+
+                <span class="rotulo_pagina">
+                    AMIGURUMIS
+                </span>
+
+
+                <h1>
+                    Adicionar amigurumi
+                </h1>
+
+
+                <p>
+                    Cadastre um novo modelo no seu catálogo.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('amigurumis.listar') }}"
+                class="btn_secundario"
+            >
+                ← Voltar para amigurumis
+            </a>
+
+        </section>
+
+
+        <!-- =================================================
+             MENSAGENS
+        ================================================== -->
+
+        {% with mensagens = get_flashed_messages(
+            with_categories=true
+        ) %}
+
+            {% if mensagens %}
+
+                <section class="mensagens">
+
+                    {% for categoria, mensagem in mensagens %}
+
+                        <div
+                            class="mensagem {{ categoria }}"
+                        >
+                            {{ mensagem }}
+                        </div>
+
+                    {% endfor %}
+
+                </section>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- =================================================
+             FORMULÁRIO
+        ================================================== -->
+
+        <section class="card_formulario">
+
+
+            <!-- =================================================
+                 TÍTULO DA SEÇÃO
+            ================================================== -->
+
+            <div class="titulo_secao">
+
+                <h2>
+                    Informações do amigurumi
+                </h2>
+
+                <p>
+                    Informe o nome do modelo e, se desejar,
+                    adicione uma imagem inicial.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 FORMULÁRIO
+            ================================================== -->
+
+            <form
+                action="{{ url_for('amigurumis.novo') }}"
+                method="POST"
+                enctype="multipart/form-data"
+                class="formulario_amigurumi"
+                id="formAmigurumi"
+            >
+
+
+                <!-- =============================================
+                     DADOS DO MODELO
+                ============================================== -->
+
+                <div class="grupo_formulario">
+
+                    <h3>
+                        Dados do modelo
+                    </h3>
+
+
+                    <div class="campo_formulario">
+
+                        <label for="produto">
+
+                            Nome do amigurumi
+
+                            <span aria-hidden="true">
+                                *
+                            </span>
+
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="produto"
+                            name="produto"
+                            maxlength="150"
+                            placeholder="Ex.: Stitch"
+                            autocomplete="off"
+                            value="{{ dados.produto if dados else '' }}"
+                            required
+                        >
+
+
+                        <small>
+                            Informe um nome para identificar
+                            facilmente este modelo.
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =============================================
+                     IMAGEM INICIAL
+                ============================================== -->
+
+                <div class="grupo_formulario">
+
+                    <h3>
+                        Imagem inicial
+                    </h3>
+
+
+                    <p class="descricao_grupo">
+
+                        Você pode adicionar uma imagem agora
+                        ou fazer isso posteriormente pela galeria.
+
+                    </p>
+
+
+                    <div class="campo_formulario">
+
+                        <label for="imagem">
+                            Imagem do modelo
+                        </label>
+
+
+                        <input
+                            type="file"
+                            id="imagem"
+                            name="imagem"
+                            accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                        >
+
+
+                        <small>
+
+                            Opcional.
+
+                            Formatos aceitos:
+                            JPG, JPEG, PNG e WEBP.
+
+                            Tamanho máximo: 15 MB.
+
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <!-- =============================================
+                     AVISO DE MÍDIAS
+                ============================================== -->
+
+                <section class="aviso_upload">
+
+                    <div class="aviso_upload_icone">
+                        🖼️
+                    </div>
+
+
+                    <div class="aviso_upload_texto">
+
+                        <strong>
+                            Você poderá adicionar mais mídias depois
+                        </strong>
+
+
+                        <p>
+
+                            Após cadastrar o amigurumi,
+                            será possível adicionar várias
+                            imagens e vídeos pela galeria.
+
+                        </p>
+
+
+                        <small>
+
+                            Imagens: até 15 MB por arquivo.
+
+                            Vídeos: até 105 MB por arquivo.
+
+                        </small>
+
+                    </div>
+
+                </section>
+
+
+                <!-- =============================================
+                     AÇÕES
+                ============================================== -->
+
+                <div class="acoes_formulario">
+
+
+                    <a
+                        href="{{ url_for('amigurumis.listar') }}"
+                        class="btn_secundario"
+                    >
+                        Cancelar
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="btn_principal"
+                    >
+                        Cadastrar amigurumi
+                    </button>
+
+                </div>
+
+
+            </form>
+
+        </section>
+
+
+        <!-- =================================================
+             AVISO FINAL
+        ================================================== -->
+
+        <section class="aviso_clientes">
+
+            <span class="icone_aviso">
+                ℹ️
+            </span>
+
+
+            <div>
+
+                <strong>
+                    Sobre as mídias
+                </strong>
+
+
+                <p>
+
+                    O cadastro inicial não limita a quantidade
+                    de mídias do modelo. Depois de criado,
+                    você poderá gerenciar imagens e vídeos
+                    individualmente pela galeria.
+
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT DO MENU
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/menu.js'
+        ) }}"
+        defer
+    ></script>
+
+
+    <!-- =====================================================
+         JAVASCRIPT GERAL
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/script.js'
+        ) }}"
+        defer
+    ></script>
+
+
+    <!-- =====================================================
+         JAVASCRIPT DOS AMIGURUMIS
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/amigurumis.js'
+        ) }}"
+        defer
+    ></script>
+
+
+</body>
+
+</html>

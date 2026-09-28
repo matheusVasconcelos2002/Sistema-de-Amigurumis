@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Encomendas
+    </title>
+
+
+    <link rel="stylesheet" href="{{ url_for(
+            'static',
+            filename='css/style.css'
+        ) }}">
+
+    <link rel="stylesheet" href="{{ url_for(
+                'static',
+                filename='css/pedidos.css'
+            ) }}">
+
+    <!-- CSS MENU-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+</head>
+
+
+<body class="tela_pedidos">
+
+    {% include "_menu.html" %}
+
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="conteudo_principal">
+
+
+        <!-- =================================================
+             CABEÇALHO
+        ================================================== -->
+
+        <div class="cabecalho_pagina">
+
+            <div>
+
+                <span class="subtitulo_pagina">
+                    Controle de encomendas
+                </span>
+
+
+                <h1>
+                    📦 Encomendas
+                </h1>
+
+
+                <p>
+                    Acompanhe suas encomendas
+                    e o andamento da produção.
+                </p>
+
+            </div>
+
+
+            <a href="{{ url_for('pedidos.novo') }}" class="botao_principal">
+                + Nova encomenda
+            </a>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MENSAGENS
+        ================================================== -->
+
+        {% with mensagens = get_flashed_messages(
+        with_categories=true
+        ) %}
+
+        {% if mensagens %}
+
+        <div class="mensagens_flash">
+
+            {% for categoria, mensagem in mensagens %}
+
+            <div class="mensagem_flash {{ categoria }}">
+
+                {{ mensagem }}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+        {% endwith %}
+
+
+
+        <!-- =================================================
+             RESUMO
+        ================================================== -->
+
+        <section class="cards_resumo_pedidos">
+
+
+            <!-- TOTAL -->
+
+            <div class="card_resumo_pedido">
+
+                <span class="icone_resumo">
+                    📦
+                </span>
+
+
+                <div>
+
+                    <span>
+                        Encomendas
+                    </span>
+
+
+                    <strong>
+                        {{ total_pedidos }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- SENDO FEITO -->
+
+            <div class="card_resumo_pedido">
+
+                <span class="icone_resumo">
+                    🧶
+                </span>
+
+
+                <div>
+
+                    <span>
+                        Sendo feitos
+                    </span>
+
+
+                    <strong>
+                        {{ total_sendo_feito }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- FINALIZADOS -->
+
+            <div class="card_resumo_pedido">
+
+                <span class="icone_resumo">
+                    ✅
+                </span>
+
+
+                <div>
+
+                    <span>
+                        Finalizados
+                    </span>
+
+
+                    <strong>
+                        {{ total_finalizados }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ATRASADOS -->
+
+            <div class="card_resumo_pedido">
+
+                <span class="icone_resumo">
+                    ⚠️
+                </span>
+
+
+                <div>
+
+                    <span>
+                        Atrasados
+                    </span>
+
+
+                    <strong>
+                        {{ total_atrasados }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             LEGENDA DOS STATUS
+        ================================================== -->
+
+        <section class="legenda_pedidos">
+
+
+            <div class="legenda_item">
+
+                <span class="legenda_ponto a_fazer">
+                </span>
+
+                A fazer
+
+            </div>
+
+
+            <div class="legenda_item">
+
+                <span class="legenda_ponto sendo_feito">
+                </span>
+
+                Sendo feito
+
+            </div>
+
+
+            <div class="legenda_item">
+
+                <span class="legenda_ponto finalizado">
+                </span>
+
+                Finalizado
+
+            </div>
+
+
+            <div class="legenda_item">
+
+                <span class="legenda_ponto entregue">
+                </span>
+
+                Entregue
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             LISTA DE PEDIDOS
+        ================================================== -->
+
+        <section class="card_pedidos">
+
+
+            <div class="cabecalho_lista">
+
+                <div>
+
+                    <h2>
+                        Encomendas em andamento
+                    </h2>
+
+
+                    <p>
+                        Acompanhe cada item da produção.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            {% if itens %}
+
+
+            <div class="tabela_container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Cliente
+                            </th>
+
+                            <th>
+                                Amigurumi
+                            </th>
+
+                            <th>
+                                Quantidade
+                            </th>
+
+                            <th>
+                                Total
+                            </th>
+
+                            <th>
+                                Tipo
+                            </th>
+
+                            <th>
+                                Tamanho
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Entrega prevista
+                            </th>
+
+                            <th>
+                                Entrega
+                            </th>
+
+                            <th>
+                                Ações
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+
+                        {% for item in itens %}
+
+
+                        <tr>
+
+
+                            <!-- CLIENTE -->
+
+                            <td>
+
+                                <div class="cliente_tabela">
+
+                                    <strong>
+
+                                        {{
+                                        item.pedido
+                                        .cliente_nome_snapshot
+                                        }}
+
+                                    </strong>
+
+
+                                    <small>
+
+                                        Pedido:
+                                        #{{ item.pedido.id }}
+
+                                    </small>
+
+                                </div>
+
+                            </td>
+
+
+
+                            <!-- AMIGURUMI -->
+
+                            <td>
+
+                                <div class="amigurumi_tabela">
+
+                                    {% if item.amigurumi.midias %}
+
+                                    {% set primeira_midia = item.amigurumi.midias[0] %}
+
+                                    <img src="{{ url_for(
+                                                        'static',
+                                                        filename=primeira_midia.arquivo
+                                                    ) }}" alt="{{ item.amigurumi.produto }}"
+                                        class="imagem_amigurumi_tabela">
+
+                                    {% else %}
+
+                                    {% endif %}
+
+
+                                    <strong>
+                                        {{ item.amigurumi.produto }}
+                                    </strong>
+
+                                </div>
+
+                            </td>
+
+
+
+                            <!-- QUANTIDADE -->
+
+                            <td>
+
+                                {{ item.quantidade }}
+
+                            </td>
+
+
+
+                            <!-- TOTAL -->
+
+                            <td class="valor_total">
+
+                                R$
+
+                                {{
+                                (
+                                item.preco_unitario
+                                *
+                                item.quantidade
+                                ) | round(2)
+                                }}
+
+                            </td>
+
+
+
+                            <!-- TIPO -->
+
+                            <td>
+
+                                {{ item.tipo }}
+
+                            </td>
+
+
+
+                            <!-- TAMANHO -->
+
+                            <td>
+
+                                {{ item.tamanho }} cm
+
+                            </td>
+
+
+
+                            <!-- STATUS -->
+
+                            <td>
+
+                                <span class="status_pedido status-{{ item.status.value }}">
+
+                                    {% if item.status.value == 'a_fazer' %}
+
+                                    ⏳ A fazer
+
+                                    {% elif item.status.value == 'sendo_feito' %}
+
+                                    🧶 Sendo feito
+
+                                    {% elif item.status.value == 'finalizado' %}
+
+                                    ✅ Finalizado
+
+                                    {% elif item.status.value == 'entregue' %}
+
+                                    ✓ Entregue
+
+                                    {% elif item.status.value == 'cancelado' %}
+
+                                    ❌ Cancelado
+
+                                    {% endif %}
+
+                                </span>
+
+                            </td>
+
+
+
+                            <!-- DATA PREVISTA -->
+
+                            <td>
+
+                                {% if item.data_prevista_entrega %}
+
+                                {% if
+                                item.data_prevista_entrega < data_hoje and item.status.value not in
+                                    ['entregue', 'cancelado' ] %} <span class="data_atrasada">
+
+                                    ⚠️
+
+                                    {{
+                                    item.data_prevista_entrega.strftime(
+                                    '%d/%m/%Y'
+                                    )
+                                    }}
+
+                                    </span>
+
+                                    {% else %}
+
+                                    {{
+                                    item.data_prevista_entrega.strftime(
+                                    '%d/%m/%Y'
+                                    )
+                                    }}
+
+                                    {% endif %}
+
+                                    {% else %}
+
+                                    -
+
+                                    {% endif %}
+
+                            </td>
+
+
+
+                            <!-- ENTREGA -->
+
+                            <td>
+
+                                {% if item.data_entrega %}
+
+                                {{
+                                item.data_entrega.strftime(
+                                '%d/%m/%Y %H:%M'
+                                )
+                                }}
+
+                                {% else %}
+
+                                <span class="aguardando_entrega">
+
+                                    Aguardando produção
+
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- AÇÕES -->
+
+                            <td class="acoes_pedido">
+
+
+                                {% if item.status.value == 'a_fazer' %}
+
+
+                                <form method="POST" action="{{ url_for(
+                                                    'pedidos.iniciar_producao',
+                                                    item_id=item.id
+                                                ) }}">
+
+                                    <button type="submit" class="btn_acao btn_iniciar">
+                                        🧶 Iniciar produção
+                                    </button>
+
+                                </form>
+
+
+                                {% elif item.status.value == 'sendo_feito' %}
+
+
+                                <form method="POST" action="{{ url_for(
+                                                    'pedidos.finalizar',
+                                                    item_id=item.id
+                                                ) }}">
+
+                                    <button type="submit" class="btn_acao btn_finalizar">
+                                        ✓ Finalizar
+                                    </button>
+
+                                </form>
+
+
+                                {% elif item.status.value == 'finalizado' %}
+
+
+                                <form method="POST" action="{{ url_for(
+                                                    'pedidos.entregar',
+                                                    item_id=item.id
+                                                ) }}">
+
+                                    <button type="submit" class="btn_acao btn_entregar">
+                                        📦 Marcar como entregue
+                                    </button>
+
+                                </form>
+
+
+                                {% elif item.status.value == 'entregue' %}
+
+                                <span class="pedido_entregue">
+                                    ✓ Entregue
+                                </span>
+
+                                {% endif %}
+
+
+
+                                <a href="{{ url_for(
+                                    'pedidos.editar',
+                                    pedido_id=item.pedido.id
+                                ) }}" class="btn_acao btn_editar">
+                                    ✏️ Editar
+                                </a>
+
+
+                            </td>
+
+
+                        </tr>
+
+
+                        {% endfor %}
+
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- =================================================
+                     ESTADO VAZIO
+                ================================================== -->
+
+            <div class="estado_vazio">
+
+                <div class="estado_vazio_icone">
+                    📦
+                </div>
+
+
+                <h3>
+                    Nenhuma encomenda cadastrada
+                </h3>
+
+
+                <p>
+                    Quando você cadastrar uma nova encomenda,
+                    ela aparecerá aqui.
+                </p>
+
+
+                <a href="{{ url_for('pedidos.novo') }}" class="botao_principal">
+                    + Nova encomenda
+                </a>
+
+            </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+    </main>
+
+
+    <script src="{{ url_for(
+            'static',
+            filename='js/script.js'
+        ) }}" defer></script>
+
+    <script src="{{ url_for(
+            'static',
+            filename='js/pedidos.js'
+        ) }}" defer></script>
+
+    <!-- =====================================================
+         JAVASCRIPT DO MENU
+    ====================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/menu.js') }}"
+        defer
+    ></script>
+
+</body>
+
+</html>

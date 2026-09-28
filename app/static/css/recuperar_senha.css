@@ -1,0 +1,454 @@
+/* ==========================================================
+   RECUPERAR SENHA
+   Estilos exclusivos da página de recuperação de senha
+========================================================== */
+
+
+/* ==========================================================
+   ESTRUTURA GERAL DA PÁGINA
+========================================================== */
+
+body.tela_recuperar_senha {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background: #f8f5f2;
+}
+
+
+/* ==========================================================
+   ÁREA PRINCIPAL
+========================================================== */
+
+.tela_recuperar_senha .tela_login {
+    width: 100%;
+    flex: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 40px 20px;
+
+    box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.tela_recuperar_senha .card_login {
+    width: 100%;
+    max-width: 450px;
+
+    padding: 40px 35px;
+
+    box-sizing: border-box;
+
+    background: #fff;
+
+    border: 1px solid #eee;
+    border-radius: 20px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ==========================================================
+   LOGO
+========================================================== */
+
+.tela_recuperar_senha .logo {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin-bottom: 25px;
+}
+
+.tela_recuperar_senha .logo img {
+    display: block;
+
+    width: 105px;
+    height: 105px;
+
+    object-fit: contain;
+}
+
+
+/* ==========================================================
+   CABEÇALHO
+========================================================== */
+
+.tela_recuperar_senha .cabecalho_login {
+    margin-bottom: 25px;
+
+    text-align: center;
+}
+
+.tela_recuperar_senha .cabecalho_login h1 {
+    margin: 0 0 10px;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    color: #333;
+}
+
+.tela_recuperar_senha .cabecalho_login p {
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    color: #777;
+}
+
+
+/* ==========================================================
+   MENSAGENS
+========================================================== */
+
+.tela_recuperar_senha .mensagem_erro,
+.tela_recuperar_senha .mensagem_sucesso,
+.tela_recuperar_senha .mensagem {
+    width: 100%;
+
+    margin-bottom: 18px;
+    padding: 12px 14px;
+
+    box-sizing: border-box;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.tela_recuperar_senha .mensagem_erro {
+    border: 1px solid #e3b5b5;
+
+    background: #fff1f1;
+
+    color: #a33;
+}
+
+.tela_recuperar_senha .mensagem_sucesso {
+    border: 1px solid #b8dcbc;
+
+    background: #f0faf1;
+
+    color: #34703a;
+}
+
+.tela_recuperar_senha .mensagem {
+    border: 1px solid #ddd;
+
+    background: #f7f7f7;
+
+    color: #555;
+}
+
+
+/* ==========================================================
+   FORMULÁRIO
+========================================================== */
+
+.tela_recuperar_senha .form_login {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+
+/* ==========================================================
+   CAMPO DO FORMULÁRIO
+========================================================== */
+
+.tela_recuperar_senha .campo_formulario {
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+.tela_recuperar_senha .campo_formulario label {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #444;
+}
+
+.tela_recuperar_senha .campo_formulario input {
+    width: 100%;
+
+    min-height: 46px;
+
+    padding: 0 14px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dcd6d1;
+    border-radius: 10px;
+
+    background: #fff;
+
+    color: #333;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.tela_recuperar_senha .campo_formulario input::placeholder {
+    color: #aaa;
+}
+
+.tela_recuperar_senha .campo_formulario input:hover {
+    border-color: #c9b7a9;
+}
+
+.tela_recuperar_senha .campo_formulario input:focus {
+    border-color: #a97852;
+
+    box-shadow: 0 0 0 3px rgba(169, 120, 82, 0.12);
+}
+
+
+/* ==========================================================
+   BOTÃO PRINCIPAL
+   NÃO ALTERADO
+========================================================== */
+
+.tela_recuperar_senha .btn_principal {
+    width: 100%;
+
+    min-height: 46px;
+
+    padding: 0 20px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #8b5e3c;
+    border-radius: 10px;
+
+    background: #8b5e3c;
+
+    color: #fff;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.tela_recuperar_senha .btn_principal:hover {
+    background: #754b30;
+    border-color: #754b30;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 4px 12px rgba(139, 94, 60, 0.2);
+}
+
+.tela_recuperar_senha .btn_principal:active {
+    transform: translateY(0);
+}
+
+
+/* ==========================================================
+   LINK DE VOLTAR
+========================================================== */
+
+.tela_recuperar_senha .links_login {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 22px;
+}
+
+.tela_recuperar_senha .links_login a {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #8b5e3c;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        text-decoration-color 0.2s ease;
+}
+
+.tela_recuperar_senha .links_login a:hover {
+    color: #754b30;
+
+    text-decoration: underline;
+}
+
+
+/* ==========================================================
+   RODAPÉ
+========================================================== */
+
+.tela_recuperar_senha .rodape {
+    width: 100%;
+
+    padding: 20px 20px 24px;
+
+    box-sizing: border-box;
+
+    background: transparent;
+}
+
+.tela_recuperar_senha .rodape_conteudo {
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+.tela_recuperar_senha .rodape_linha {
+    display: block;
+
+    width: 100%;
+    max-width: 390px;
+
+    height: 1px;
+
+    margin: 0 auto 12px;
+
+    background: #e1d8d2;
+}
+
+.tela_recuperar_senha .rodape_direitos {
+    margin: 0;
+
+    font-size: 11px;
+    font-weight: 600;
+
+    color: #8a8380;
+
+    line-height: 1.4;
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+========================================================== */
+
+@media (max-width: 600px) {
+
+    .tela_recuperar_senha .tela_login {
+        padding: 30px 15px;
+    }
+
+    .tela_recuperar_senha .card_login {
+        padding: 32px 25px;
+
+        border-radius: 16px;
+    }
+
+    /* Logo um pouco maior no celular */
+    .tela_recuperar_senha .logo img {
+        width: 110px;
+        height: 110px;
+    }
+
+    .tela_recuperar_senha .cabecalho_login h1 {
+        font-size: 25px;
+    }
+
+    .tela_recuperar_senha .cabecalho_login p {
+        font-size: 13px;
+    }
+
+    .tela_recuperar_senha .campo_formulario input {
+        min-height: 44px;
+
+        font-size: 14px;
+    }
+
+    .tela_recuperar_senha .btn_principal {
+        min-height: 44px;
+
+        font-size: 14px;
+    }
+
+    .tela_recuperar_senha .rodape {
+        padding: 18px 15px 22px;
+    }
+
+    .tela_recuperar_senha .rodape_linha {
+        max-width: 100%;
+
+        margin-bottom: 11px;
+    }
+
+    .tela_recuperar_senha .rodape_direitos {
+        font-size: 11px;
+    }
+}
+
+
+/* ==========================================================
+   CELULARES PEQUENOS
+========================================================== */
+
+@media (max-width: 400px) {
+
+    .tela_recuperar_senha .tela_login {
+        padding: 20px 12px;
+    }
+
+    .tela_recuperar_senha .card_login {
+        padding: 28px 20px;
+    }
+
+    .tela_recuperar_senha .logo img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .tela_recuperar_senha .cabecalho_login h1 {
+        font-size: 23px;
+    }
+
+    .tela_recuperar_senha .cabecalho_login p {
+        font-size: 12px;
+    }
+
+    .tela_recuperar_senha .campo_formulario label {
+        font-size: 13px;
+    }
+
+    .tela_recuperar_senha .links_login a {
+        font-size: 13px;
+    }
+
+    .tela_recuperar_senha .rodape {
+        padding: 16px 12px 20px;
+    }
+
+    .tela_recuperar_senha .rodape_direitos {
+        font-size: 10px;
+    }
+}

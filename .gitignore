@@ -1,0 +1,32 @@
+# Ambiente virtual
+.venv/
+
+# Variáveis de ambiente
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+
+# Testes
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# Sistema operacional
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Banco de dados
+*.db
+*.sqlite
+*.sqlite3
+
+# Uploads e arquivos gerados pelo sistema
+app/static/fotos_perfil/
+app/static/uploads/

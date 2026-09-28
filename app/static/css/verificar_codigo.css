@@ -1,0 +1,342 @@
+/* ==========================================================
+   VERIFICAR CÓDIGO
+   Estilos exclusivos da página de verificação
+========================================================== */
+
+
+/* ==========================================================
+   ESTRUTURA GERAL
+========================================================== */
+
+body.pagina_codigo {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px 20px;
+
+    box-sizing: border-box;
+
+    background: #f8f5f2;
+}
+
+
+/* ==========================================================
+   CAIXA PRINCIPAL
+========================================================== */
+
+.pagina_codigo .caixa_codigo {
+    width: 100%;
+    max-width: 450px;
+
+    padding: 40px 35px;
+
+    box-sizing: border-box;
+
+    background: #fff;
+
+    border: 1px solid #eee;
+    border-radius: 20px;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+
+    text-align: center;
+}
+
+
+/* ==========================================================
+   TÍTULO
+========================================================== */
+
+.pagina_codigo .caixa_codigo h1 {
+    margin: 0 0 12px;
+
+    font-size: 27px;
+    font-weight: 700;
+
+    color: #333;
+}
+
+
+/* ==========================================================
+   TEXTOS
+========================================================== */
+
+.pagina_codigo .caixa_codigo > p {
+    margin: 0;
+
+    font-size: 14px;
+    line-height: 1.6;
+
+    color: #666;
+}
+
+.pagina_codigo .caixa_codigo .instrucao {
+    margin-top: 6px;
+
+    color: #888;
+}
+
+
+/* ==========================================================
+   MENSAGEM
+========================================================== */
+
+.pagina_codigo .mensagem {
+    width: 100%;
+
+    margin: 22px 0;
+
+    padding: 12px 14px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e3b5b5;
+    border-radius: 10px;
+
+    background: #fff1f1;
+
+    color: #a33;
+
+    text-align: left;
+}
+
+.pagina_codigo .mensagem p {
+    margin: 0;
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* ==========================================================
+   FORMULÁRIO
+========================================================== */
+
+.pagina_codigo .caixa_codigo form {
+    display: flex;
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-top: 28px;
+
+    text-align: left;
+}
+
+
+/* ==========================================================
+   LABEL
+========================================================== */
+
+.pagina_codigo .caixa_codigo form label {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #444;
+}
+
+
+/* ==========================================================
+   CAMPO DO CÓDIGO
+========================================================== */
+
+.pagina_codigo .caixa_codigo form input {
+    width: 100%;
+
+    min-height: 52px;
+
+    padding: 0 15px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dcd6d1;
+    border-radius: 10px;
+
+    background: #fff;
+
+    color: #333;
+
+    font-size: 22px;
+    font-weight: 600;
+
+    letter-spacing: 7px;
+
+    text-align: center;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.pagina_codigo .caixa_codigo form input::placeholder {
+    color: #bbb;
+
+    letter-spacing: 7px;
+}
+
+.pagina_codigo .caixa_codigo form input:hover {
+    border-color: #c9b7a9;
+}
+
+.pagina_codigo .caixa_codigo form input:focus {
+    border-color: #a97852;
+
+    box-shadow: 0 0 0 3px rgba(169, 120, 82, 0.12);
+}
+
+
+/* ==========================================================
+   BOTÃO
+========================================================== */
+
+.pagina_codigo .caixa_codigo form button {
+    width: 100%;
+
+    min-height: 46px;
+
+    margin-top: 8px;
+
+    padding: 0 20px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #8b5e3c;
+    border-radius: 10px;
+
+    background: #8b5e3c;
+
+    color: #fff;
+
+    font-size: 15px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.pagina_codigo .caixa_codigo form button:hover {
+    background: #754b30;
+    border-color: #754b30;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 4px 12px rgba(139, 94, 60, 0.2);
+}
+
+.pagina_codigo .caixa_codigo form button:active {
+    transform: translateY(0);
+}
+
+
+/* ==========================================================
+   VOLTAR PARA LOGIN
+========================================================== */
+
+.pagina_codigo .voltar_login {
+    display: inline-block;
+
+    margin-top: 24px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #8b5e3c;
+
+    text-decoration: none;
+
+    transition: color 0.2s ease;
+}
+
+.pagina_codigo .voltar_login:hover {
+    color: #754b30;
+
+    text-decoration: underline;
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+========================================================== */
+
+@media (max-width: 600px) {
+
+    body.pagina_codigo {
+        padding: 20px 15px;
+    }
+
+    .pagina_codigo .caixa_codigo {
+        padding: 32px 25px;
+
+        border-radius: 16px;
+    }
+
+    .pagina_codigo .caixa_codigo h1 {
+        font-size: 24px;
+    }
+
+    .pagina_codigo .caixa_codigo > p {
+        font-size: 13px;
+    }
+
+    .pagina_codigo .caixa_codigo form input {
+        min-height: 50px;
+
+        font-size: 20px;
+
+        letter-spacing: 6px;
+    }
+
+    .pagina_codigo .caixa_codigo form input::placeholder {
+        letter-spacing: 6px;
+    }
+
+    .pagina_codigo .caixa_codigo form button {
+        min-height: 44px;
+
+        font-size: 14px;
+    }
+}
+
+
+/* ==========================================================
+   CELULARES PEQUENOS
+========================================================== */
+
+@media (max-width: 400px) {
+
+    body.pagina_codigo {
+        padding: 15px 12px;
+    }
+
+    .pagina_codigo .caixa_codigo {
+        padding: 28px 20px;
+    }
+
+    .pagina_codigo .caixa_codigo h1 {
+        font-size: 22px;
+    }
+
+    .pagina_codigo .caixa_codigo form input {
+        font-size: 18px;
+
+        letter-spacing: 5px;
+    }
+
+    .pagina_codigo .caixa_codigo form input::placeholder {
+        letter-spacing: 5px;
+    }
+
+    .pagina_codigo .voltar_login {
+        font-size: 13px;
+    }
+}

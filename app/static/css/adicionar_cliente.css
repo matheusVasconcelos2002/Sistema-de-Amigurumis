@@ -1,0 +1,895 @@
+/* =========================================================
+
+   TELA: ADICIONAR CLIENTE
+   ========================================================= */
+
+
+/* =========================================================
+   01. ESTRUTURA PRINCIPAL
+   ========================================================= */
+
+.tela_adicionar_cliente {
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.tela_adicionar_cliente .conteudo_principal {
+    width: 100%;
+    min-height: 100vh;
+
+    margin-left: 0;
+
+    padding:
+        35px
+        35px
+        50px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   02. CABEÇALHO DA PÁGINA
+   ========================================================= */
+
+.tela_adicionar_cliente .cabecalho_pagina {
+    width: 100%;
+    max-width: 1050px;
+
+    display: flex;
+
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin: 0 auto 28px;
+}
+
+.tela_adicionar_cliente .cabecalho_pagina > div {
+    min-width: 0;
+}
+
+.tela_adicionar_cliente .rotulo_pagina {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    padding: 5px 10px;
+
+    border-radius: var(--raio-pequeno);
+
+    background-color: var(--cor-primaria-clara);
+
+    color: var(--cor-primaria-escura);
+
+    font-size: 10px;
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+.tela_adicionar_cliente .cabecalho_pagina h1 {
+    margin: 0 0 7px;
+
+    color: var(--cor-texto);
+
+    font-size: 30px;
+    line-height: 1.2;
+}
+
+.tela_adicionar_cliente .cabecalho_pagina p {
+    margin: 0;
+
+    color: var(--cor-texto-secundario);
+
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   03. BOTÃO VOLTAR
+   ========================================================= */
+
+.tela_adicionar_cliente .cabecalho_pagina .btn_secundario {
+    flex-shrink: 0;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   04. MENSAGENS
+   ========================================================= */
+
+.tela_adicionar_cliente .mensagens {
+    width: 100%;
+    max-width: 1050px;
+
+    margin: 0 auto 20px;
+}
+
+.tela_adicionar_cliente .mensagem {
+    width: 100%;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   05. CARD PRINCIPAL
+   ========================================================= */
+
+.tela_adicionar_cliente .card_formulario {
+    width: 100%;
+    max-width: 1050px;
+
+    margin: 0 auto 22px;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    background-color: var(--cor-branca);
+
+    border:
+        1px solid var(--cor-borda);
+
+    border-radius: var(--raio-grande);
+
+    box-shadow:
+        var(--sombra-card);
+}
+
+
+/* =========================================================
+   06. TÍTULO DA SEÇÃO
+   ========================================================= */
+
+.tela_adicionar_cliente .titulo_secao {
+    margin-bottom: 28px;
+
+    padding-bottom: 18px;
+
+    border-bottom:
+        1px solid var(--cor-borda-clara);
+}
+
+.tela_adicionar_cliente .titulo_secao h2 {
+    margin: 0 0 6px;
+
+    color: var(--cor-texto);
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.tela_adicionar_cliente .titulo_secao p {
+    margin: 0;
+
+    color: var(--cor-texto-secundario);
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   07. GRUPOS DO FORMULÁRIO
+   ========================================================= */
+
+.tela_adicionar_cliente .grupo_formulario {
+    margin-bottom: 30px;
+}
+
+.tela_adicionar_cliente .grupo_formulario:last-of-type {
+    margin-bottom: 0;
+}
+
+.tela_adicionar_cliente .grupo_formulario > h3 {
+    margin: 0 0 7px;
+
+    color: var(--cor-texto);
+
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.tela_adicionar_cliente .descricao_grupo {
+    margin: 0 0 18px;
+
+    color: var(--cor-texto-secundario);
+
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   08. CAMPOS
+   ========================================================= */
+
+.tela_adicionar_cliente .campo_formulario {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+
+    margin-bottom: 18px;
+
+    width: 100%;
+    max-width: 700px;
+}
+
+.tela_adicionar_cliente .grupo_formulario
+.campo_formulario:last-child {
+    margin-bottom: 0;
+}
+
+.tela_adicionar_cliente .campo_formulario label {
+    color: var(--cor-texto);
+
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.tela_adicionar_cliente .campo_formulario label span {
+    margin-left: 2px;
+
+    color: var(--cor-erro);
+}
+
+
+/* =========================================================
+   09. CAMPOS DE TEXTO
+   ========================================================= */
+
+.tela_adicionar_cliente
+.campo_formulario
+input[type="text"],
+
+.tela_adicionar_cliente
+.campo_formulario
+input[type="tel"] {
+
+    width: 100%;
+
+    min-height: 46px;
+
+    padding:
+        11px
+        13px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid var(--cor-borda);
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        var(--cor-branca);
+
+    color:
+        var(--cor-texto);
+
+    font-family: inherit;
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color var(--transicao),
+        box-shadow var(--transicao),
+        background-color var(--transicao);
+}
+
+.tela_adicionar_cliente
+.campo_formulario
+input[type="text"]:hover,
+
+.tela_adicionar_cliente
+.campo_formulario
+input[type="tel"]:hover {
+
+    border-color:
+        var(--cor-primaria-clara);
+}
+
+.tela_adicionar_cliente
+.campo_formulario
+input[type="text"]:focus,
+
+.tela_adicionar_cliente
+.campo_formulario
+input[type="tel"]:focus {
+
+    border-color:
+        var(--cor-primaria);
+
+    box-shadow:
+        0 0 0 3px var(--cor-primaria-clara);
+}
+
+.tela_adicionar_cliente
+.campo_formulario
+input::placeholder {
+
+    color:
+        var(--cor-texto-claro);
+}
+
+
+/* =========================================================
+   10. TEXTOS DE AJUDA
+   ========================================================= */
+
+.tela_adicionar_cliente
+.campo_formulario
+small {
+
+    color:
+        var(--cor-texto-claro);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   11. CEP
+   ========================================================= */
+
+.tela_adicionar_cliente .campo_cep {
+    max-width: 100%;
+}
+
+.tela_adicionar_cliente .campo_cep_linha {
+    width: 100%;
+
+    display: flex;
+
+    align-items: stretch;
+
+    gap: 10px;
+}
+
+.tela_adicionar_cliente .campo_cep_linha input {
+    flex: 1;
+
+    min-width: 0;
+}
+
+.tela_adicionar_cliente
+.campo_cep_linha
+.btn_secundario {
+
+    flex-shrink: 0;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   12. ESTADO
+   ========================================================= */
+
+.tela_adicionar_cliente #estado {
+    max-width: 120px;
+
+    text-transform: uppercase;
+}
+
+
+/* =========================================================
+   13. BUSCAR CEP
+   ========================================================= */
+
+.tela_adicionar_cliente #btnBuscarCep {
+    min-height: 46px;
+
+    padding:
+        10px
+        18px;
+
+    border:
+        1px solid var(--cor-primaria);
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        var(--cor-primaria);
+
+    color:
+        var(--cor-branca);
+
+    font-family: inherit;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background-color var(--transicao),
+        border-color var(--transicao),
+        transform var(--transicao),
+        box-shadow var(--transicao);
+}
+
+.tela_adicionar_cliente #btnBuscarCep:hover {
+    background-color:
+        var(--cor-primaria-escura);
+
+    border-color:
+        var(--cor-primaria-escura);
+
+    box-shadow:
+        var(--sombra-hover);
+
+    transform:
+        translateY(-1px);
+}
+
+.tela_adicionar_cliente #btnBuscarCep:active {
+    transform:
+        translateY(0);
+}
+
+.tela_adicionar_cliente #btnBuscarCep:disabled {
+    opacity: 0.6;
+
+    cursor: not-allowed;
+
+    transform: none;
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   14. VALIDAÇÃO
+   ========================================================= */
+
+.tela_adicionar_cliente
+.campo_formulario
+input:required:invalid:not(:placeholder-shown) {
+
+    border-color:
+        var(--cor-erro);
+}
+
+.tela_adicionar_cliente
+.campo_formulario
+input:required:valid:not(:placeholder-shown) {
+
+    border-color:
+        var(--cor-sucesso);
+}
+
+.tela_adicionar_cliente #cep:invalid {
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   15. AÇÕES DO FORMULÁRIO
+   ========================================================= */
+
+.tela_adicionar_cliente .acoes_formulario {
+    display: flex;
+
+    align-items: center;
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 30px;
+
+    padding-top: 22px;
+
+    border-top:
+        1px solid var(--cor-borda-clara);
+}
+
+.tela_adicionar_cliente
+.acoes_formulario
+.btn_principal {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding:
+        10px
+        22px;
+
+    border:
+        1px solid transparent;
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        var(--cor-primaria);
+
+    color:
+        var(--cor-branca);
+
+    font-family: inherit;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background-color var(--transicao),
+        box-shadow var(--transicao),
+        transform var(--transicao);
+}
+
+.tela_adicionar_cliente
+.acoes_formulario
+.btn_principal:hover {
+
+    background-color:
+        var(--cor-primaria-escura);
+
+    box-shadow:
+        var(--sombra-hover);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   16. AVISO
+   ========================================================= */
+
+.tela_adicionar_cliente .aviso_clientes {
+    width: 100%;
+    max-width: 1050px;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 13px;
+
+    margin: 0 auto;
+
+    padding:
+        17px
+        19px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid var(--cor-borda);
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        var(--cor-fundo-claro);
+}
+
+.tela_adicionar_cliente .icone_aviso {
+    width: 34px;
+    height: 34px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    flex-shrink: 0;
+
+    border-radius:
+        var(--raio-redondo);
+
+    background-color:
+        var(--cor-primaria-clara);
+
+    font-size: 16px;
+}
+
+.tela_adicionar_cliente
+.aviso_clientes
+strong {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color:
+        var(--cor-texto);
+
+    font-size: 13px;
+}
+
+.tela_adicionar_cliente
+.aviso_clientes
+p {
+
+    margin: 0;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size: 12px;
+
+    line-height: 1.6;
+}
+
+/* =========================================================
+   OPÇÃO "NÃO SEI O CEP"
+   ========================================================= */
+
+.tela_adicionar_cliente .opcao_cep,
+.tela_editar_clientes .opcao_cep {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 9px;
+
+    width: fit-content;
+
+    margin-top: 10px;
+
+    color: var(--cor-texto);
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    user-select: none;
+}
+
+
+.tela_adicionar_cliente .opcao_cep input,
+.tela_editar_clientes .opcao_cep input {
+
+    width: 17px;
+    height: 17px;
+
+    margin: 0;
+
+    accent-color: var(--cor-primaria);
+
+    cursor: pointer;
+}
+
+
+.tela_adicionar_cliente .opcao_cep span,
+.tela_editar_clientes .opcao_cep span {
+
+    line-height: 1.4;
+}
+
+
+.tela_adicionar_cliente
+.campo_cep:has(#cep:disabled),
+
+.tela_editar_clientes
+.campo_cep:has(#cep:disabled) {
+
+    opacity: 0.95;
+}
+
+
+.tela_adicionar_cliente
+.campo_cep
+#cep:disabled,
+
+.tela_editar_clientes
+.campo_cep
+#cep:disabled {
+
+    background-color:
+        var(--cor-fundo-claro);
+
+    color:
+        var(--cor-texto-claro);
+
+    cursor:
+        not-allowed;
+}
+
+/* =========================================================
+   17. RESPONSIVIDADE - TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .tela_adicionar_cliente
+    .conteudo_principal {
+
+        padding:
+            90px
+            22px
+            40px;
+    }
+}
+
+
+/* =========================================================
+   18. RESPONSIVIDADE - CELULAR
+   ========================================================= */
+
+@media (max-width: 650px) {
+
+    .tela_adicionar_cliente
+    .conteudo_principal {
+
+        padding:
+            82px
+            14px
+            35px;
+    }
+
+    .tela_adicionar_cliente
+    .cabecalho_pagina {
+
+        align-items:
+            flex-start;
+
+        flex-direction:
+            column;
+
+        gap: 15px;
+    }
+
+    .tela_adicionar_cliente
+    .cabecalho_pagina h1 {
+
+        font-size: 25px;
+    }
+
+    .tela_adicionar_cliente
+    .cabecalho_pagina p {
+
+        font-size: 14px;
+    }
+
+    .tela_adicionar_cliente
+    .cabecalho_pagina
+    .btn_secundario {
+
+        width: 100%;
+    }
+
+    .tela_adicionar_cliente
+    .card_formulario {
+
+        padding:
+            20px
+            16px;
+
+        border-radius:
+            var(--raio-medio);
+    }
+
+    .tela_adicionar_cliente
+    .titulo_secao {
+
+        margin-bottom: 22px;
+    }
+
+    .tela_adicionar_cliente
+    .campo_cep_linha {
+
+        flex-direction:
+            column;
+    }
+
+    .tela_adicionar_cliente
+    .campo_cep_linha
+    .btn_secundario {
+
+        width: 100%;
+    }
+
+    .tela_adicionar_cliente
+    #estado {
+
+        max-width: none;
+    }
+
+    .tela_adicionar_cliente
+    .acoes_formulario {
+
+        align-items:
+            stretch;
+
+        flex-direction:
+            column-reverse;
+
+        gap: 8px;
+    }
+
+    .tela_adicionar_cliente
+    .acoes_formulario
+    a,
+
+    .tela_adicionar_cliente
+    .acoes_formulario
+    button {
+
+        width: 100%;
+    }
+
+    .tela_adicionar_cliente
+    .aviso_clientes {
+
+        flex-direction:
+            column;
+
+        padding:
+            15px;
+    }
+}
+
+
+/* =========================================================
+   19. CELULARES PEQUENOS
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+    .tela_adicionar_cliente
+    .conteudo_principal {
+
+        padding:
+            80px
+            12px
+            30px;
+    }
+
+    .tela_adicionar_cliente
+    .card_formulario {
+
+        padding:
+            18px
+            13px;
+    }
+
+    .tela_adicionar_cliente
+    .rotulo_pagina {
+
+        font-size: 9px;
+    }
+
+    .tela_adicionar_cliente
+    .cabecalho_pagina h1 {
+
+        font-size: 23px;
+    }
+
+    .tela_adicionar_cliente
+    .campo_formulario {
+
+        max-width: none;
+    }
+
+    .tela_adicionar_cliente
+    .aviso_clientes {
+
+        padding:
+            14px;
+    }
+}

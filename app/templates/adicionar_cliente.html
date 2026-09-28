@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Adicionar Cliente</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adicionar_cliente.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+
+</head>
+
+<body class="tela_adicionar_cliente">
+
+    {% include "_menu.html" %}
+
+    <main class="conteudo_principal">
+
+        <section class="cabecalho_pagina">
+
+            <div>
+
+                <span class="rotulo_pagina">
+                    CLIENTES
+                </span>
+
+                <h1>
+                    Adicionar cliente
+                </h1>
+
+                <p>
+                    Cadastre as informações do cliente para
+                    utilizar posteriormente nas encomendas.
+                </p>
+
+            </div>
+
+            <a href="{{ url_for('clientes.listar') }}" class="btn_secundario">
+                ← Voltar para clientes
+            </a>
+
+        </section>
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+        {% if mensagens %}
+
+        <section class="mensagens">
+
+            {% for categoria, mensagem in mensagens %}
+
+            <div class="mensagem {{ categoria }}">
+                {{ mensagem }}
+            </div>
+
+            {% endfor %}
+
+        </section>
+
+        {% endif %}
+
+        {% endwith %}
+
+        <section class="card_formulario">
+
+            <div class="titulo_secao">
+
+                <h2>
+                    Informações do cliente
+                </h2>
+
+                <p>
+                    Os campos marcados com *
+                    são obrigatórios.
+                </p>
+
+            </div>
+
+            <form action="{{ url_for('clientes.novo') }}" method="POST" class="formulario_cliente">
+
+                <div class="grupo_formulario">
+
+                    <h3>
+                        Dados pessoais
+                    </h3>
+
+                    <div class="campo_formulario">
+
+                        <label for="nome">
+                            Nome
+                            <span aria-hidden="true">*</span>
+                        </label>
+
+                        <input type="text" id="nome" name="nome" placeholder="Nome e sobrenome do cliente"
+                            maxlength="150" autocomplete="name" value="{{ dados.nome if dados else '' }}" required>
+
+                    </div>
+
+                    <div class="campo_formulario">
+
+                        <label for="telefone">
+                            Telefone
+                            <span aria-hidden="true">*</span>
+                        </label>
+
+                        <input type="tel" id="telefone" name="telefone" placeholder="(92) 99999-9999" maxlength="11"
+                            minlength="10" inputmode="numeric" autocomplete="tel"
+                            value="{{ dados.telefone if dados else '' }}" required>
+
+                        <small>
+                            Pode ser o telefone do próprio cliente
+                            ou de uma pessoa responsável.
+                        </small>
+
+                    </div>
+
+                </div>
+
+                <div class="grupo_formulario">
+
+                    <h3>
+                        Endereço
+                    </h3>
+
+                    <p class="descricao_grupo">
+                        Informe o endereço utilizado para entregas.
+                    </p>
+
+                    <!-- =================================================
+     CEP
+================================================== -->
+
+                    <div class="campo_formulario campo_cep">
+
+                        <label for="cep">
+                            CEP
+                        </label>
+
+
+                        <div class="campo_cep_linha">
+
+                            <input type="text" id="cep" name="cep" placeholder="Ex.: 69101-230" maxlength="9"
+                                inputmode="numeric" autocomplete="postal-code" value="{{ dados.cep if dados else '' }}">
+
+
+                            <button type="button" id="btnBuscarCep" class="btn_secundario">
+                                Buscar CEP
+                            </button>
+
+                        </div>
+
+
+                        <!-- OPÇÃO PARA QUEM NÃO SABE O CEP -->
+
+                        <label for="cep_nao_informado" class="opcao_cep">
+
+                            <input type="checkbox" id="cep_nao_informado" name="cep_nao_informado" value="1">
+
+                            <span>
+                                Não sei o CEP
+                            </span>
+
+                        </label>
+
+
+                        <small id="ajuda_cep">
+
+                            Se você souber o CEP, informe acima para
+                            preencher o endereço automaticamente.
+                            Caso não saiba, marque "Não sei o CEP"
+                            e preencha o endereço manualmente.
+
+                        </small>
+
+                    </div>
+                    <div class="campo_formulario">
+
+                        <label for="estado">
+                            Estado
+                            <span aria-hidden="true">*</span>
+                        </label>
+
+                        <input type="text" id="estado" name="estado" placeholder="Ex.: AM" maxlength="2"
+                            autocomplete="address-level1" value="{{ dados.estado if dados else '' }}" required>
+
+                    </div>
+
+                    <div class="campo_formulario">
+
+                        <label for="cidade">
+                            Cidade
+                            <span aria-hidden="true">*</span>
+                        </label>
+
+                        <input type="text" id="cidade" name="cidade" placeholder="Ex.: Itacoatiara" maxlength="100"
+                            autocomplete="address-level2" value="{{ dados.cidade if dados else '' }}" required>
+
+                    </div>
+
+                    <div class="campo_formulario">
+
+                        <label for="rua">
+                            Rua
+                            <span aria-hidden="true">*</span>
+                        </label>
+
+                        <input type="text" id="rua" name="rua" placeholder="Informe o nome da rua" maxlength="200"
+                            autocomplete="street-address" value="{{ dados.rua if dados else '' }}" required>
+
+                    </div>
+
+                    <div class="campo_formulario">
+
+                        <label for="numero">
+                            Número
+                        </label>
+
+                        <input type="text" id="numero" name="numero" placeholder="Ex.: 123" maxlength="20"
+                            autocomplete="address-line2" value="{{ dados.numero if dados else '' }}">
+
+                        <small>
+                            Campo opcional.
+                        </small>
+
+                    </div>
+
+                    <div class="campo_formulario">
+
+                        <label for="complemento">
+                            Complemento
+                        </label>
+
+                        <input type="text" id="complemento" name="complemento" placeholder="Ex.: Apto 202, Bloco A"
+                            maxlength="150" autocomplete="address-line2"
+                            value="{{ dados.complemento if dados else '' }}">
+
+                        <small>
+                            Campo opcional.
+                        </small>
+
+                    </div>
+
+                    <div class="campo_formulario">
+
+                        <label for="bairro">
+                            Bairro
+                            <span aria-hidden="true">*</span>
+                        </label>
+
+                        <input type="text" id="bairro" name="bairro" placeholder="Informe o bairro" maxlength="100"
+                            autocomplete="address-level3" value="{{ dados.bairro if dados else '' }}" required>
+
+                    </div>
+
+                </div>
+
+                <div class="acoes_formulario">
+
+                    <a href="{{ url_for('clientes.listar') }}" class="btn_secundario">
+                        Cancelar
+                    </a>
+
+                    <button type="submit" class="btn_principal">
+                        Cadastrar cliente
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+        <section class="aviso_clientes">
+
+            <span class="icone_aviso">
+                ℹ️
+            </span>
+
+            <div>
+
+                <strong>
+                    Sobre os dados do cliente
+                </strong>
+
+                <p>
+                    As informações cadastradas serão utilizadas
+                    para registrar encomendas e entregas.
+                    O endereço do cliente também poderá ser
+                    preservado no histórico de pedidos.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="rodape_sistema">
+
+        <p class="rodape_direitos">
+            Sistema de Encomendas de Amigurumis
+        </p>
+
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+    <script src="{{ url_for('static', filename='js/clientes.js') }}" defer></script>
+
+    <script src="{{ url_for('static', filename='js/cep.js') }}" defer></script>
+
+    <script src="{{ url_for('static', filename='js/menu.js') }}" defer></script>
+
+</body>
+
+</html>

@@ -1,0 +1,583 @@
+/* =========================================================
+   SELECIONAR ENCOMENDA PARA EDIÇÃO
+   OFICIAL AMIGURUMIS
+   ========================================================= */
+
+
+/* =========================================================
+   ESTRUTURA PRINCIPAL
+   ========================================================= */
+
+.tela_selecionar_edicao .conteudo_principal {
+    width: 100%;
+    max-width: 1250px;
+
+    margin: 0 auto;
+
+    padding: 35px 30px 50px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CABEÇALHO DA PÁGINA
+   ========================================================= */
+
+.tela_selecionar_edicao .cabecalho_pagina {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 25px;
+}
+
+
+.tela_selecionar_edicao .subtitulo_pagina {
+    display: inline-block;
+
+    margin-bottom: 6px;
+
+    font-size: 12px;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+
+    opacity: 0.7;
+}
+
+
+.tela_selecionar_edicao .cabecalho_pagina h1 {
+    margin: 0 0 7px;
+
+    font-size: 30px;
+    font-weight: 700;
+}
+
+
+.tela_selecionar_edicao .cabecalho_pagina p {
+    margin: 0;
+
+    font-size: 15px;
+
+    line-height: 1.5;
+
+    opacity: 0.7;
+}
+
+
+/* =========================================================
+   MENSAGENS
+   ========================================================= */
+
+.tela_selecionar_edicao .mensagens_flash {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+
+.tela_selecionar_edicao .mensagem_flash {
+    padding: 13px 16px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   CARD PRINCIPAL
+   ========================================================= */
+
+.tela_selecionar_edicao .card_formulario {
+    width: 100%;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    background-color: #ffffff;
+
+    border: 1px solid #eeeeee;
+
+    border-radius: 16px;
+
+    box-shadow:
+        0 5px 20px rgba(0, 0, 0, 0.06);
+}
+
+
+/* =========================================================
+   CABEÇALHO DO CARD
+   ========================================================= */
+
+.tela_selecionar_edicao .cabecalho_card {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    padding-bottom: 20px;
+
+    margin-bottom: 25px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+
+.tela_selecionar_edicao .cabecalho_card h2 {
+    margin: 0 0 5px;
+
+    font-size: 20px;
+    font-weight: 700;
+}
+
+
+.tela_selecionar_edicao .cabecalho_card p {
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   LISTA DE ENCOMENDAS
+   ========================================================= */
+
+.tela_selecionar_edicao .lista_pedidos_edicao {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+
+/* =========================================================
+   CARD DA ENCOMENDA
+   ========================================================= */
+
+.tela_selecionar_edicao .pedido_edicao {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 24px;
+
+    width: 100%;
+
+    padding: 22px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #e5e0dc;
+
+    border-radius: 14px;
+
+    background-color: #fafafa;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.tela_selecionar_edicao .pedido_edicao:hover {
+    border-color: #d8c2ad;
+
+    box-shadow:
+        0 5px 16px rgba(0, 0, 0, 0.05);
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================================================
+   INFORMAÇÕES DO PEDIDO
+   ========================================================= */
+
+.tela_selecionar_edicao .informacoes_pedido_edicao {
+    flex: 1;
+
+    min-width: 0;
+}
+
+
+/* =========================================================
+   IDENTIFICAÇÃO
+   ========================================================= */
+
+.tela_selecionar_edicao .identificacao_pedido {
+    margin-bottom: 16px;
+}
+
+
+.tela_selecionar_edicao .subtitulo_pedido {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 0.85rem;
+
+    font-weight: 600;
+
+    color: #8b7b72;
+}
+
+
+.tela_selecionar_edicao .identificacao_pedido h3 {
+    margin: 0;
+
+    overflow: hidden;
+
+    font-size: 1.15rem;
+
+    color: #493f3a;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   DADOS DO PEDIDO
+   ========================================================= */
+
+.tela_selecionar_edicao .dados_pedido_edicao {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 24px;
+}
+
+
+.tela_selecionar_edicao .dados_pedido_edicao > div {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    min-width: 130px;
+}
+
+
+.tela_selecionar_edicao .rotulo_dado {
+    font-size: 0.78rem;
+
+    color: #91857e;
+}
+
+
+.tela_selecionar_edicao .dados_pedido_edicao strong {
+    font-size: 0.92rem;
+
+    font-weight: 700;
+
+    color: #514741;
+}
+
+
+/* =========================================================
+   AÇÃO
+   ========================================================= */
+
+.tela_selecionar_edicao .acoes_pedido_edicao {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    flex-shrink: 0;
+}
+
+
+/* =========================================================
+   BOTÕES
+   ========================================================= */
+
+.tela_selecionar_edicao .botao_principal,
+.tela_selecionar_edicao .botao_secundario {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 44px;
+
+    padding: 0 20px;
+
+    box-sizing: border-box;
+
+    border-radius: 10px;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.tela_selecionar_edicao .botao_principal:hover,
+.tela_selecionar_edicao .botao_secundario:hover {
+    transform: translateY(-1px);
+
+    opacity: 0.92;
+}
+
+
+.tela_selecionar_edicao .botao_principal:active,
+.tela_selecionar_edicao .botao_secundario:active {
+    transform: translateY(0);
+}
+
+
+/* =========================================================
+   ESTADO VAZIO
+   ========================================================= */
+
+.tela_selecionar_edicao .estado_vazio {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 220px;
+
+    padding: 30px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    border: 1px dashed #dddddd;
+
+    border-radius: 12px;
+
+    background-color: #fafafa;
+}
+
+
+.tela_selecionar_edicao .icone_estado_vazio {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 54px;
+    height: 54px;
+
+    margin-bottom: 12px;
+
+    border-radius: 14px;
+
+    font-size: 25px;
+}
+
+
+.tela_selecionar_edicao .estado_vazio h3 {
+    margin: 0 0 6px;
+
+    font-size: 16px;
+}
+
+
+.tela_selecionar_edicao .estado_vazio p {
+    max-width: 450px;
+
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+
+    opacity: 0.65;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .tela_selecionar_edicao .dados_pedido_edicao {
+        gap: 16px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLETS / TELAS MENORES
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .tela_selecionar_edicao .conteudo_principal {
+        padding: 25px 20px 40px;
+    }
+
+
+    .tela_selecionar_edicao .cabecalho_pagina {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .tela_selecionar_edicao .cabecalho_pagina .botao_secundario {
+        width: 100%;
+    }
+
+
+    .tela_selecionar_edicao .card_formulario {
+        padding: 25px;
+    }
+
+
+    .tela_selecionar_edicao .pedido_edicao {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 20px;
+    }
+
+
+    .tela_selecionar_edicao .acoes_pedido_edicao {
+        width: 100%;
+
+        justify-content: stretch;
+    }
+
+
+    .tela_selecionar_edicao .acoes_pedido_edicao .botao_principal {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .tela_selecionar_edicao .conteudo_principal {
+        padding: 20px 15px 35px;
+    }
+
+
+    .tela_selecionar_edicao .cabecalho_pagina h1 {
+        font-size: 25px;
+    }
+
+
+    .tela_selecionar_edicao .cabecalho_pagina p {
+        font-size: 14px;
+    }
+
+
+    .tela_selecionar_edicao .card_formulario {
+        padding: 20px;
+
+        border-radius: 13px;
+    }
+
+
+    .tela_selecionar_edicao .cabecalho_card {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+
+    .tela_selecionar_edicao .pedido_edicao {
+        padding: 18px;
+
+        border-radius: 12px;
+    }
+
+
+    .tela_selecionar_edicao .identificacao_pedido h3 {
+        white-space: normal;
+    }
+
+
+    .tela_selecionar_edicao .dados_pedido_edicao {
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+
+    .tela_selecionar_edicao .dados_pedido_edicao > div {
+        min-width: 0;
+    }
+
+
+    .tela_selecionar_edicao .acoes_pedido_edicao .botao_principal {
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   CELULARES MUITO PEQUENOS
+   ========================================================= */
+
+@media (max-width: 400px) {
+
+    .tela_selecionar_edicao .cabecalho_pagina h1 {
+        font-size: 22px;
+    }
+
+
+    .tela_selecionar_edicao .card_formulario {
+        padding: 17px;
+    }
+
+
+    .tela_selecionar_edicao .pedido_edicao {
+        padding: 15px;
+    }
+
+}

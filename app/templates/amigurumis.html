@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Amigurumis</title>
+
+
+    <!-- =====================================================
+         CSS GERAL
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/style.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         CSS DO MENU
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/menu.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         CSS DA PÁGINA
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/amigurumis.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body class="tela_amigurumis">
+
+
+    <!-- =====================================================
+         MENU
+    ====================================================== -->
+
+    {% include "_menu.html" %}
+
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="conteudo_principal">
+
+
+        <!-- =================================================
+             CABEÇALHO
+        ================================================== -->
+
+        <section class="cabecalho_pagina">
+
+            <div>
+
+                <span class="rotulo_pagina">
+                    CATÁLOGO
+                </span>
+
+
+                <h1>
+                    Amigurumis
+                </h1>
+
+
+                <p>
+                    Gerencie seus modelos e suas mídias.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('amigurumis.novo') }}"
+                class="btn_principal"
+            >
+                + Novo amigurumi
+            </a>
+
+        </section>
+
+
+        <!-- =================================================
+             MENSAGENS
+        ================================================== -->
+
+        {% with mensagens = get_flashed_messages(
+            with_categories=true
+        ) %}
+
+            {% if mensagens %}
+
+                <section class="mensagens">
+
+                    {% for categoria, mensagem in mensagens %}
+
+                        <div
+                            class="mensagem {{ categoria }}"
+                        >
+                            {{ mensagem }}
+                        </div>
+
+                    {% endfor %}
+
+                </section>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- =================================================
+             AVISO DE UPLOAD
+        ================================================== -->
+
+        <section class="aviso_upload">
+
+            <div class="aviso_upload_icone">
+                🖼️
+            </div>
+
+
+            <div class="aviso_upload_texto">
+
+                <strong>
+                    Limites para arquivos
+                </strong>
+
+
+                <p>
+
+                    Imagens:
+                    <strong>15 MB</strong>
+
+                    &nbsp;·&nbsp;
+
+                    Vídeos:
+                    <strong>105 MB</strong>
+
+                </p>
+
+
+                <small>
+
+                    Formatos aceitos:
+                    JPG, JPEG, PNG, WEBP, MP4 e WEBM.
+
+                </small>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ABAS
+        ================================================== -->
+
+        <nav
+            class="abas_amigurumis"
+            aria-label="Catálogo"
+        >
+
+            <button
+                type="button"
+                class="aba_amigurumi ativa"
+                data-aba="ativos"
+            >
+                Ativos
+            </button>
+
+
+            <button
+                type="button"
+                class="aba_amigurumi"
+                data-aba="excluidos"
+            >
+                Excluídos
+            </button>
+
+        </nav>
+
+
+        <!-- =================================================
+             PAINEL — ATIVOS
+        ================================================== -->
+
+        <section
+            id="painelAtivos"
+            class="painel_aba ativo"
+        >
+
+
+            <!-- =================================================
+                 CABEÇALHO DO ÁLBUM
+            ================================================== -->
+
+            <div class="titulo_secao">
+
+                <div>
+
+                    <h2>
+                        Meus amigurumis
+                    </h2>
+
+
+                    <p>
+                        Modelos cadastrados no seu catálogo.
+                    </p>
+
+                </div>
+
+
+                <span class="contador_amigurumis">
+
+                    {{
+                        amigurumis_ativos|length
+                        if amigurumis_ativos
+                        else 0
+                    }}
+
+                </span>
+
+            </div>
+
+
+            {% if amigurumis_ativos %}
+
+
+                <!-- =================================================
+                     ÁLBUM DE FOTOS
+                ================================================== -->
+
+                <div class="grid_amigurumis">
+
+
+                    {% for amigurumi in amigurumis_ativos %}
+
+
+                        <article class="card_amigurumi">
+
+
+                            <!-- =========================================
+                                 FOTO
+                            ========================================== -->
+
+                            <div class="imagem_amigurumi">
+
+
+                                {% if amigurumi.midias %}
+
+
+                                    {% set imagem_principal = none %}
+
+
+                                    {% for midia in amigurumi.midias %}
+
+                                        {% if
+                                            midia.tipo.value == 'imagem'
+                                            and imagem_principal is none
+                                        %}
+
+                                            {% set imagem_principal = midia %}
+
+                                        {% endif %}
+
+                                    {% endfor %}
+
+
+                                    {% if imagem_principal %}
+
+
+                                        <img
+                                            src="{{ url_for(
+                                                'static',
+                                                filename=imagem_principal.arquivo
+                                            ) }}"
+                                            alt="{{ amigurumi.produto }}"
+                                            loading="lazy"
+                                        >
+
+
+                                    {% else %}
+
+
+                                        <div class="sem_imagem">
+
+                                            <span>
+                                                🧸
+                                            </span>
+
+                                            <p>
+                                                Sem imagem
+                                            </p>
+
+                                        </div>
+
+
+                                    {% endif %}
+
+
+                                {% else %}
+
+
+                                    <div class="sem_imagem">
+
+                                        <span>
+                                            🧸
+                                        </span>
+
+                                        <p>
+                                            Sem imagem
+                                        </p>
+
+                                    </div>
+
+
+                                {% endif %}
+
+
+                            </div>
+
+
+                            <!-- =========================================
+                                 INFORMAÇÕES
+                            ========================================== -->
+
+                            <div class="info_amigurumi">
+
+
+                                <h3>
+                                    {{ amigurumi.produto }}
+                                </h3>
+
+
+                                <!-- =====================================
+                                     ESTATÍSTICAS
+                                ====================================== -->
+
+                                <div class="dados_amigurumi">
+
+
+                                    <div class="dado_amigurumi">
+
+                                        <span class="dado_icone">
+                                            📦
+                                        </span>
+
+
+                                        <div>
+
+                                            <small>
+                                                Pedidos
+                                            </small>
+
+
+                                            <strong>
+                                                {{
+                                                    amigurumi.pedidos|length
+                                                    if amigurumi.pedidos
+                                                    else 0
+                                                }}
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="dado_amigurumi">
+
+                                        <span class="dado_icone">
+                                            🖼️
+                                        </span>
+
+
+                                        <div>
+
+                                            <small>
+                                                Mídias
+                                            </small>
+
+
+                                            <strong>
+                                                {{
+                                                    amigurumi.midias|length
+                                                    if amigurumi.midias
+                                                    else 0
+                                                }}
+                                            </strong>
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <!-- =====================================
+                                     AÇÕES
+                                ====================================== -->
+
+                                <div class="acoes_amigurumi">
+
+
+                                    <a
+                                        href="{{ url_for(
+                                            'amigurumis.galeria',
+                                            amigurumi_id=amigurumi.id
+                                        ) }}"
+                                        class="btn_secundario"
+                                    >
+                                        Ver galeria
+                                    </a>
+
+
+                                    <a
+                                        href="{{ url_for(
+                                            'amigurumis.editar',
+                                            amigurumi_id=amigurumi.id
+                                        ) }}"
+                                        class="btn_editar"
+                                    >
+                                        Editar
+                                    </a>
+
+
+                                    <form
+                                        action="{{ url_for(
+                                            'amigurumis.excluir',
+                                            amigurumi_id=amigurumi.id
+                                        ) }}"
+                                        method="POST"
+                                        class="formulario_excluir_amigurumi"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="btn_excluir"
+                                            data-excluir-amigurumi
+                                        >
+                                            Excluir
+                                        </button>
+
+                                    </form>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </article>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <!-- =================================================
+                     ÁLBUM VAZIO
+                ================================================== -->
+
+                <div class="estado_vazio">
+
+
+                    <div class="estado_vazio_icone">
+                        🧸
+                    </div>
+
+
+                    <h3>
+                        Nenhum amigurumi cadastrado
+                    </h3>
+
+
+                    <p>
+                        Cadastre seu primeiro modelo para
+                        começar seu catálogo.
+                    </p>
+
+
+                    <a
+                        href="{{ url_for('amigurumis.novo') }}"
+                        class="btn_principal"
+                    >
+                        + Novo amigurumi
+                    </a>
+
+
+                </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+        <!-- =================================================
+             PAINEL — EXCLUÍDOS
+        ================================================== -->
+
+        <section
+            id="painelExcluidos"
+            class="painel_aba"
+        >
+
+
+            <div class="titulo_secao">
+
+                <div>
+
+                    <h2>
+                        Amigurumis excluídos
+                    </h2>
+
+
+                    <p>
+                        Modelos que foram removidos do catálogo.
+                    </p>
+
+                </div>
+
+
+                <span class="contador_amigurumis">
+
+                    {{
+                        amigurumis_excluidos|length
+                        if amigurumis_excluidos
+                        else 0
+                    }}
+
+                </span>
+
+            </div>
+
+
+            {% if amigurumis_excluidos %}
+
+
+                <div class="grid_amigurumis">
+
+
+                    {% for amigurumi in amigurumis_excluidos %}
+
+
+                        <article
+                            class="card_amigurumi card_excluido"
+                        >
+
+
+                            <!-- =====================================
+                                 IMAGEM
+                            ====================================== -->
+
+                            <div class="imagem_amigurumi">
+
+
+                                {% if amigurumi.midias %}
+
+
+                                    {% set imagem_principal = none %}
+
+
+                                    {% for midia in amigurumi.midias %}
+
+                                        {% if
+                                            midia.tipo.value == 'imagem'
+                                            and imagem_principal is none
+                                        %}
+
+                                            {% set imagem_principal = midia %}
+
+                                        {% endif %}
+
+                                    {% endfor %}
+
+
+                                    {% if imagem_principal %}
+
+
+                                        <img
+                                            src="{{ url_for(
+                                                'static',
+                                                filename=imagem_principal.arquivo
+                                            ) }}"
+                                            alt="{{ amigurumi.produto }}"
+                                            loading="lazy"
+                                        >
+
+
+                                    {% else %}
+
+
+                                        <div class="sem_imagem">
+
+                                            <span>
+                                                🗑️
+                                            </span>
+
+                                            <p>
+                                                Sem imagem
+                                            </p>
+
+                                        </div>
+
+
+                                    {% endif %}
+
+
+                                {% else %}
+
+
+                                    <div class="sem_imagem">
+
+                                        <span>
+                                            🗑️
+                                        </span>
+
+                                        <p>
+                                            Sem imagem
+                                        </p>
+
+                                    </div>
+
+
+                                {% endif %}
+
+
+                            </div>
+
+
+                            <!-- =====================================
+                                 INFORMAÇÕES
+                            ====================================== -->
+
+                            <div class="info_amigurumi">
+
+
+                                <h3>
+                                    {{ amigurumi.produto }}
+                                </h3>
+
+
+                                <p class="texto_excluido">
+                                    Este amigurumi está excluído.
+                                </p>
+
+
+                                <div class="acoes_amigurumi">
+
+
+                                    <form
+                                        action="{{ url_for(
+                                            'amigurumis.restaurar',
+                                            amigurumi_id=amigurumi.id
+                                        ) }}"
+                                        method="POST"
+                                        class="formulario_restaurar"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="btn_restaurar"
+                                            data-restaurar-amigurumi
+                                        >
+                                            Restaurar
+                                        </button>
+
+                                    </form>
+
+
+                                </div>
+
+
+                            </div>
+
+
+                        </article>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="estado_vazio">
+
+
+                    <div class="estado_vazio_icone">
+                        🗑️
+                    </div>
+
+
+                    <h3>
+                        Nenhum amigurumi excluído
+                    </h3>
+
+
+                    <p>
+                        Os modelos excluídos aparecerão aqui.
+                    </p>
+
+
+                </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+        <!-- =================================================
+             AVISO FINAL
+        ================================================== -->
+
+        <section class="aviso_clientes">
+
+
+            <span class="icone_aviso">
+                ℹ️
+            </span>
+
+
+            <div>
+
+                <strong>
+                    Sobre os amigurumis excluídos
+                </strong>
+
+
+                <p>
+                    Um amigurumi excluído pode ser restaurado
+                    posteriormente pela aba "Excluídos".
+                </p>
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT DO MENU
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/menu.js'
+        ) }}"
+        defer
+    ></script>
+
+
+    <!-- =====================================================
+         JAVASCRIPT GERAL
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/script.js'
+        ) }}"
+        defer
+    ></script>
+
+
+    <!-- =====================================================
+         JAVASCRIPT DOS AMIGURUMIS
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/amigurumis.js'
+        ) }}"
+        defer
+    ></script>
+
+
+</body>
+
+</html>

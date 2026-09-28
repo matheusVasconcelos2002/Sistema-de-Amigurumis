@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Pedidos finalizados
+    </title>
+    <link rel="stylesheet" href="{{ url_for(
+            'static',
+            filename='css/style.css'
+        ) }}">
+    
+        <link rel="stylesheet" href="{{ url_for(
+        'static',
+        filename='css/pedidos_finalizados.css'
+    ) }}">
+
+    <!-- CSS MENU-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+
+</head>
+
+
+<body class="tela_pedidos_finalizados">
+
+    {% include "_menu.html" %}
+
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="conteudo_principal">
+
+
+        <!-- =================================================
+             CABEÇALHO DA PÁGINA
+        ================================================== -->
+
+        <div class="cabecalho_pagina">
+
+            <div>
+
+                <span class="subtitulo_pagina">
+                    Histórico de encomendas
+                </span>
+
+
+                <h1>
+                    ✅ Pedidos finalizados
+                </h1>
+
+
+                <p>
+                    Pedidos que já foram entregues aos clientes.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================================
+             MENSAGENS
+        ================================================== -->
+
+        {% with mensagens = get_flashed_messages(
+        with_categories=true
+        ) %}
+
+
+        {% if mensagens %}
+
+
+        <div class="mensagens_flash">
+
+
+            {% for categoria, mensagem in mensagens %}
+
+
+            <div class="mensagem_flash {{ categoria }}">
+
+                {{ mensagem }}
+
+            </div>
+
+
+            {% endfor %}
+
+
+        </div>
+
+
+        {% endif %}
+
+
+        {% endwith %}
+
+
+
+        <!-- =================================================
+             RESUMO
+        ================================================== -->
+
+        <section class="cards_resumo_pedidos">
+
+
+            <!-- ITENS ENTREGUES -->
+
+            <div class="card_resumo_pedido">
+
+                <span class="icone_resumo">
+                    ✅
+                </span>
+
+
+                <div>
+
+                    <span>
+                        Itens entregues
+                    </span>
+
+
+                    <strong>
+                        {{ total_finalizados }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- VALOR TOTAL -->
+
+            <div class="card_resumo_pedido">
+
+                <span class="icone_resumo">
+                    💰
+                </span>
+
+
+                <div>
+
+                    <span>
+                        Valor entregue
+                    </span>
+
+
+                    <strong>
+
+                        R$
+                        {{ valor_total_entregue }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             HISTÓRICO
+        ================================================== -->
+
+        <section class="card_pedidos">
+
+
+            <div class="cabecalho_lista">
+
+                <div>
+
+                    <h2>
+                        Histórico de pedidos
+                    </h2>
+
+
+                    <p>
+                        Consulte as encomendas que já foram entregues.
+                    </p>
+
+                </div>
+
+
+                <a href="{{ url_for('pedidos.listar') }}" class="botao_secundario">
+                    ← Voltar para pedidos
+                </a>
+
+            </div>
+
+
+
+            {% if itens %}
+
+
+            <div class="tabela_container">
+
+
+                <table>
+
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Cliente
+                            </th>
+
+                            <th>
+                                Amigurumi
+                            </th>
+
+                            <th>
+                                Quantidade
+                            </th>
+
+                            <th>
+                                Total
+                            </th>
+
+                            <th>
+                                Tipo
+                            </th>
+
+                            <th>
+                                Tamanho
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Entrega prevista
+                            </th>
+
+                            <th>
+                                Data da entrega
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for item in itens %}
+
+
+                        <tr>
+
+
+                            <!-- CLIENTE -->
+
+                            <td>
+
+                                <div class="cliente_tabela">
+
+                                    <strong>
+
+                                        {{
+                                        item.pedido
+                                        .cliente_nome_snapshot
+                                        }}
+
+                                    </strong>
+
+
+                                    <small>
+
+                                        Pedido:
+                                        #{{ item.pedido.id }}
+
+                                    </small>
+
+                                </div>
+
+                            </td>
+
+
+
+                            <!-- AMIGURUMI -->
+
+                            <td>
+
+                                <div class="amigurumi_tabela">
+
+
+                                    {% if item.amigurumi.midias %}
+
+
+                                    {% set primeira_midia =
+                                    item.amigurumi.midias[0]
+                                    %}
+
+
+                                    <img src="{{ url_for(
+                                                        'static',
+                                                        filename=primeira_midia.arquivo
+                                                    ) }}" alt="{{ item.amigurumi.produto }}"
+                                        class="imagem_amigurumi_tabela">
+
+
+                                    {% else %}                
+
+
+                                    {% endif %}
+
+
+                                    <strong>
+                                        {{ item.amigurumi.produto }}
+                                    </strong>
+
+
+                                </div>
+
+                            </td>
+
+
+
+                            <!-- QUANTIDADE -->
+
+                            <td>
+
+                                {{ item.quantidade }}
+
+                            </td>
+
+
+
+                            <!-- TOTAL -->
+
+                            <td class="valor_total">
+
+                                R$
+
+                                {{
+                                (
+                                item.preco_unitario
+                                *
+                                item.quantidade
+                                ) | round(2)
+                                }}
+
+                            </td>
+
+
+
+                            <!-- TIPO -->
+
+                            <td>
+
+                                {{ item.tipo }}
+
+                            </td>
+
+
+
+                            <!-- TAMANHO -->
+
+                            <td>
+
+                                {{ item.tamanho }}
+                                cm
+
+                            </td>
+
+
+
+                            <!-- STATUS -->
+
+                            <td>
+
+                                <span class="status_pedido status-{{ item.status.value }}">
+
+                                    {% if item.status.value == 'entregue' %}
+
+                                    ✓ Entregue
+
+                                    {% elif item.status.value == 'finalizado' %}
+
+                                    ✅ Finalizado
+
+                                    {% elif item.status.value == 'cancelado' %}
+
+                                    ❌ Cancelado
+
+                                    {% else %}
+
+                                    {{ item.status.value }}
+
+                                    {% endif %}
+
+                                </span>
+
+                            </td>
+
+
+
+                            <!-- ENTREGA PREVISTA -->
+
+                            <td>
+
+                                {% if item.data_prevista_entrega %}
+
+                                {{
+                                item.data_prevista_entrega.strftime(
+                                '%d/%m/%Y'
+                                )
+                                }}
+
+                                {% else %}
+
+                                -
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- DATA DA ENTREGA -->
+
+                            <td>
+
+                                {% if item.data_entrega %}
+
+                                {{
+                                item.data_entrega.strftime(
+                                '%d/%m/%Y %H:%M'
+                                )
+                                }}
+
+                                {% else %}
+
+                                -
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+
+                        {% endfor %}
+
+
+                    </tbody>
+
+
+                </table>
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- =================================================
+                     ESTADO VAZIO
+                ================================================== -->
+
+            <div class="estado_vazio">
+
+                <div class="estado_vazio_icone">
+                    ✅
+                </div>
+
+
+                <h3>
+                    Nenhum pedido finalizado
+                </h3>
+
+
+                <p>
+                    Os pedidos entregues aos clientes
+                    aparecerão neste histórico.
+                </p>
+
+
+                <a href="{{ url_for('pedidos.listar') }}" class="botao_secundario">
+                    Voltar para pedidos
+                </a>
+
+            </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             INFORMAÇÃO
+        ================================================== -->
+
+        <section class="aviso_historico">
+
+            <span class="aviso_icone">
+                ℹ️
+            </span>
+
+
+            <div>
+
+                <strong>
+                    Histórico preservado
+                </strong>
+
+
+                <p>
+                    Os dados apresentados aqui representam
+                    o histórico das encomendas entregues.
+                    Alterações futuras no cadastro do cliente
+                    não modificam os dados históricos registrados
+                    no pedido.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="{{ url_for(
+            'static',
+            filename='js/script.js'
+        ) }}" defer></script>
+
+    <script src="{{ url_for(
+        'static',
+        filename='js/pedidos.js'
+    ) }}" defer></script>
+
+    <!-- =====================================================
+         JAVASCRIPT DO MENU
+    ====================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/menu.js') }}"
+        defer
+    ></script>
+
+</body>
+
+</html>

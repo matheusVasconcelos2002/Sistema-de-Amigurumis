@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nova senha</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/nova_senha.css') }}">
+
+</head>
+
+<body class="tela_nova_senha">
+
+    <main>
+
+        <section class="card_nova_senha">
+
+            <div class="logo_nova_senha">
+
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo Amigurumis">
+
+            </div>
+
+            <h1>
+                Nova senha
+            </h1>
+
+            <p class="texto_nova_senha">
+                Crie uma nova senha para acessar sua conta.
+            </p>
+
+            {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+            {% if mensagens %}
+
+            {% for categoria, mensagem in mensagens %}
+
+            {% if categoria == "erro" %}
+
+            <div class="mensagem_erro" role="alert">
+                {{ mensagem }}
+            </div>
+
+            {% elif categoria == "sucesso" %}
+
+            <div class="mensagem_sucesso" role="alert">
+                {{ mensagem }}
+            </div>
+
+            {% else %}
+
+            <div class="mensagem" role="alert">
+                {{ mensagem }}
+            </div>
+
+            {% endif %}
+
+            {% endfor %}
+
+            {% endif %}
+
+            {% endwith %}
+
+            <form action="{{ url_for('auth.nova_senha', token=token) }}" method="POST" class="formulario_nova_senha">
+
+                <div class="campo">
+
+                    <label for="senha">
+                        Nova senha
+                    </label>
+
+                    <div class="campo_senha">
+
+                        <input type="password" id="senha" name="senha" placeholder="Digite sua nova senha"
+                            autocomplete="new-password" minlength="8" required>
+
+                        <button type="button" class="btn_mostrar_senha" data-target="senha" aria-label="Mostrar senha"
+                            title="Mostrar senha">
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="campo">
+
+                    <label for="confirmar_senha">
+                        Confirmar nova senha
+                    </label>
+
+                    <div class="campo_senha">
+
+                        <input type="password" id="confirmar_senha" name="confirmar_senha"
+                            placeholder="Digite novamente sua senha" autocomplete="new-password" minlength="8" required>
+
+                        <button type="button" class="btn_mostrar_senha" data-target="confirmar_senha"
+                            aria-label="Mostrar senha" title="Mostrar senha">
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn_resetar">
+                    Criar nova senha
+                </button>
+
+            </form>
+
+            <a href="{{ url_for('auth.login') }}" class="voltar_login">
+                Voltar para o login
+            </a>
+
+        </section>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Galeria - {{ amigurumi.produto }}
+    </title>
+
+
+    <!-- =====================================================
+         CSS GERAL
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/style.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         CSS DO MENU
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/menu.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         CSS DA GALERIA
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/galeria_amigurumis.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body class="tela_galeria_amigurumi">
+
+
+    <!-- =====================================================
+         MENU GLOBAL
+    ====================================================== -->
+
+    {% include "_menu.html" %}
+
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="conteudo_principal">
+
+
+        <!-- =================================================
+             CABEÇALHO
+        ================================================== -->
+
+        <header class="cabecalho_pagina">
+
+            <div>
+
+                <span class="subtitulo_pagina">
+                    CATÁLOGO
+                </span>
+
+
+                <h1>
+                    {{ amigurumi.produto }}
+                </h1>
+
+
+                <p>
+                    Galeria de imagens e vídeos.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for(
+                    'amigurumis.listar'
+                ) }}"
+                class="btn_secundario"
+            >
+                ← Voltar
+            </a>
+
+        </header>
+
+
+        <!-- =================================================
+             MENSAGENS
+        ================================================== -->
+
+        {% with mensagens = get_flashed_messages(
+            with_categories=true
+        ) %}
+
+            {% if mensagens %}
+
+                <section class="mensagens">
+
+                    {% for categoria, mensagem in mensagens %}
+
+                        <div
+                            class="mensagem {{ categoria }}"
+                        >
+                            {{ mensagem }}
+                        </div>
+
+                    {% endfor %}
+
+                </section>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- =================================================
+             FORMULÁRIO DE UPLOAD
+        ================================================== -->
+
+        <section class="card_formulario">
+
+            <div class="titulo_secao">
+
+                <h2>
+                    Adicionar mídias
+                </h2>
+
+
+                <p>
+                    Você pode selecionar várias imagens
+                    e vídeos de uma vez.
+                </p>
+
+            </div>
+
+
+            <form
+                action="{{ url_for(
+                    'amigurumis.adicionar_midias',
+                    amigurumi_id=amigurumi.id
+                ) }}"
+                method="POST"
+                enctype="multipart/form-data"
+                id="formUploadMidias"
+                class="formulario_galeria"
+            >
+
+
+                <!-- =================================================
+                     ARQUIVOS
+                ================================================== -->
+
+                <div class="campo_formulario">
+
+                    <label for="midias">
+                        Selecionar arquivos
+                    </label>
+
+
+                    <input
+                        type="file"
+                        id="midias"
+                        name="midias"
+                        multiple
+                        accept="
+                            .jpg,
+                            .jpeg,
+                            .png,
+                            .webp,
+                            .mp4,
+                            .webm,
+                            image/jpeg,
+                            image/png,
+                            image/webp,
+                            video/mp4,
+                            video/webm
+                        "
+                    >
+
+
+                    <small>
+                        Imagens: até 15 MB por arquivo.
+                        Vídeos: até 105 MB por arquivo.
+                    </small>
+
+                </div>
+
+
+                <!-- =================================================
+                     PREVIEW
+                ================================================== -->
+
+                <div
+                    id="previewMidias"
+                    class="preview_midias"
+                ></div>
+
+
+                <!-- =================================================
+                     AÇÕES
+                ================================================== -->
+
+                <div class="acoes_formulario">
+
+                    <button
+                        type="submit"
+                        class="btn_principal"
+                        id="btnEnviarMidias"
+                    >
+                        Adicionar mídias
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- =================================================
+             GALERIA
+        ================================================== -->
+
+        <section class="galeria_midias">
+
+            <div class="titulo_galeria">
+
+                <div>
+
+                    <span class="icone_galeria">
+                        🖼️
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            Mídias cadastradas
+                        </h2>
+
+                        <p>
+                            Imagens e vídeos deste amigurumi.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {% if amigurumi.midias %}
+
+                <div class="grid_midias">
+
+                    {% for midia in amigurumi.midias %}
+
+                        <article class="card_midia">
+
+
+                            <!-- =================================
+                                 IMAGEM
+                            ================================== -->
+
+                            {% if midia.tipo.value == 'imagem' %}
+
+                                <div class="midia_visual">
+
+                                    <img
+                                        src="{{ url_for(
+                                            'static',
+                                            filename=midia.arquivo
+                                        ) }}"
+                                        alt="{{ midia.nome_original or amigurumi.produto }}"
+                                        loading="lazy"
+                                    >
+
+                                </div>
+
+
+                            <!-- =================================
+                                 VÍDEO
+                            ================================== -->
+
+                            {% else %}
+
+                                <div class="midia_visual">
+
+                                    <video
+                                        controls
+                                        preload="metadata"
+                                    >
+
+                                        <source
+                                            src="{{ url_for(
+                                                'static',
+                                                filename=midia.arquivo
+                                            ) }}"
+                                            type="video/{{ midia.arquivo.rsplit('.', 1)[-1] }}"
+                                        >
+
+                                        Seu navegador não suporta vídeo.
+
+                                    </video>
+
+                                </div>
+
+                            {% endif %}
+
+
+                            <!-- =================================
+                                 INFORMAÇÕES
+                            ================================== -->
+
+                            <div class="dados_midia">
+
+                                <strong
+                                    title="{{ midia.nome_original or 'Mídia' }}"
+                                >
+                                    {{ midia.nome_original or 'Mídia' }}
+                                </strong>
+
+
+                                {% if midia.tamanho_bytes %}
+
+                                    <span>
+                                        {{ (
+                                            midia.tamanho_bytes
+                                            / 1024
+                                            / 1024
+                                        ) | round(2) }} MB
+                                    </span>
+
+                                {% endif %}
+
+
+                                <!-- =================================
+                                     AÇÕES
+                                ================================== -->
+
+                                <div class="acoes_midia">
+
+                                    <a
+                                        href="{{ url_for(
+                                            'static',
+                                            filename=midia.arquivo
+                                        ) }}"
+                                        download
+                                        class="btn_secundario"
+                                    >
+                                        Baixar
+                                    </a>
+
+
+                                    <form
+                                        action="{{ url_for(
+                                            'amigurumis.excluir_midia',
+                                            amigurumi_id=amigurumi.id,
+                                            midia_id=midia.id
+                                        ) }}"
+                                        method="POST"
+                                        class="formulario_excluir_midia"
+                                    >
+
+                                        <button
+                                            type="submit"
+                                            class="btn_excluir"
+                                            data-excluir-midia
+                                        >
+                                            Excluir
+                                        </button>
+
+                                    </form>
+
+                                </div>
+
+                            </div>
+
+                        </article>
+
+                    {% endfor %}
+
+                </div>
+
+
+            {% else %}
+
+                <!-- =============================================
+                     GALERIA VAZIA
+                ============================================== -->
+
+                <div class="estado_vazio">
+
+                    <div class="estado_vazio_icone">
+                        🖼️
+                    </div>
+
+
+                    <h3>
+                        Nenhuma mídia cadastrada
+                    </h3>
+
+
+                    <p>
+                        Adicione imagens ou vídeos
+                        para este amigurumi.
+                    </p>
+
+                </div>
+
+            {% endif %}
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT DO MENU
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/menu.js'
+        ) }}"
+        defer
+    ></script>
+
+
+    <!-- =====================================================
+         JAVASCRIPT GERAL
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/script.js'
+        ) }}"
+        defer
+    ></script>
+
+
+    <!-- =====================================================
+         JAVASCRIPT DOS AMIGURUMIS
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/amigurumis.js'
+        ) }}"
+        defer
+    ></script>
+
+
+</body>
+
+</html>

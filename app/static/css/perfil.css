@@ -1,0 +1,699 @@
+/* ==========================================================
+   PERFIL
+   Estilos exclusivos da página Meu Perfil
+========================================================== */
+
+
+/* ==========================================================
+   ESTRUTURA GERAL
+========================================================== */
+
+body.tela_perfil {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.tela_perfil .perfil_pagina {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 40px 30px;
+    box-sizing: border-box;
+}
+
+
+/* ==========================================================
+   CABEÇALHO
+========================================================== */
+
+.tela_perfil .perfil_cabecalho {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.tela_perfil .rotulo_perfil {
+    display: inline-block;
+    margin-bottom: 8px;
+
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+
+    color: #8b5e3c;
+}
+
+.tela_perfil .perfil_cabecalho h1 {
+    margin: 0;
+
+    font-size: 32px;
+    font-weight: 700;
+
+    color: #333;
+}
+
+.tela_perfil .perfil_cabecalho p {
+    margin: 8px 0 0;
+
+    font-size: 15px;
+    line-height: 1.5;
+
+    color: #777;
+}
+
+
+/* ==========================================================
+   BOTÃO VOLTAR
+========================================================== */
+
+.tela_perfil .voltar_perfil {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 42px;
+    padding: 0 18px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #ddd;
+    border-radius: 10px;
+
+    background: #fff;
+
+    color: #555;
+    font-size: 14px;
+    font-weight: 600;
+
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.tela_perfil .voltar_perfil:hover {
+    background: #f8f4f1;
+    border-color: #c9a98f;
+    color: #6f4930;
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================================
+   MENSAGENS
+========================================================== */
+
+.tela_perfil .mensagens_perfil {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin-bottom: 25px;
+}
+
+.tela_perfil .mensagem,
+.tela_perfil .mensagem_erro,
+.tela_perfil .mensagem_sucesso {
+    width: 100%;
+    padding: 13px 16px;
+
+    box-sizing: border-box;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.tela_perfil .mensagem {
+    border: 1px solid #ddd;
+    background: #f7f7f7;
+    color: #555;
+}
+
+.tela_perfil .mensagem_erro {
+    border: 1px solid #e3b5b5;
+    background: #fff1f1;
+    color: #a33;
+}
+
+.tela_perfil .mensagem_sucesso {
+    border: 1px solid #b8dcbc;
+    background: #f0faf1;
+    color: #34703a;
+}
+
+
+/* ==========================================================
+   CONTEÚDO
+========================================================== */
+
+.tela_perfil .perfil_conteudo {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+
+/* ==========================================================
+   CARDS DO PERFIL
+========================================================== */
+
+.tela_perfil .card_perfil {
+    width: 100%;
+    padding: 28px;
+
+    box-sizing: border-box;
+
+    background: #fff;
+
+    border: 1px solid #e8e2de;
+    border-radius: 18px;
+
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+}
+
+.tela_perfil .titulo_card_perfil {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    margin-bottom: 28px;
+}
+
+.tela_perfil .icone_card_perfil {
+    width: 48px;
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background: #f5ebe3;
+
+    font-size: 22px;
+}
+
+.tela_perfil .titulo_card_perfil h2 {
+    margin: 0;
+
+    font-size: 20px;
+    font-weight: 700;
+
+    color: #333;
+}
+
+.tela_perfil .titulo_card_perfil p {
+    margin: 5px 0 0;
+
+    font-size: 14px;
+    line-height: 1.5;
+
+    color: #777;
+}
+
+
+/* ==========================================================
+   FOTO DE PERFIL
+========================================================== */
+
+.tela_perfil .foto_perfil_area {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    padding-top: 5px;
+}
+
+.tela_perfil .foto_perfil_container {
+    width: 130px;
+    height: 130px;
+
+    flex-shrink: 0;
+
+    overflow: hidden;
+
+    border-radius: 50%;
+
+    border: 4px solid #f1e5dc;
+
+    background: #f8f5f2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tela_perfil .foto_perfil {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+}
+
+.tela_perfil .avatar_padrao {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f5ebe3;
+
+    font-size: 48px;
+}
+
+
+/* ==========================================================
+   FORMULÁRIO DA FOTO
+========================================================== */
+
+.tela_perfil .form_foto {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+
+    flex: 1;
+}
+
+.tela_perfil .form_foto label {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #444;
+}
+
+.tela_perfil .form_foto input[type="file"] {
+    width: 100%;
+    max-width: 450px;
+
+    padding: 10px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #ddd;
+    border-radius: 9px;
+
+    background: #fafafa;
+
+    font-size: 14px;
+    color: #555;
+}
+
+.tela_perfil .form_foto small {
+    font-size: 12px;
+    line-height: 1.5;
+
+    color: #888;
+}
+
+
+/* ==========================================================
+   FORMULÁRIO DE INFORMAÇÕES
+========================================================== */
+
+.tela_perfil .form_perfil {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.tela_perfil .campo_formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.tela_perfil .campo_formulario label {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #444;
+}
+
+.tela_perfil .campo_formulario input {
+    width: 100%;
+
+    min-height: 46px;
+    padding: 0 14px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dcd6d1;
+    border-radius: 10px;
+
+    background: #fff;
+
+    color: #333;
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.tela_perfil .campo_formulario input:hover {
+    border-color: #c9b7a9;
+}
+
+.tela_perfil .campo_formulario input:focus {
+    border-color: #a97852;
+
+    box-shadow: 0 0 0 3px rgba(169, 120, 82, 0.12);
+}
+
+.tela_perfil .campo_formulario small {
+    font-size: 12px;
+    line-height: 1.5;
+
+    color: #888;
+}
+
+
+/* ==========================================================
+   AÇÕES DO FORMULÁRIO
+========================================================== */
+
+.tela_perfil .acoes_perfil {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: 5px;
+}
+
+.tela_perfil .btn_principal,
+.tela_perfil .btn_secundario {
+    min-height: 44px;
+    padding: 0 20px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* ==========================================================
+   BOTÃO PRINCIPAL
+========================================================== */
+
+.tela_perfil .btn_principal {
+    border: 1px solid #8b5e3c;
+
+    background: #8b5e3c;
+
+    color: #fff;
+}
+
+.tela_perfil .btn_principal:hover {
+    background: #754b30;
+    border-color: #754b30;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 4px 12px rgba(139, 94, 60, 0.2);
+}
+
+
+/* ==========================================================
+   BOTÃO SECUNDÁRIO
+========================================================== */
+
+.tela_perfil .btn_secundario {
+    border: 1px solid #d7c4b5;
+
+    background: #fff;
+
+    color: #6f4930;
+}
+
+.tela_perfil .btn_secundario:hover {
+    background: #f8f1ec;
+    border-color: #b99578;
+
+    transform: translateY(-1px);
+}
+
+
+/* ==========================================================
+   AVISO DE SEGURANÇA
+========================================================== */
+
+.tela_perfil .aviso_seguranca {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+
+    padding: 18px 20px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #eadbcf;
+    border-radius: 14px;
+
+    background: #fffaf6;
+}
+
+.tela_perfil .icone_aviso {
+    flex-shrink: 0;
+
+    font-size: 22px;
+    line-height: 1.3;
+}
+
+.tela_perfil .aviso_seguranca strong {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #5f4432;
+}
+
+.tela_perfil .aviso_seguranca p {
+    margin: 0;
+
+    font-size: 13px;
+    line-height: 1.6;
+
+    color: #765f50;
+}
+
+
+/* ==========================================================
+   RODAPÉ
+========================================================== */
+
+.tela_perfil .rodape_sistema {
+    width: 100%;
+
+    margin-top: auto;
+    padding: 25px 30px;
+
+    box-sizing: border-box;
+
+    background: transparent;
+}
+
+.tela_perfil .rodape_conteudo {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+.tela_perfil .rodape_linha {
+    display: block;
+
+    width: 100%;
+    max-width: 500px;
+
+    height: 1px;
+
+    margin: 0 auto 15px;
+
+    background: #e5ddd7;
+}
+
+.tela_perfil .rodape_mensagem {
+    max-width: 600px;
+
+    margin: 0 auto 8px;
+
+    font-size: 12px;
+    line-height: 1.5;
+
+    color: #999;
+}
+
+.tela_perfil .rodape_direitos {
+    margin: 0;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    color: #888;
+}
+
+
+/* ==========================================================
+   RESPONSIVIDADE
+========================================================== */
+
+@media (max-width: 768px) {
+
+    .tela_perfil .perfil_pagina {
+        padding: 30px 20px;
+    }
+
+    .tela_perfil .perfil_cabecalho {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .tela_perfil .perfil_cabecalho h1 {
+        font-size: 28px;
+    }
+
+    .tela_perfil .voltar_perfil {
+        width: 100%;
+    }
+
+    .tela_perfil .card_perfil {
+        padding: 22px;
+    }
+
+    .tela_perfil .foto_perfil_area {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .tela_perfil .form_foto {
+        width: 100%;
+        align-items: stretch;
+    }
+
+    .tela_perfil .form_foto input[type="file"] {
+        max-width: none;
+    }
+
+    .tela_perfil .form_foto .btn_secundario {
+        width: 100%;
+    }
+
+    .tela_perfil .acoes_perfil {
+        justify-content: stretch;
+    }
+
+    .tela_perfil .acoes_perfil .btn_principal {
+        width: 100%;
+    }
+
+    .tela_perfil .rodape_sistema {
+        padding: 20px;
+    }
+}
+
+
+/* ==========================================================
+   CELULARES
+========================================================== */
+
+@media (max-width: 480px) {
+
+    .tela_perfil .perfil_pagina {
+        padding: 25px 15px;
+    }
+
+    .tela_perfil .perfil_cabecalho h1 {
+        font-size: 24px;
+    }
+
+    .tela_perfil .perfil_cabecalho p {
+        font-size: 14px;
+    }
+
+    .tela_perfil .card_perfil {
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+    .tela_perfil .titulo_card_perfil {
+        align-items: flex-start;
+    }
+
+    .tela_perfil .icone_card_perfil {
+        width: 42px;
+        height: 42px;
+
+        font-size: 19px;
+    }
+
+    .tela_perfil .titulo_card_perfil h2 {
+        font-size: 18px;
+    }
+
+    .tela_perfil .titulo_card_perfil p {
+        font-size: 13px;
+    }
+
+    .tela_perfil .foto_perfil_container {
+        width: 110px;
+        height: 110px;
+    }
+
+    .tela_perfil .avatar_padrao {
+        font-size: 40px;
+    }
+
+    .tela_perfil .campo_formulario input {
+        min-height: 44px;
+        font-size: 14px;
+    }
+
+    .tela_perfil .aviso_seguranca {
+        padding: 15px;
+    }
+
+    .tela_perfil .aviso_seguranca p {
+        font-size: 12px;
+    }
+
+    .tela_perfil .rodape_mensagem {
+        font-size: 11px;
+    }
+
+    .tela_perfil .rodape_direitos {
+        font-size: 11px;
+    }
+}

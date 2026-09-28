@@ -1,0 +1,565 @@
+/* =========================================================
+   CADASTRO - CRIAR CONTA
+========================================================= */
+
+
+/* =========================================================
+   CONFIGURAÇÃO GERAL
+========================================================= */
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+
+    margin: 0;
+    padding: 0;
+
+    overflow-x: hidden;
+
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+
+/* =========================================================
+   ESTRUTURA DA PÁGINA
+========================================================= */
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   ÁREA PRINCIPAL
+========================================================= */
+
+.criar_conta {
+    flex: 1;
+
+    width: 100%;
+    max-width: 100%;
+
+    box-sizing: border-box;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 40px 20px;
+}
+
+
+/* =========================================================
+   CARD PRINCIPAL
+========================================================= */
+
+.card_conta {
+    width: 100%;
+    max-width: 480px;
+
+    padding: 35px;
+
+    box-sizing: border-box;
+
+    border-radius: 18px;
+
+    background-color: #ffffff;
+
+    box-shadow:
+        0 8px 30px rgba(0, 0, 0, 0.10);
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.logo {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    margin-bottom: 20px;
+}
+
+.logo img {
+    width: 110px;
+    height: 110px;
+
+    max-width: 100%;
+
+    object-fit: contain;
+
+    display: block;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+========================================================= */
+
+.cabecalho_conta {
+    text-align: center;
+
+    margin-bottom: 25px;
+}
+
+.cabecalho_conta h1 {
+    margin: 0 0 8px;
+
+    font-size: 28px;
+    font-weight: 700;
+
+    color: #2f2931;
+}
+
+.cabecalho_conta p {
+    margin: 0;
+
+    font-size: 15px;
+    line-height: 1.5;
+
+    color: #817981;
+}
+
+
+/* =========================================================
+   MENSAGENS
+========================================================= */
+
+.mensagem_erro,
+.mensagem_sucesso,
+.mensagem {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 12px 14px;
+    margin-bottom: 18px;
+
+    box-sizing: border-box;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.mensagem_erro {
+    background-color: #fde8e8;
+
+    color: #b42318;
+
+    border: 1px solid #f5b5b5;
+}
+
+.mensagem_sucesso {
+    background-color: #e8f7ee;
+
+    color: #18794e;
+
+    border: 1px solid #a8dfbf;
+}
+
+.mensagem {
+    background-color: #f1f3f5;
+
+    color: #343a40;
+
+    border: 1px solid #dee2e6;
+}
+
+
+/* =========================================================
+   FORMULÁRIO
+========================================================= */
+
+.form_login {
+    width: 100%;
+    max-width: 100%;
+}
+
+.campo_formulario {
+    width: 100%;
+    max-width: 100%;
+
+    margin-bottom: 18px;
+}
+
+.campo_formulario label {
+    display: block;
+
+    margin-bottom: 7px;
+
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #302a31;
+}
+
+.campo_formulario input {
+    width: 100%;
+    max-width: 100%;
+    height: 46px;
+
+    padding: 0 14px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #d8d4d8;
+    border-radius: 10px;
+
+    background-color: #ffffff;
+
+    color: #302a31;
+
+    font-size: 15px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background-color 0.2s ease;
+}
+
+.campo_formulario input:focus {
+    border-color: #9b7a9f;
+
+    box-shadow:
+        0 0 0 3px rgba(155, 122, 159, 0.15);
+
+    background-color: #fffdfd;
+}
+
+.campo_formulario input::placeholder {
+    color: #999399;
+}
+
+
+/* =========================================================
+   CAMPO DE SENHA
+========================================================= */
+
+.campo_senha {
+    position: relative;
+
+    width: 100%;
+    max-width: 100%;
+}
+
+.campo_senha input {
+    padding-right: 52px;
+}
+
+
+/* Botão mostrar senha */
+
+.btn_mostrar_senha {
+    position: absolute;
+
+    top: 50%;
+    right: 10px;
+
+    width: 34px;
+    height: 34px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: none;
+    border-radius: 8px;
+
+    background: transparent;
+
+    cursor: pointer;
+
+    font-size: 17px;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.btn_mostrar_senha:hover {
+    background-color: #f4eef5;
+}
+
+.btn_mostrar_senha:focus {
+    outline: 2px solid #9b7a9f;
+    outline-offset: 1px;
+}
+
+
+/* =========================================================
+   BOTÃO CRIAR CONTA
+========================================================= */
+
+.btn_principal {
+    width: 100%;
+    max-width: 100%;
+
+    min-height: 46px;
+
+    margin-top: 8px;
+
+    border: none;
+    border-radius: 10px;
+
+    background-color: #9b819f;
+    color: #ffffff;
+
+    cursor: pointer;
+
+    font-size: 15px;
+    font-weight: 700;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.btn_principal:hover {
+    background-color: #876d8b;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 5px 14px rgba(82, 59, 85, 0.18);
+}
+
+.btn_principal:active {
+    transform: translateY(0);
+
+    box-shadow: none;
+}
+
+.btn_principal:focus-visible {
+    outline: 3px solid rgba(155, 129, 159, 0.30);
+    outline-offset: 2px;
+}
+
+
+/* =========================================================
+   LINK PARA LOGIN
+========================================================= */
+
+.links_login {
+    margin-top: 22px;
+
+    text-align: center;
+}
+
+.links_login a {
+    font-size: 14px;
+    font-weight: 600;
+
+    color: #725576;
+
+    text-decoration: none;
+
+    transition:
+        color 0.2s ease,
+        opacity 0.2s ease;
+}
+
+.links_login a:hover {
+    color: #563c59;
+
+    opacity: 0.85;
+}
+
+/* =========================================================
+   RODAPÉ
+========================================================= */
+
+.rodape {
+    width: 100%;
+    max-width: 480px;
+
+    flex-shrink: 0;
+
+    margin: 0 auto;
+
+    padding: 16px 0 22px;
+
+    box-sizing: border-box;
+
+    background: transparent;
+
+    text-align: center;
+}
+
+
+.rodape_conteudo {
+    width: 100%;
+    max-width: 480px;
+
+    margin: 0 auto;
+
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+.rodape_linha {
+    display: block;
+
+    width: 150px;
+    max-width: 60%;
+
+    height: 1px;
+
+    margin: 0 auto 10px;
+
+    background-color: #d2c9d1;
+
+    opacity: 0.85;
+}
+
+
+.rodape_direitos {
+    width: 100%;
+
+    margin: 0;
+
+    text-align: center;
+
+    font-size: 11px;
+    line-height: 1.4;
+
+    color: #837b83;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .criar_conta {
+        padding: 25px 15px;
+    }
+
+    .card_conta {
+        width: 100%;
+        max-width: 480px;
+
+        padding: 25px 20px;
+
+        border-radius: 14px;
+    }
+
+    .logo {
+        margin-bottom: 18px;
+    }
+
+    .logo img {
+        width: 90px;
+        height: 90px;
+    }
+
+    .cabecalho_conta {
+        margin-bottom: 22px;
+    }
+
+    .cabecalho_conta h1 {
+        font-size: 24px;
+    }
+
+    .cabecalho_conta p {
+        font-size: 14px;
+    }
+
+    .campo_formulario input {
+        height: 44px;
+    }
+
+
+    /* RODAPÉ */
+
+    .rodape {
+        width: 100%;
+        max-width: 480px;
+
+        padding: 14px 15px 20px;
+    }
+
+    .rodape_conteudo {
+        width: 100%;
+        max-width: 480px;
+    }
+
+    .rodape_linha {
+        width: 130px;
+        max-width: 60%;
+
+        margin-bottom: 9px;
+    }
+
+    .rodape_direitos {
+        font-size: 10px;
+    }
+}
+
+/* =========================================================
+   CELULARES PEQUENOS
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .criar_conta {
+        padding: 20px 10px;
+    }
+
+    .card_conta {
+        padding: 22px 16px;
+    }
+
+    .logo img {
+        width: 82px;
+        height: 82px;
+    }
+
+    .cabecalho_conta h1 {
+        font-size: 22px;
+    }
+
+    .rodape {
+        width: 100%;
+        max-width: 100%;
+
+        padding: 14px 10px 16px;
+    }
+
+    .rodape_conteudo {
+        max-width: 100%;
+    }
+
+    .rodape_linha {
+        width: 120px;
+        max-width: 55%;
+    }
+}

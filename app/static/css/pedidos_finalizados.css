@@ -1,0 +1,1047 @@
+/* =========================================================
+   PEDIDOS FINALIZADOS - V2
+   Visual inspirado na V1
+   ========================================================= */
+
+
+/* =========================================================
+   VARIÁVEIS
+   ========================================================= */
+
+.tela_pedidos_finalizados {
+
+    --roxo-principal: #70408a;
+    --roxo-hover: #603674;
+    --roxo-claro: #f1eaf5;
+    --roxo-muito-claro: #f8f4fa;
+
+    --fundo: #f7f5f8;
+
+    --branco: #ffffff;
+
+    --texto-principal: #302936;
+    --texto-secundario: #706674;
+    --texto-suave: #8d8391;
+
+    --borda: #e2dce5;
+    --borda-suave: #ece7ee;
+
+    --verde: #4b9562;
+    --verde-fundo: #e8f4eb;
+
+    --azul: #44768e;
+    --azul-fundo: #e8f3f7;
+
+    --amarelo: #b47b21;
+    --amarelo-fundo: #fff4df;
+
+    --sombra:
+        0 4px 16px rgba(55, 40, 62, 0.07);
+
+    --sombra-hover:
+        0 7px 20px rgba(55, 40, 62, 0.11);
+
+    --raio: 12px;
+}
+
+
+/* =========================================================
+   ESTRUTURA
+   ========================================================= */
+
+.tela_pedidos_finalizados {
+
+    width: 100%;
+    min-height: 100vh;
+
+    margin: 0;
+    padding: 0;
+
+    background: var(--fundo);
+
+    color: var(--texto-principal);
+}
+
+
+.tela_pedidos_finalizados *,
+.tela_pedidos_finalizados *::before,
+.tela_pedidos_finalizados *::after {
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CABEÇALHO SUPERIOR
+   ========================================================= */
+
+.tela_pedidos_finalizados .cabecalho_mobile {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 58px;
+
+    padding: 0 20px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--roxo-principal);
+
+    color: #ffffff;
+
+    box-shadow:
+        0 3px 12px rgba(45, 30, 52, 0.18);
+
+    z-index: 1000;
+}
+
+
+.tela_pedidos_finalizados .btn_menu {
+
+    width: 34px;
+    height: 34px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 6px;
+
+    background: #ffffff;
+
+    color: var(--roxo-principal);
+
+    font-size: 20px;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.tela_pedidos_finalizados .btn_menu:hover {
+
+    background: #f2edf4;
+
+    transform: scale(1.04);
+}
+
+
+.tela_pedidos_finalizados .logo_mobile {
+
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    margin-right: auto;
+    margin-left: 10px;
+
+    color: #ffffff;
+}
+
+
+.tela_pedidos_finalizados .logo_mobile strong {
+
+    font-size: 0.90rem;
+
+    font-weight: 700;
+}
+
+
+.tela_pedidos_finalizados .perfil_mobile {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 34px;
+    height: 34px;
+
+    color: #ffffff;
+
+    text-decoration: none;
+}
+
+
+.tela_pedidos_finalizados .perfil_mobile img {
+
+    width: 32px;
+    height: 32px;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border: 2px solid rgba(255,255,255,0.8);
+}
+
+
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+   ========================================================= */
+
+.tela_pedidos_finalizados .conteudo_principal {
+
+    width: 100%;
+
+    max-width: 1560px;
+
+    min-height: calc(100vh - 58px);
+
+    margin: 0 auto;
+
+    padding:
+        82px
+        28px
+        35px;
+
+    background: var(--fundo);
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.tela_pedidos_finalizados .cabecalho_pagina {
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    width: 100%;
+
+    margin-bottom: 22px;
+}
+
+
+.tela_pedidos_finalizados .subtitulo_pagina {
+
+    display: block;
+
+    margin-bottom: 4px;
+
+    color: var(--roxo-principal);
+
+    font-size: 0.72rem;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+}
+
+
+.tela_pedidos_finalizados .cabecalho_pagina h1 {
+
+    margin: 0 0 6px;
+
+    color: var(--texto-principal);
+
+    font-size: 1.75rem;
+    font-weight: 700;
+
+    line-height: 1.2;
+}
+
+
+.tela_pedidos_finalizados .cabecalho_pagina p {
+
+    margin: 0;
+
+    color: var(--texto-secundario);
+
+    font-size: 0.82rem;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   FLASH
+   ========================================================= */
+
+.tela_pedidos_finalizados .mensagens_flash {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-bottom: 18px;
+}
+
+
+.tela_pedidos_finalizados .mensagem_flash {
+
+    padding: 11px 14px;
+
+    border-radius: 8px;
+
+    font-size: 0.80rem;
+}
+
+
+.tela_pedidos_finalizados .mensagem_flash.sucesso {
+
+    background: var(--verde-fundo);
+
+    border: 1px solid #c6dfcc;
+
+    color: #357148;
+}
+
+
+.tela_pedidos_finalizados .mensagem_flash.erro {
+
+    background: #fbeaea;
+
+    border: 1px solid #e7c4c4;
+
+    color: #9a4040;
+}
+
+
+.tela_pedidos_finalizados .mensagem_flash.info {
+
+    background: #eaf3f8;
+
+    border: 1px solid #c8dfe8;
+
+    color: #386a80;
+}
+
+
+.tela_pedidos_finalizados .mensagem_flash.aviso {
+
+    background: var(--amarelo-fundo);
+
+    border: 1px solid #ead7ad;
+
+    color: #85631e;
+}
+
+
+/* =========================================================
+   CARDS DE RESUMO
+   ========================================================= */
+
+.tela_pedidos_finalizados .cards_resumo_pedidos {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+
+    width: 100%;
+
+    margin-bottom: 16px;
+}
+
+
+.tela_pedidos_finalizados .card_resumo_pedido {
+
+    display: flex;
+    align-items: center;
+
+    min-height: 78px;
+
+    padding: 14px 16px;
+
+    gap: 12px;
+
+    background: var(--branco);
+
+    border: 1px solid var(--borda);
+
+    border-radius: var(--raio);
+
+    box-shadow: var(--sombra);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.tela_pedidos_finalizados .card_resumo_pedido:hover {
+
+    transform: translateY(-2px);
+
+    box-shadow: var(--sombra-hover);
+}
+
+
+.tela_pedidos_finalizados .icone_resumo {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: var(--verde-fundo);
+
+    font-size: 1.15rem;
+}
+
+
+.tela_pedidos_finalizados .card_resumo_pedido span:not(.icone_resumo) {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--texto-secundario);
+
+    font-size: 0.72rem;
+}
+
+
+.tela_pedidos_finalizados .card_resumo_pedido strong {
+
+    display: block;
+
+    color: var(--texto-principal);
+
+    font-size: 1.18rem;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   CARD DA TABELA
+   ========================================================= */
+
+.tela_pedidos_finalizados .card_tabela_pedidos {
+
+    width: 100%;
+
+    background: var(--branco);
+
+    border: 1px solid var(--borda);
+
+    border-radius: var(--raio);
+
+    box-shadow: var(--sombra);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   CABEÇALHO DA TABELA
+   ========================================================= */
+
+.tela_pedidos_finalizados .cabecalho_tabela_pedidos {
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    min-height: 68px;
+
+    padding: 14px 18px;
+
+    border-bottom: 1px solid var(--borda-suave);
+}
+
+
+.tela_pedidos_finalizados .rotulo_tabela {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--roxo-principal);
+
+    font-size: 0.65rem;
+    font-weight: 700;
+
+    letter-spacing: 0.07em;
+}
+
+
+.tela_pedidos_finalizados .cabecalho_tabela_pedidos h2 {
+
+    margin: 0;
+
+    color: var(--texto-principal);
+
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   TABELA
+   ========================================================= */
+
+.tela_pedidos_finalizados .tabela_scroll {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+
+.tela_pedidos_finalizados .tabela_pedidos {
+
+    width: 100%;
+
+    min-width: 1100px;
+
+    border-collapse: separate;
+    border-spacing: 0;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.tela_pedidos_finalizados .tabela_pedidos thead {
+
+    background: var(--roxo-principal);
+}
+
+
+.tela_pedidos_finalizados .tabela_pedidos th {
+
+    padding: 10px 11px;
+
+    background: var(--roxo-principal);
+
+    color: #ffffff;
+
+    border: none;
+
+    font-size: 0.67rem;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+.tela_pedidos_finalizados .tabela_pedidos th:first-child {
+
+    border-top-left-radius: 6px;
+}
+
+
+.tela_pedidos_finalizados .tabela_pedidos th:last-child {
+
+    border-top-right-radius: 6px;
+}
+
+
+/* =========================================================
+   LINHAS
+   ========================================================= */
+
+.tela_pedidos_finalizados .tabela_pedidos td {
+
+    padding: 12px 11px;
+
+    border-bottom: 1px solid var(--borda-suave);
+
+    color: var(--texto-principal);
+
+    font-size: 0.75rem;
+
+    vertical-align: middle;
+}
+
+
+.tela_pedidos_finalizados .tabela_pedidos tbody tr {
+
+    background: #ffffff;
+
+    transition:
+        background-color 0.18s ease;
+}
+
+
+.tela_pedidos_finalizados .tabela_pedidos tbody tr:hover {
+
+    background: #fbf9fc;
+}
+
+
+.tela_pedidos_finalizados .tabela_pedidos tbody tr:last-child td {
+
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   CLIENTE
+   ========================================================= */
+
+.tela_pedidos_finalizados .cliente_tabela {
+
+    min-width: 130px;
+}
+
+
+.tela_pedidos_finalizados .cliente_tabela strong {
+
+    display: block;
+
+    color: #39313d;
+
+    font-size: 0.77rem;
+    font-weight: 600;
+}
+
+
+.tela_pedidos_finalizados .cliente_tabela small {
+
+    display: block;
+
+    margin-top: 3px;
+
+    color: var(--texto-suave);
+
+    font-size: 0.65rem;
+}
+
+
+/* =========================================================
+   AMIGURUMI
+   ========================================================= */
+
+.tela_pedidos_finalizados .amigurumi_tabela {
+
+    color: #39313d;
+
+    font-size: 0.76rem;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   IMAGEM
+   ========================================================= */
+
+.tela_pedidos_finalizados .imagem_pedido {
+
+    width: 40px;
+    height: 40px;
+
+    object-fit: cover;
+
+    border-radius: 7px;
+
+    border: 1px solid var(--borda);
+}
+
+
+.tela_pedidos_finalizados .sem_imagem_pedido {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+
+    border-radius: 7px;
+
+    background: var(--roxo-claro);
+
+    font-size: 0.9rem;
+}
+
+
+.tela_pedidos_finalizados .sem_imagem_pedido small {
+
+    display: none;
+}
+
+
+/* =========================================================
+   VALORES
+   ========================================================= */
+
+.tela_pedidos_finalizados .valor_tabela {
+
+    font-weight: 500;
+
+    white-space: nowrap;
+}
+
+
+.tela_pedidos_finalizados .preco_total {
+
+    color: var(--texto-principal);
+
+    font-size: 0.76rem;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   TIPO
+   ========================================================= */
+
+.tela_pedidos_finalizados .badge_tipo {
+
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 24px;
+
+    padding: 4px 8px;
+
+    border-radius: 7px;
+
+    background: var(--roxo-muito-claro);
+
+    color: var(--texto-secundario);
+
+    font-size: 0.66rem;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   TAMANHO
+   ========================================================= */
+
+.tela_pedidos_finalizados .tamanho_pedido {
+
+    color: var(--texto-secundario);
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   STATUS ENTREGUE
+   ========================================================= */
+
+.tela_pedidos_finalizados .status_pedido {
+
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 24px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    background: var(--verde-fundo);
+
+    color: var(--verde);
+
+    font-size: 0.65rem;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+.tela_pedidos_finalizados .status_entregue {
+
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 24px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    background: var(--verde-fundo);
+
+    color: var(--verde);
+
+    font-size: 0.65rem;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   DATA
+   ========================================================= */
+
+.tela_pedidos_finalizados .data_pedido {
+
+    color: var(--texto-secundario);
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   ENTREGA REALIZADA
+   ========================================================= */
+
+.tela_pedidos_finalizados .entrega_realizada {
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 3px;
+}
+
+
+.tela_pedidos_finalizados .entrega_realizada small {
+
+    color: var(--texto-suave);
+
+    font-size: 0.63rem;
+}
+
+
+/* =========================================================
+   ESTADO VAZIO
+   ========================================================= */
+
+.tela_pedidos_finalizados .sem_resultados {
+
+    padding: 0 !important;
+
+    text-align: center;
+}
+
+
+.tela_pedidos_finalizados .estado_vazio {
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 205px;
+
+    padding: 30px 20px;
+}
+
+
+.tela_pedidos_finalizados .estado_vazio_icone {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 58px;
+    height: 58px;
+
+    margin-bottom: 12px;
+
+    border-radius: 50%;
+
+    background: var(--verde-fundo);
+
+    font-size: 1.55rem;
+}
+
+
+.tela_pedidos_finalizados .estado_vazio h3 {
+
+    margin: 0 0 5px;
+
+    color: var(--texto-principal);
+
+    font-size: 0.90rem;
+}
+
+
+.tela_pedidos_finalizados .estado_vazio p {
+
+    max-width: 400px;
+
+    margin: 0;
+
+    color: var(--texto-secundario);
+
+    font-size: 0.72rem;
+}
+
+
+/* =========================================================
+   AVISO HISTÓRICO
+   ========================================================= */
+
+.tela_pedidos_finalizados .aviso_historico {
+
+    display: flex;
+    align-items: flex-start;
+
+    width: 100%;
+
+    gap: 10px;
+
+    margin-top: 16px;
+
+    padding: 13px 16px;
+
+    background: #fff8e8;
+
+    border: 1px solid #ead9b4;
+
+    border-radius: var(--raio);
+}
+
+
+.tela_pedidos_finalizados .aviso_historico .icone_aviso {
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #f3e4c7;
+}
+
+
+.tela_pedidos_finalizados .aviso_historico strong {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: #5d4938;
+
+    font-size: 0.76rem;
+}
+
+
+.tela_pedidos_finalizados .aviso_historico p {
+
+    margin: 0;
+
+    color: #77675a;
+
+    font-size: 0.69rem;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   SCROLL
+   ========================================================= */
+
+.tela_pedidos_finalizados .tabela_scroll::-webkit-scrollbar {
+
+    height: 7px;
+}
+
+
+.tela_pedidos_finalizados .tabela_scroll::-webkit-scrollbar-track {
+
+    background: #f1edf3;
+}
+
+
+.tela_pedidos_finalizados .tabela_scroll::-webkit-scrollbar-thumb {
+
+    background: #c6b5ce;
+
+    border-radius: 10px;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+    .tela_pedidos_finalizados .cabecalho_mobile {
+
+        padding: 0 14px;
+    }
+
+
+    .tela_pedidos_finalizados .conteudo_principal {
+
+        padding:
+            78px
+            14px
+            25px;
+    }
+
+
+    .tela_pedidos_finalizados .cabecalho_pagina h1 {
+
+        font-size: 1.45rem;
+    }
+
+
+    .tela_pedidos_finalizados .cards_resumo_pedidos {
+
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+
+    .tela_pedidos_finalizados .card_resumo_pedido {
+
+        min-height: 70px;
+    }
+
+}
+
+
+@media (max-width: 450px) {
+
+    .tela_pedidos_finalizados .logo_mobile strong {
+
+        font-size: 0.80rem;
+    }
+
+
+    .tela_pedidos_finalizados .cabecalho_pagina h1 {
+
+        font-size: 1.30rem;
+    }
+
+
+    .tela_pedidos_finalizados .cabecalho_pagina p {
+
+        font-size: 0.76rem;
+    }
+
+}

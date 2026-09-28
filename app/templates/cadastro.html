@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Criar conta</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cadastro.css') }}">
+
+</head>
+
+<body>
+
+    <main class="criar_conta">
+
+        <section class="card_conta">
+
+            <div class="logo">
+
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo do Sistema de Amigurumis">
+
+            </div>
+
+            <div class="cabecalho_conta">
+
+                <h1>Criar conta</h1>
+
+                <p>
+                    Cadastre-se para começar a usar o sistema.
+                </p>
+
+            </div>
+
+            {% with mensagens = get_flashed_messages(with_categories=true) %}
+            {% if mensagens %}
+
+            {% for categoria, mensagem in mensagens %}
+
+            {% if categoria == "erro" %}
+
+            <div class="mensagem_erro" role="alert">
+                {{ mensagem }}
+            </div>
+
+            {% elif categoria == "sucesso" %}
+
+            <div class="mensagem_sucesso" role="alert">
+                {{ mensagem }}
+            </div>
+
+            {% else %}
+
+            <div class="mensagem" role="alert">
+                {{ mensagem }}
+            </div>
+
+            {% endif %}
+
+            {% endfor %}
+
+            {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('auth.cadastro') }}" method="POST" class="form_login">
+
+                <div class="campo_formulario">
+
+                    <label for="nome">
+                        Nome
+                    </label>
+
+                    <input type="text" id="nome" name="nome" placeholder="Digite seu nome" autocomplete="name"
+                        value="{{ nome or '' }}" required>
+
+                </div>
+
+                <div class="campo_formulario">
+
+                    <label for="telefone">
+                        Telefone
+                    </label>
+
+                    <input type="tel" id="telefone" name="telefone" placeholder="(92) 99999-9999" autocomplete="tel"
+                        minlength="11" maxlength="11" value="{{ telefone or '' }}" required>
+
+                </div>
+
+                <div class="campo_formulario">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input type="email" id="email" name="email" placeholder="Digite seu e-mail" autocomplete="email"
+                        value="{{ email or '' }}" required>
+
+                </div>
+
+                <div class="campo_formulario">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <div class="campo_senha">
+
+                        <input type="password" id="senha" name="senha" placeholder="Digite sua senha"
+                            autocomplete="new-password" minlength="8" required>
+
+                        <button type="button" class="btn_mostrar_senha" data-target="senha" aria-label="Mostrar senha"
+                            title="Mostrar senha" aria-pressed="false">
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="campo_formulario">
+
+                    <label for="confirmar_senha">
+                        Confirmar senha
+                    </label>
+
+                    <div class="campo_senha">
+
+                        <input type="password" id="confirmar_senha" name="confirmar_senha"
+                            placeholder="Digite a senha novamente" autocomplete="new-password" minlength="8" required>
+
+                        <button type="button" class="btn_mostrar_senha" data-target="confirmar_senha"
+                            aria-label="Mostrar senha" title="Mostrar senha" aria-pressed="false">
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn_principal">
+                    Criar conta
+                </button>
+
+            </form>
+
+            <div class="links_login">
+
+                <a href="{{ url_for('auth.login') }}">
+                    Já tenho uma conta
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="rodape">
+
+        <div class="rodape_conteudo">
+
+            <span class="rodape_linha"></span>
+
+
+            <p class="rodape_direitos">
+                Sistema de Amigurumis
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+
+</body>
+
+</html>

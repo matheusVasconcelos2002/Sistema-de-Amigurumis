@@ -1,0 +1,718 @@
+/* =========================================================
+   OFICIAL AMIGURUMIS V2
+   MENU GLOBAL DO SISTEMA
+   ========================================================= */
+
+
+/* =========================================================
+   VARIÁVEIS
+   ========================================================= */
+
+:root {
+
+    --menu-largura: 320px;
+
+    --menu-fundo: #ffffff;
+
+    --menu-texto: #3f3547;
+
+    --menu-texto-secundario: #766b7d;
+
+    --menu-borda: #eadfea;
+
+    --menu-hover: #f7eef8;
+
+    --menu-ativo: #e9dced;
+
+    --menu-destaque: #8f5b9f;
+
+    --menu-destaque-hover: #794889;
+
+    --menu-sombra:
+        8px 0 28px rgba(43, 31, 48, 0.20);
+
+    --menu-sobreposicao:
+        rgba(24, 18, 27, 0.48);
+
+    --menu-transicao:
+        0.28s ease;
+}
+
+
+/* =========================================================
+   BOTÃO ABRIR MENU
+   ========================================================= */
+
+.btn_abrir_menu {
+
+    position: fixed;
+
+    top: 16px;
+    left: 16px;
+
+    width: 50px;
+    height: 50px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 1px solid var(--menu-borda);
+
+    border-radius: 12px;
+
+    background-color: var(--menu-fundo);
+
+    color: var(--menu-destaque);
+
+    box-shadow:
+        0 4px 14px rgba(43, 31, 48, 0.14);
+
+    font-size: 25px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 1200;
+
+    transition:
+        background-color var(--menu-transicao),
+        color var(--menu-transicao),
+        transform var(--menu-transicao),
+        box-shadow var(--menu-transicao);
+}
+
+
+.btn_abrir_menu:hover {
+
+    background-color: var(--menu-hover);
+
+    color: var(--menu-destaque-hover);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 18px rgba(43, 31, 48, 0.18);
+}
+
+
+.btn_abrir_menu:active {
+
+    transform: scale(0.96);
+}
+
+
+/* =========================================================
+   SOBREPOSIÇÃO
+   ========================================================= */
+
+.sobreposicao_menu {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    background-color:
+        var(--menu-sobreposicao);
+
+    z-index: 1090;
+}
+
+
+.sobreposicao_menu.visivel {
+
+    display: block;
+}
+
+
+/* =========================================================
+   MENU LATERAL
+   ========================================================= */
+
+.menu_lateral {
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: var(--menu-largura);
+
+    height: 100vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background-color:
+        var(--menu-fundo);
+
+    border-right:
+        1px solid var(--menu-borda);
+
+    box-shadow:
+        var(--menu-sombra);
+
+    overflow: hidden;
+
+    transform:
+        translateX(-110%) !important;
+
+    transition:
+        transform var(--menu-transicao);
+
+    z-index: 1100;
+}
+
+
+/* MENU ABERTO */
+
+.menu_lateral.aberto {
+
+    transform:
+        translateX(0) !important;
+}
+
+
+/* =========================================================
+   BOTÃO FECHAR
+   ========================================================= */
+
+.btn_fechar_menu {
+
+    position: absolute;
+
+    top: 14px;
+    right: 14px;
+
+    width: 42px;
+    height: 42px;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    border: 1px solid var(--menu-borda);
+
+    border-radius: 10px;
+
+    background-color: var(--menu-fundo);
+
+    color: var(--menu-destaque);
+
+    font-size: 23px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    z-index: 5;
+
+    transition:
+        background-color var(--menu-transicao),
+        color var(--menu-transicao),
+        transform var(--menu-transicao);
+}
+
+
+.menu_lateral.aberto .btn_fechar_menu {
+
+    display: flex;
+}
+
+
+.btn_fechar_menu:hover {
+
+    background-color: var(--menu-hover);
+
+    color: var(--menu-destaque-hover);
+
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+   ÁREA SUPERIOR DO MENU
+   ========================================================= */
+
+.logo_menu {
+
+    width: 100%;
+
+    padding:
+        22px
+        18px
+        18px;
+
+    border-bottom:
+        1px solid var(--menu-borda);
+}
+
+
+/* =========================================================
+   PERFIL
+   ========================================================= */
+
+.perfil_menu {
+
+    width: 100%;
+
+    margin-bottom: 18px;
+}
+
+
+.perfil_menu_link {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    width: 100%;
+
+    padding: 9px;
+
+    border-radius: 12px;
+
+    color: var(--menu-texto);
+
+    transition:
+        background-color var(--menu-transicao);
+}
+
+
+.perfil_menu_link:hover {
+
+    background-color:
+        var(--menu-hover);
+}
+
+
+/* =========================================================
+   FOTO DO PERFIL
+   ========================================================= */
+
+.foto_menu {
+
+    width: 52px;
+    height: 52px;
+
+    flex-shrink: 0;
+
+    object-fit: cover;
+
+    border-radius: 50%;
+
+    border:
+        2px solid var(--menu-ativo);
+
+    background-color:
+        var(--menu-hover);
+}
+
+
+.foto_menu_padrao {
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 24px;
+}
+
+
+/* =========================================================
+   DADOS DO PERFIL
+   ========================================================= */
+
+.dados_menu {
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 2px;
+}
+
+
+.dados_menu strong {
+
+    overflow: hidden;
+
+    color: var(--menu-texto);
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+.dados_menu span {
+
+    color:
+        var(--menu-texto-secundario);
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   NOME DO SISTEMA
+   ========================================================= */
+
+.logo_sistema {
+
+    text-align: center;
+
+    padding-top: 4px;
+}
+
+
+.logo_sistema h1 {
+
+    margin-bottom: 2px;
+
+    color:
+        var(--menu-destaque);
+
+    font-size: 21px;
+
+    font-weight: 800;
+}
+
+
+.logo_sistema p {
+
+    color:
+        var(--menu-texto-secundario);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   NAVEGAÇÃO
+   ========================================================= */
+
+.menu_navegacao {
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding:
+        14px
+        12px;
+
+    flex: 1;
+
+    min-height: 0;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================================================
+   ITENS DO MENU
+   ========================================================= */
+
+.menu_item {
+
+    width: 100%;
+
+    min-height: 46px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 13px;
+
+    padding:
+        10px
+        13px;
+
+    border-radius: 10px;
+
+    color:
+        var(--menu-texto);
+
+    font-size: 15px;
+
+    font-weight: 600;
+
+    text-decoration: none;
+
+    white-space: nowrap;
+
+    transition:
+        background-color var(--menu-transicao),
+        color var(--menu-transicao),
+        transform var(--menu-transicao);
+}
+
+
+.menu_item:hover {
+
+    background-color:
+        var(--menu-hover);
+
+    color:
+        var(--menu-destaque);
+
+    transform:
+        translateX(2px);
+}
+
+
+/* ITEM ATIVO */
+
+.menu_item.ativo {
+
+    background-color:
+        var(--menu-ativo);
+
+    color:
+        var(--menu-destaque);
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   ÍCONES
+   ========================================================= */
+
+.menu_icone {
+
+    width: 25px;
+
+    min-width: 25px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 20px;
+
+    line-height: 1;
+}
+
+
+/* =========================================================
+   TEXTO
+   ========================================================= */
+
+.menu_texto {
+
+    display: block;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+}
+
+
+/* =========================================================
+   RODAPÉ DO MENU
+   ========================================================= */
+
+.menu_rodape {
+
+    width: 100%;
+
+    margin-top: auto;
+
+    padding:
+        12px;
+
+    border-top:
+        1px solid var(--menu-borda);
+    
+    flex-shrink: 0;
+}
+
+
+.menu_item.sair {
+
+    color: #b86f73;
+}
+
+
+.menu_item.sair:hover {
+
+    background-color: #f9e9ea;
+
+    color: #a65257;
+}
+
+
+/* =========================================================
+   BARRA DE ROLAGEM
+   ========================================================= */
+
+.menu_lateral::-webkit-scrollbar {
+
+    width: 7px;
+}
+
+
+.menu_lateral::-webkit-scrollbar-track {
+
+    background: transparent;
+}
+
+
+.menu_lateral::-webkit-scrollbar-thumb {
+
+    background-color:
+        var(--menu-borda);
+
+    border-radius: 10px;
+}
+
+
+.menu_lateral::-webkit-scrollbar-thumb:hover {
+
+    background-color:
+        var(--menu-ativo);
+}
+
+
+/* =========================================================
+   BLOQUEAR ROLAGEM DA PÁGINA
+   ========================================================= */
+
+body.menu_aberto {
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+/* =========================================================
+   AJUSTE DO RODAPÉ NO CELULAR
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .menu_lateral {
+        height: 100dvh;
+        max-height: 100dvh;
+
+        display: flex;
+        flex-direction: column;
+
+        overflow: hidden;
+    }
+
+    .logo_menu {
+        flex-shrink: 0;
+    }
+
+    .menu_navegacao {
+        flex: 1 1 auto;
+
+        min-height: 0;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .menu_rodape {
+        position: relative;
+
+        flex: 0 0 auto;
+        flex-shrink: 0;
+
+        width: 100%;
+
+        margin-top: 0;
+
+        padding: 8px 10px;
+
+        box-sizing: border-box;
+
+        background-color: var(--menu-fundo);
+
+        border-top: 1px solid var(--menu-borda);
+
+        z-index: 20;
+    }
+
+    .menu_rodape .menu_item {
+        width: 100%;
+
+        min-height: 50px;
+
+        margin: 0;
+
+        padding: 11px 14px;
+
+        box-sizing: border-box;
+    }
+}
+
+/* =========================================================
+   CELULARES PEQUENOS
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+    .menu_rodape {
+        padding: 6px 10px;
+    }
+
+    .menu_rodape .menu_item {
+        min-height: 50px;
+
+        padding: 10px 14px;
+
+        font-size: 15px;
+    }
+}
+
+/* =========================================================
+   CELULARES MUITO PEQUENOS
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+    .menu_lateral {
+
+        width: 90vw;
+    }
+
+
+    .menu_item {
+
+        font-size: 14px;
+    }
+}

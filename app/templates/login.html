@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Login</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tela_de_login.css') }}">
+
+</head>
+
+<body class="tela_login">
+
+    <main class="tela_login">
+
+        <section class="card_login">
+
+            <div class="logo">
+
+                {% if usuario_lembrado and usuario_lembrado.foto_perfil %}
+
+                <img src="{{ url_for('static', filename='fotos_perfil/' ~ usuario_lembrado.foto_perfil) }}"
+                    alt="Foto de perfil" class="imagem_login foto_login">
+
+                {% else %}
+
+                <img src="{{ url_for('static', filename='logo.png') }}" alt="Logo do Sistema de Amigurumis"
+                    class="imagem_login logo_login">
+
+                {% endif %}
+
+            </div>
+
+            <div class="cabecalho_login">
+                <h1>Bem-vindo!</h1>
+                <p>Entre na sua conta para continuar.</p>
+            </div>
+
+            {% with mensagens = get_flashed_messages(with_categories=true) %}
+            {% if mensagens %}
+            {% for categoria, mensagem in mensagens %}
+
+            {% if categoria == "erro" %}
+            <div class="mensagem_erro" role="alert">
+                {{ mensagem }}
+            </div>
+            {% elif categoria == "sucesso" %}
+            <div class="mensagem_sucesso" role="alert">
+                {{ mensagem }}
+            </div>
+            {% else %}
+            <div class="mensagem" role="alert">
+                {{ mensagem }}
+            </div>
+            {% endif %}
+
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <form action="{{ url_for('auth.login') }}" method="POST" class="form_login">
+
+                <div class="campo_formulario">
+
+                    <label for="email">
+                        E-mail
+                    </label>
+
+                    <input type="email" id="email" name="email" placeholder="Digite seu e-mail" autocomplete="email"
+                        value="{{ email or '' }}" required>
+
+                </div>
+
+                <div class="campo_formulario">
+
+                    <label for="senha">
+                        Senha
+                    </label>
+
+                    <div class="campo_senha">
+
+                        <input type="password" id="senha" name="senha" placeholder="Digite sua senha"
+                            autocomplete="current-password" required>
+
+                        <button type="button" class="btn_mostrar_senha" data-target="senha" aria-label="Mostrar senha"
+                            title="Mostrar senha" aria-pressed="false">
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <button type="submit" class="btn_principal">
+                    Entrar
+                </button>
+
+            </form>
+
+            <div class="links_login">
+
+                <a href="{{ url_for('auth.recuperar_senha') }}">
+                    Esqueci minha senha
+                </a>
+
+                <a href="{{ url_for('auth.cadastro') }}">
+                    Criar uma conta
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="rodape">
+
+        <div class="rodape_conteudo">
+
+            <span class="rodape_linha"></span>
+
+            <p class="rodape_direitos">
+                Sistem de Amigurumis
+            </p>
+
+        </div>
+
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+</body>
+
+</html>

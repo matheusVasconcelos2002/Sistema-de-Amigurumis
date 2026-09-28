@@ -1,0 +1,1855 @@
+/* =========================================================
+   PAGAMENTOS - V2
+   Controle financeiro dos pedidos
+   ========================================================= */
+
+
+/* =========================================================
+   VARIÁVEIS
+   ========================================================= */
+
+.tela_pagamentos {
+    --roxo-principal: #70408a;
+    --roxo-hover: #603674;
+    --roxo-claro: #f1eaf5;
+    --roxo-suave: #e8ddec;
+
+    --fundo: #f7f4f8;
+    --branco: #ffffff;
+
+    --texto-principal: #302936;
+    --texto-secundario: #6f6572;
+    --texto-suave: #8c8290;
+
+    --borda: #e2dce5;
+    --borda-suave: #ece7ee;
+
+    --verde: #4b9562;
+    --verde-fundo: #e8f4eb;
+
+    --amarelo: #b47b21;
+    --amarelo-fundo: #fff4df;
+
+    --vermelho: #a94b4b;
+    --vermelho-fundo: #fbeaea;
+
+    --azul: #44768e;
+    --azul-fundo: #e9f3f7;
+
+    --sombra-card:
+        0 3px 12px rgba(55, 40, 62, 0.07);
+
+    --sombra-hover:
+        0 6px 18px rgba(55, 40, 62, 0.10);
+
+    --raio-card: 12px;
+    --raio-pequeno: 8px;
+}
+
+
+/* =========================================================
+   ESTRUTURA GERAL
+   ========================================================= */
+
+.tela_pagamentos {
+    width: 100%;
+    min-height: 100vh;
+
+    margin: 0;
+    padding: 0;
+
+    background: var(--fundo);
+
+    color: var(--texto-principal);
+
+    box-sizing: border-box;
+}
+
+
+/*
+   Mantém o box-sizing consistente
+*/
+
+.tela_pagamentos *,
+.tela_pagamentos *::before,
+.tela_pagamentos *::after {
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+   ========================================================= */
+
+.tela_pagamentos .conteudo_principal {
+    width: 100%;
+    min-height: 100vh;
+
+    /*
+       Espaço para a barra superior do sistema.
+       Evita que o conteúdo fique escondido atrás
+       do menu/header.
+    */
+
+    padding: 112px 30px 35px;
+
+    background: var(--fundo);
+}
+
+
+/* =========================================================
+   CABEÇALHO DA PÁGINA
+   ========================================================= */
+
+.tela_pagamentos .cabecalho_pagina {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    width: 100%;
+    max-width: 1580px;
+
+    margin: 0 auto 24px;
+}
+
+
+/* subtítulo */
+
+.tela_pagamentos .subtitulo_pagina {
+    display: block;
+
+    margin-bottom: 5px;
+
+    font-size: 0.78rem;
+    font-weight: 600;
+
+    color: var(--roxo-principal);
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.05em;
+}
+
+
+/* título */
+
+.tela_pagamentos .cabecalho_pagina h1 {
+    margin: 0 0 7px;
+
+    font-size: 1.75rem;
+    font-weight: 700;
+
+    line-height: 1.2;
+
+    color: var(--texto-principal);
+}
+
+
+/* descrição */
+
+.tela_pagamentos .cabecalho_pagina p {
+    max-width: 700px;
+
+    margin: 0;
+
+    font-size: 0.88rem;
+    line-height: 1.5;
+
+    color: var(--texto-secundario);
+}
+
+
+/* =========================================================
+   MENSAGENS FLASH
+   ========================================================= */
+
+.tela_pagamentos .mensagens_flash {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    max-width: 1580px;
+
+    gap: 10px;
+
+    margin: 0 auto 20px;
+}
+
+
+.tela_pagamentos .mensagem_flash {
+    width: 100%;
+
+    padding: 12px 15px;
+
+    border-radius: var(--raio-pequeno);
+
+    font-size: 0.86rem;
+    font-weight: 500;
+}
+
+
+.tela_pagamentos .mensagem_flash.sucesso {
+    background: var(--verde-fundo);
+
+    border: 1px solid #c5dfcc;
+
+    color: #357148;
+}
+
+
+.tela_pagamentos .mensagem_flash.erro {
+    background: var(--vermelho-fundo);
+
+    border: 1px solid #e7c4c4;
+
+    color: #9a4040;
+}
+
+
+.tela_pagamentos .mensagem_flash.info {
+    background: var(--azul-fundo);
+
+    border: 1px solid #c8dfe8;
+
+    color: #386a80;
+}
+
+
+.tela_pagamentos .mensagem_flash.aviso {
+    background: var(--amarelo-fundo);
+
+    border: 1px solid #ead7ad;
+
+    color: #85631e;
+}
+
+
+/* =========================================================
+   RESUMO FINANCEIRO
+   ========================================================= */
+
+.tela_pagamentos .resumo_pagamentos {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+    width: 100%;
+    max-width: 1580px;
+
+    gap: 16px;
+
+    margin: 0 auto 18px;
+}
+
+
+.tela_pagamentos .resumo_card {
+    display: flex;
+    align-items: center;
+
+    min-height: 88px;
+
+    padding: 17px 18px;
+
+    gap: 14px;
+
+    background: var(--branco);
+
+    border: 1px solid var(--borda);
+
+    border-radius: var(--raio-card);
+
+    box-shadow: var(--sombra-card);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.tela_pagamentos .resumo_card:hover {
+    transform: translateY(-2px);
+
+    box-shadow: var(--sombra-hover);
+}
+
+
+/* ícone */
+
+.tela_pagamentos .resumo_icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 44px;
+    height: 44px;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    background: var(--roxo-claro);
+
+    font-size: 1.25rem;
+}
+
+
+/* texto */
+
+.tela_pagamentos .resumo_card span {
+    display: block;
+
+    margin-bottom: 3px;
+
+    font-size: 0.75rem;
+    font-weight: 500;
+
+    color: var(--texto-secundario);
+}
+
+
+.tela_pagamentos .resumo_card strong {
+    display: block;
+
+    font-size: 1.25rem;
+    font-weight: 700;
+
+    color: var(--texto-principal);
+}
+
+
+/* =========================================================
+   LEGENDA
+   ========================================================= */
+
+.tela_pagamentos .legenda_pagamentos {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    max-width: 1580px;
+
+    gap: 22px;
+
+    margin: 0 auto 16px;
+
+    padding: 0 2px;
+}
+
+
+.tela_pagamentos .legenda_item {
+    display: flex;
+    align-items: center;
+
+    gap: 7px;
+
+    font-size: 0.78rem;
+
+    color: var(--texto-secundario);
+}
+
+
+.tela_pagamentos .legenda_ponto {
+    width: 8px;
+    height: 8px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+}
+
+
+.tela_pagamentos .legenda_ponto.pendente {
+    background: #d89b35;
+}
+
+
+.tela_pagamentos .legenda_ponto.parcial {
+    background: #8364b7;
+}
+
+
+.tela_pagamentos .legenda_ponto.pago {
+    background: var(--verde);
+}
+
+
+/* =========================================================
+   CARD PRINCIPAL
+   ========================================================= */
+
+.tela_pagamentos .card_pagamentos {
+    width: 100%;
+    max-width: 1580px;
+
+    margin: 0 auto;
+
+    background: var(--branco);
+
+    border: 1px solid var(--borda);
+
+    border-radius: var(--raio-card);
+
+    box-shadow: var(--sombra-card);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   TÍTULO DA TABELA
+   ========================================================= */
+
+.tela_pagamentos .titulo_tabela {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 100%;
+
+    padding: 18px 20px;
+
+    border-bottom: 1px solid var(--borda-suave);
+}
+
+
+.tela_pagamentos .titulo_tabela h2 {
+    margin: 0 0 4px;
+
+    font-size: 1.05rem;
+    font-weight: 700;
+
+    color: var(--texto-principal);
+}
+
+
+.tela_pagamentos .titulo_tabela p {
+    margin: 0;
+
+    font-size: 0.78rem;
+    line-height: 1.4;
+
+    color: var(--texto-secundario);
+}
+
+
+/* =========================================================
+   CONTAINER DA TABELA
+   ========================================================= */
+
+.tela_pagamentos .tabela_container {
+    width: 100%;
+
+    overflow-x: auto;
+
+    -webkit-overflow-scrolling: touch;
+}
+
+
+/* =========================================================
+   TABELA
+   ========================================================= */
+
+.tela_pagamentos .tabela_container table {
+    width: 100%;
+
+    min-width: 1180px;
+
+    border-collapse: separate;
+    border-spacing: 0;
+
+    text-align: left;
+}
+
+
+/* =========================================================
+   CABEÇALHO DA TABELA
+   ========================================================= */
+
+.tela_pagamentos .tabela_container thead {
+    background: var(--roxo-principal);
+}
+
+
+.tela_pagamentos .tabela_container th {
+    padding: 11px 12px;
+
+    background: var(--roxo-principal);
+
+    border: none;
+
+    font-size: 0.70rem;
+    font-weight: 600;
+
+    line-height: 1.2;
+
+    color: #ffffff;
+
+    white-space: nowrap;
+
+    text-transform: none;
+}
+
+
+/*
+   Arredondamento do cabeçalho
+*/
+
+.tela_pagamentos .tabela_container thead th:first-child {
+    border-top-left-radius: 7px;
+}
+
+
+.tela_pagamentos .tabela_container thead th:last-child {
+    border-top-right-radius: 7px;
+}
+
+
+/* =========================================================
+   CÉLULAS
+   ========================================================= */
+
+.tela_pagamentos .tabela_container td {
+    padding: 13px 12px;
+
+    border-bottom: 1px solid var(--borda-suave);
+
+    font-size: 0.79rem;
+
+    line-height: 1.35;
+
+    color: var(--texto-principal);
+
+    vertical-align: middle;
+}
+
+
+.tela_pagamentos .tabela_container tbody tr {
+    background: #ffffff;
+
+    transition:
+        background-color 0.18s ease;
+}
+
+
+.tela_pagamentos .tabela_container tbody tr:hover {
+    background: #fbf9fc;
+}
+
+
+.tela_pagamentos .tabela_container tbody tr:last-child td {
+    border-bottom: none;
+}
+
+
+/* =========================================================
+   CLIENTE
+   ========================================================= */
+
+.tela_pagamentos .cliente_tabela {
+    min-width: 135px;
+}
+
+
+.tela_pagamentos .cliente_tabela strong {
+    display: block;
+
+    font-size: 0.80rem;
+    font-weight: 600;
+
+    color: #39313d;
+}
+
+
+/* =========================================================
+   AMIGURUMI
+   ========================================================= */
+
+.tela_pagamentos .amigurumi_tabela {
+    display: flex;
+    align-items: center;
+
+    min-width: 145px;
+
+    gap: 8px;
+}
+
+
+.tela_pagamentos .icone_amigurumi {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 28px;
+    height: 28px;
+
+    flex-shrink: 0;
+
+    border-radius: 7px;
+
+    background: var(--roxo-claro);
+
+    font-size: 0.9rem;
+}
+
+
+.tela_pagamentos .amigurumi_tabela strong {
+    font-size: 0.79rem;
+    font-weight: 600;
+
+    color: #39313d;
+}
+
+
+/* =========================================================
+   VALORES
+   ========================================================= */
+
+.tela_pagamentos td.valor {
+    white-space: nowrap;
+
+    font-variant-numeric: tabular-nums;
+}
+
+
+.tela_pagamentos td.valor_total {
+    font-weight: 700;
+
+    color: #332c36;
+}
+
+
+.tela_pagamentos td.valor_pago {
+    font-weight: 600;
+
+    color: var(--verde);
+}
+
+
+.tela_pagamentos .valor_restante {
+    font-weight: 700;
+
+    color: var(--amarelo);
+}
+
+
+.tela_pagamentos .valor_quitado {
+    font-weight: 700;
+
+    color: var(--verde);
+}
+
+
+/* =========================================================
+   STATUS DE PRODUÇÃO
+   ========================================================= */
+
+.tela_pagamentos .status_pedido {
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 25px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    font-size: 0.68rem;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+.tela_pagamentos .status_pedido.status-a_fazer {
+    background: #fff4df;
+
+    color: #98651d;
+}
+
+
+.tela_pagamentos .status_pedido.status-sendo_feito {
+    background: #eee9f8;
+
+    color: #70559d;
+}
+
+
+.tela_pagamentos .status_pedido.status-finalizado {
+    background: #e8f4eb;
+
+    color: #397248;
+}
+
+
+.tela_pagamentos .status_pedido.status-entregue {
+    background: #e8f3f7;
+
+    color: #356d83;
+}
+
+
+.tela_pagamentos .status_pedido.status-cancelado {
+    background: #fbeaea;
+
+    color: #a04444;
+}
+
+
+/* =========================================================
+   STATUS DO PAGAMENTO
+   ========================================================= */
+
+.tela_pagamentos .status_pagamento {
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 25px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    font-size: 0.68rem;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+.tela_pagamentos .status_pagamento.status-pendente {
+    background: #fff4df;
+
+    color: #98651d;
+}
+
+
+.tela_pagamentos .status_pagamento.status-parcial {
+    background: #eee9f8;
+
+    color: #70559d;
+}
+
+
+.tela_pagamentos .status_pagamento.status-pago {
+    background: #e8f4eb;
+
+    color: #397248;
+}
+
+
+/* =========================================================
+   STATUS DA ENTREGA
+   ========================================================= */
+
+.tela_pagamentos .status_entrega {
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 25px;
+
+    padding: 4px 8px;
+
+    border-radius: 20px;
+
+    font-size: 0.68rem;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+.tela_pagamentos .status_entrega.no_prazo {
+    background: #e8f4eb;
+
+    color: #397248;
+}
+
+
+.tela_pagamentos .status_entrega.atrasado {
+    background: #fbeaea;
+
+    color: #a04444;
+}
+
+
+.tela_pagamentos td small {
+    display: block;
+
+    margin-top: 4px;
+
+    font-size: 0.68rem;
+
+    color: var(--texto-suave);
+}
+
+
+/* =========================================================
+   AÇÃO DE PAGAMENTO
+   ========================================================= */
+
+.tela_pagamentos .celula_acao {
+    min-width: 150px;
+
+    white-space: nowrap;
+}
+
+
+.tela_pagamentos .btn_pagamento {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 34px;
+
+    padding: 7px 11px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: var(--roxo-principal);
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 0.70rem;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.tela_pagamentos .btn_pagamento:hover {
+    background: var(--roxo-hover);
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 4px 10px rgba(112, 64, 138, 0.20);
+}
+
+
+.tela_pagamentos .btn_pagamento:active {
+    transform: translateY(0);
+}
+
+
+.tela_pagamentos .btn_pagamento:focus-visible {
+    outline: 2px solid var(--roxo-principal);
+
+    outline-offset: 2px;
+}
+
+
+.tela_pagamentos .pagamento_confirmado {
+    display: inline-flex;
+    align-items: center;
+
+    min-height: 27px;
+
+    padding: 5px 9px;
+
+    border-radius: 7px;
+
+    background: var(--verde-fundo);
+
+    color: var(--verde);
+
+    font-size: 0.68rem;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   ESTADO VAZIO
+   ========================================================= */
+
+.tela_pagamentos .sem_resultados {
+    padding: 0 !important;
+
+    text-align: center;
+}
+
+
+.tela_pagamentos .estado_vazio {
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 250px;
+
+    padding: 35px 20px;
+}
+
+
+.tela_pagamentos .estado_vazio_icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 62px;
+    height: 62px;
+
+    margin-bottom: 13px;
+
+    border-radius: 50%;
+
+    background: var(--roxo-claro);
+
+    font-size: 1.75rem;
+}
+
+
+.tela_pagamentos .estado_vazio h3 {
+    margin: 0 0 6px;
+
+    font-size: 0.95rem;
+    font-weight: 700;
+
+    color: var(--texto-principal);
+}
+
+
+.tela_pagamentos .estado_vazio p {
+    max-width: 400px;
+
+    margin: 0;
+
+    font-size: 0.78rem;
+    line-height: 1.5;
+
+    color: var(--texto-secundario);
+}
+
+
+/* =========================================================
+   AVISO
+   ========================================================= */
+
+.tela_pagamentos .aviso_pagamento {
+    display: flex;
+    align-items: flex-start;
+
+    width: 100%;
+    max-width: 1580px;
+
+    gap: 11px;
+
+    margin: 16px auto 22px;
+
+    padding: 14px 17px;
+
+    background: #ffffff;
+
+    border: 1px solid var(--borda);
+
+    border-radius: var(--raio-card);
+
+    box-shadow: 0 2px 8px rgba(55, 40, 62, 0.04);
+}
+
+
+.tela_pagamentos .aviso_icone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 27px;
+    height: 27px;
+
+    flex-shrink: 0;
+
+    border-radius: 50%;
+
+    background: #eaf2fb;
+
+    font-size: 0.78rem;
+}
+
+
+.tela_pagamentos .aviso_pagamento strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    font-size: 0.78rem;
+
+    color: var(--texto-principal);
+}
+
+
+.tela_pagamentos .aviso_pagamento p {
+    margin: 0 0 4px;
+
+    font-size: 0.72rem;
+    line-height: 1.5;
+
+    color: var(--texto-secundario);
+}
+
+
+.tela_pagamentos .aviso_pagamento p:last-child {
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   RODAPÉ
+   ========================================================= */
+
+.tela_pagamentos .rodape {
+    width: 100%;
+    max-width: 1580px;
+
+    margin: 0 auto;
+
+    padding: 12px 20px 18px;
+
+    text-align: center;
+}
+
+
+.tela_pagamentos .rodape_direitos {
+    margin: 0;
+
+    font-size: 0.70rem;
+
+    color: #8c8290;
+}
+
+
+/* =========================================================
+   SCROLL DA TABELA
+   ========================================================= */
+
+.tela_pagamentos .tabela_container::-webkit-scrollbar {
+    height: 8px;
+}
+
+
+.tela_pagamentos .tabela_container::-webkit-scrollbar-track {
+    background: #f1edf3;
+}
+
+
+.tela_pagamentos .tabela_container::-webkit-scrollbar-thumb {
+    background: #c5b4ce;
+
+    border-radius: 10px;
+}
+
+
+.tela_pagamentos .tabela_container::-webkit-scrollbar-thumb:hover {
+    background: #a98bb6;
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 1200px) {
+
+    .tela_pagamentos .conteudo_principal {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+
+
+    .tela_pagamentos .resumo_pagamentos {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .tela_pagamentos .conteudo_principal {
+        padding:
+            100px
+            18px
+            30px;
+    }
+
+
+    .tela_pagamentos .cabecalho_pagina {
+        margin-bottom: 20px;
+    }
+
+
+    .tela_pagamentos .cabecalho_pagina h1 {
+        font-size: 1.55rem;
+    }
+
+
+    .tela_pagamentos .cabecalho_pagina p {
+        font-size: 0.82rem;
+    }
+
+
+    .tela_pagamentos .resumo_pagamentos {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+
+    .tela_pagamentos .resumo_card {
+        min-height: 78px;
+
+        padding: 14px 16px;
+    }
+
+
+    .tela_pagamentos .legenda_pagamentos {
+        flex-wrap: wrap;
+
+        gap: 10px 18px;
+    }
+
+
+    .tela_pagamentos .titulo_tabela {
+        padding: 16px;
+    }
+
+
+    .tela_pagamentos .aviso_pagamento {
+        padding: 14px;
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .tela_pagamentos .conteudo_principal {
+        padding:
+            92px
+            12px
+            25px;
+    }
+
+
+    .tela_pagamentos .cabecalho_pagina h1 {
+        font-size: 1.35rem;
+    }
+
+
+    .tela_pagamentos .subtitulo_pagina {
+        font-size: 0.70rem;
+    }
+
+
+    .tela_pagamentos .cabecalho_pagina p {
+        font-size: 0.78rem;
+    }
+
+
+    .tela_pagamentos .resumo_card {
+        gap: 11px;
+    }
+
+
+    .tela_pagamentos .resumo_icone {
+        width: 40px;
+        height: 40px;
+
+        font-size: 1.1rem;
+    }
+
+
+    .tela_pagamentos .resumo_card strong {
+        font-size: 1.12rem;
+    }
+
+
+    .tela_pagamentos .legenda_pagamentos {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 8px;
+    }
+
+
+    .tela_pagamentos .titulo_tabela {
+        padding: 14px;
+    }
+
+
+    .tela_pagamentos .titulo_tabela h2 {
+        font-size: 0.95rem;
+    }
+
+
+    .tela_pagamentos .titulo_tabela p {
+        font-size: 0.73rem;
+    }
+
+
+    .tela_pagamentos .aviso_pagamento {
+        gap: 8px;
+    }
+
+
+    .tela_pagamentos .aviso_pagamento p {
+        font-size: 0.70rem;
+    }
+
+}
+
+/* =========================================================
+   MODAL DE PAGAMENTO
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   BLOQUEAR SCROLL QUANDO O MODAL ESTIVER ABERTO
+   --------------------------------------------------------- */
+
+body.modal_bloqueado {
+    overflow: hidden;
+}
+
+
+/* ---------------------------------------------------------
+   ESTRUTURA DO MODAL
+   --------------------------------------------------------- */
+
+.tela_pagamentos .modal_pagamento {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 9999;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    box-sizing: border-box;
+}
+
+
+/*
+   O JavaScript adiciona esta classe quando o modal abre.
+*/
+
+.tela_pagamentos .modal_pagamento.modal_aberto {
+    display: flex;
+}
+
+
+/* ---------------------------------------------------------
+   FUNDO ESCURO
+   --------------------------------------------------------- */
+
+.tela_pagamentos .modal_pagamento_sobreposicao {
+    position: absolute;
+
+    inset: 0;
+
+    background: rgba(47, 36, 30, 0.58);
+
+    backdrop-filter: blur(3px);
+    -webkit-backdrop-filter: blur(3px);
+
+    animation: aparecerSobreposicao 0.2s ease;
+}
+
+
+/* ---------------------------------------------------------
+   CONTEÚDO
+   --------------------------------------------------------- */
+
+.tela_pagamentos .modal_pagamento_conteudo {
+    position: relative;
+
+    z-index: 1;
+
+    width: min(100%, 560px);
+
+    max-height: calc(100vh - 48px);
+
+    overflow-y: auto;
+
+    box-sizing: border-box;
+
+    padding: 30px;
+
+    background: #fffdfb;
+
+    border: 1px solid #eadfd8;
+
+    border-radius: 22px;
+
+    box-shadow:
+        0 24px 70px rgba(55, 40, 32, 0.22),
+        0 8px 25px rgba(55, 40, 32, 0.10);
+
+    animation: aparecerModal 0.25s ease;
+}
+
+
+/* ---------------------------------------------------------
+   BOTÃO FECHAR
+   --------------------------------------------------------- */
+
+.tela_pagamentos .modal_fechar {
+    position: absolute;
+
+    top: 18px;
+    right: 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 38px;
+    height: 38px;
+
+    padding: 0;
+
+    border: none;
+    border-radius: 50%;
+
+    background: #f5eee9;
+
+    color: #705d51;
+
+    font-size: 1.35rem;
+    font-weight: 500;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.tela_pagamentos .modal_fechar:hover {
+    background: #eadfd8;
+
+    color: #3f3027;
+
+    transform: rotate(5deg);
+}
+
+
+.tela_pagamentos .modal_fechar:focus-visible {
+    outline: 3px solid rgba(166, 126, 102, 0.25);
+
+    outline-offset: 2px;
+}
+
+
+/* ---------------------------------------------------------
+   RÓTULO
+   --------------------------------------------------------- */
+
+.tela_pagamentos .modal_rotulo {
+    display: inline-flex;
+
+    align-items: center;
+
+    margin-bottom: 9px;
+
+    padding: 6px 11px;
+
+    background: #f4e8df;
+
+    border: 1px solid #ead8cb;
+
+    border-radius: 999px;
+
+    color: #8a6f5a;
+
+    font-size: 0.73rem;
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    text-transform: uppercase;
+}
+
+
+/* ---------------------------------------------------------
+   TÍTULO
+   --------------------------------------------------------- */
+
+.tela_pagamentos .modal_pagamento_conteudo h2 {
+    margin: 0 45px 7px 0;
+
+    color: #3f3027;
+
+    font-size: 1.55rem;
+    font-weight: 750;
+
+    line-height: 1.25;
+}
+
+
+.tela_pagamentos .modal_descricao {
+    margin: 0 0 22px;
+
+    color: #81736b;
+
+    font-size: 0.9rem;
+
+    line-height: 1.55;
+}
+
+
+/* ---------------------------------------------------------
+   RESUMO DO CLIENTE / AMIGURUMI / VALOR
+   --------------------------------------------------------- */
+
+.tela_pagamentos .modal_resumo {
+    display: grid;
+
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 10px;
+
+    margin-bottom: 24px;
+
+    padding: 14px;
+
+    background: #faf6f2;
+
+    border: 1px solid #eadfd8;
+
+    border-radius: 15px;
+}
+
+
+.tela_pagamentos .modal_resumo > div {
+    min-width: 0;
+
+    padding: 8px 10px;
+}
+
+
+.tela_pagamentos .modal_resumo > div + div {
+    border-left: 1px solid #e6d9d1;
+}
+
+
+.tela_pagamentos .modal_resumo span {
+    display: block;
+
+    margin-bottom: 5px;
+
+    color: #927f72;
+
+    font-size: 0.72rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.04em;
+}
+
+
+.tela_pagamentos .modal_resumo strong {
+    display: block;
+
+    overflow: hidden;
+
+    color: #4b392f;
+
+    font-size: 0.88rem;
+    font-weight: 700;
+
+    text-overflow: ellipsis;
+
+    white-space: nowrap;
+}
+
+
+/*
+   Valor restante recebe destaque.
+*/
+
+.tela_pagamentos #modal_valor_limite {
+    color: #8b624d;
+
+    font-size: 0.95rem;
+}
+
+
+/* ---------------------------------------------------------
+   FORMULÁRIO
+   --------------------------------------------------------- */
+
+.tela_pagamentos #form_pagamento {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 18px;
+}
+
+
+/* ---------------------------------------------------------
+   CAMPOS
+   --------------------------------------------------------- */
+
+.tela_pagamentos .campo_modal {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.tela_pagamentos .campo_modal label {
+    color: #56463d;
+
+    font-size: 0.84rem;
+    font-weight: 650;
+}
+
+
+/* ---------------------------------------------------------
+   INPUTS E TEXTAREA
+   --------------------------------------------------------- */
+
+.tela_pagamentos .campo_modal input,
+.tela_pagamentos .campo_modal textarea {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dfd1c8;
+
+    border-radius: 11px;
+
+    background: #ffffff;
+
+    color: #40342e;
+
+    font-family: inherit;
+
+    font-size: 0.92rem;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease;
+}
+
+
+.tela_pagamentos .campo_modal input {
+    min-height: 48px;
+
+    padding: 0 14px;
+}
+
+
+.tela_pagamentos .campo_modal textarea {
+    min-height: 105px;
+
+    padding: 13px 14px;
+
+    resize: vertical;
+}
+
+
+/* ---------------------------------------------------------
+   FOCO
+   --------------------------------------------------------- */
+
+.tela_pagamentos .campo_modal input:focus,
+.tela_pagamentos .campo_modal textarea:focus {
+    outline: none;
+
+    background: #fffdfb;
+
+    border-color: #b8947c;
+
+    box-shadow:
+        0 0 0 3px rgba(184, 148, 124, 0.14);
+}
+
+
+/* ---------------------------------------------------------
+   CAMPO VALOR — DESTAQUE
+   --------------------------------------------------------- */
+
+.tela_pagamentos #valor_pagamento {
+    min-height: 56px;
+
+    padding: 0 16px;
+
+    color: #4a392f;
+
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+
+/* ---------------------------------------------------------
+   MENSAGEM DE LIMITE
+   --------------------------------------------------------- */
+
+.tela_pagamentos #mensagem_limite {
+    display: block;
+
+    margin-top: -1px;
+
+    color: #9a8578;
+
+    font-size: 0.75rem;
+
+    line-height: 1.4;
+}
+
+
+/*
+   Quando o JavaScript detectar valor inválido.
+*/
+
+.tela_pagamentos #valor_pagamento.campo_invalido {
+    border-color: #c96d6d;
+
+    background: #fff8f8;
+
+    box-shadow:
+        0 0 0 3px rgba(201, 109, 109, 0.10);
+}
+
+
+.tela_pagamentos #valor_pagamento.campo_invalido + #mensagem_limite {
+    color: #b14d4d;
+}
+
+
+/* ---------------------------------------------------------
+   AÇÕES
+   --------------------------------------------------------- */
+
+.tela_pagamentos .modal_acoes {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-end;
+
+    gap: 10px;
+
+    margin-top: 5px;
+
+    padding-top: 20px;
+
+    border-top: 1px solid #eee3dd;
+}
+
+
+/* ---------------------------------------------------------
+   BOTÃO SECUNDÁRIO
+   --------------------------------------------------------- */
+
+.tela_pagamentos .btn_modal_secundario {
+    min-height: 45px;
+
+    padding: 0 18px;
+
+    border: 1px solid #dfd1c8;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #66564d;
+
+    font-family: inherit;
+
+    font-size: 0.87rem;
+    font-weight: 650;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        color 0.2s ease;
+}
+
+
+.tela_pagamentos .btn_modal_secundario:hover {
+    background: #f8f2ee;
+
+    border-color: #ccb9ad;
+
+    color: #493a32;
+}
+
+
+/* ---------------------------------------------------------
+   BOTÃO PRINCIPAL
+   --------------------------------------------------------- */
+
+.tela_pagamentos .btn_modal_principal {
+    min-height: 45px;
+
+    padding: 0 22px;
+
+    border: 1px solid #8d6a55;
+
+    border-radius: 10px;
+
+    background: #8d6a55;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 0.87rem;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    box-shadow: 0 4px 10px rgba(96, 68, 51, 0.15);
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.tela_pagamentos .btn_modal_principal:hover {
+    background: #765642;
+
+    border-color: #765642;
+
+    transform: translateY(-1px);
+
+    box-shadow: 0 6px 14px rgba(96, 68, 51, 0.20);
+}
+
+
+.tela_pagamentos .btn_modal_principal:active {
+    transform: translateY(0);
+}
+
+
+.tela_pagamentos .btn_modal_principal:focus-visible,
+.tela_pagamentos .btn_modal_secundario:focus-visible {
+    outline: 3px solid rgba(166, 126, 102, 0.22);
+
+    outline-offset: 2px;
+}
+
+
+/* ---------------------------------------------------------
+   ANIMAÇÕES
+   --------------------------------------------------------- */
+
+@keyframes aparecerSobreposicao {
+
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+
+}
+
+
+@keyframes aparecerModal {
+
+    from {
+        opacity: 0;
+
+        transform: translateY(12px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+
+        transform: translateY(0) scale(1);
+    }
+
+}
+
+
+/* ---------------------------------------------------------
+   RESPONSIVIDADE
+   --------------------------------------------------------- */
+
+@media (max-width: 650px) {
+
+    .tela_pagamentos .modal_pagamento {
+        padding: 15px;
+    }
+
+
+    .tela_pagamentos .modal_pagamento_conteudo {
+        padding: 24px 20px;
+
+        border-radius: 18px;
+
+        max-height: calc(100vh - 30px);
+    }
+
+
+    .tela_pagamentos .modal_resumo {
+        grid-template-columns: 1fr;
+
+        gap: 4px;
+    }
+
+
+    .tela_pagamentos .modal_resumo > div + div {
+        border-left: none;
+
+        border-top: 1px solid #e6d9d1;
+    }
+
+
+    .tela_pagamentos .modal_resumo > div {
+        padding: 9px 7px;
+    }
+
+
+    .tela_pagamentos .modal_pagamento_conteudo h2 {
+        font-size: 1.35rem;
+    }
+
+
+    .tela_pagamentos .modal_acoes {
+        flex-direction: column-reverse;
+    }
+
+
+    .tela_pagamentos .btn_modal_principal,
+    .tela_pagamentos .btn_modal_secundario {
+        width: 100%;
+    }
+
+}

@@ -1,0 +1,1089 @@
+/* =========================================================
+   CONFIGURAÇÕES
+========================================================= */
+
+
+/* =========================================================
+   VARIÁVEIS
+   ========================================================= */
+
+.tela_configuracoes {
+
+    --cor_principal: #7b3f98;
+
+    --cor_principal_hover: #693582;
+
+    --cor_texto: #333333;
+
+    --cor_texto_suave: #777777;
+
+    --cor_fundo: #e6efe9;
+
+    --cor_card: #ffffff;
+
+    --cor_borda: #e6e0e8;
+
+    --cor_card_hover: #faf7fc;
+
+    --cor_secundaria: #f4edf7;
+
+    --cor_secundaria_hover: #eadcf0;
+
+}
+
+
+/* =========================================================
+   CORPO
+   ========================================================= */
+
+body.tela_configuracoes {
+
+    min-height: 100vh;
+
+    margin: 0;
+
+    background:
+        var(--cor_fundo);
+
+    color:
+        var(--cor_texto);
+}
+
+
+/* =========================================================
+   CONTEÚDO PRINCIPAL
+   ========================================================= */
+
+.tela_configuracoes .conteudo_configuracoes {
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    /*
+        Espaço superior para o botão
+        do menu lateral.
+    */
+
+    padding:
+        75px
+        30px
+        50px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   CABEÇALHO
+   ========================================================= */
+
+.tela_configuracoes .cabecalho_configuracoes {
+
+    display: flex;
+
+    align-items: flex-start;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-bottom: 30px;
+}
+
+
+.tela_configuracoes .rotulo_configuracoes {
+
+    display: inline-block;
+
+    margin-bottom: 7px;
+
+    color:
+        var(--cor_principal);
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+    text-transform: uppercase;
+}
+
+
+.tela_configuracoes .cabecalho_configuracoes h1 {
+
+    margin:
+        0 0 8px;
+
+    color:
+        var(--cor_texto);
+
+    font-size: 30px;
+
+    font-weight: 700;
+}
+
+
+.tela_configuracoes .cabecalho_configuracoes p {
+
+    margin: 0;
+
+    color:
+        var(--cor_texto_suave);
+
+    font-size: 15px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   BOTÃO VOLTAR
+   ========================================================= */
+
+.tela_configuracoes .voltar_configuracoes {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 42px;
+
+    padding:
+        0 16px;
+
+    border:
+        1px solid var(--cor_principal);
+
+    border-radius: 9px;
+
+    background:
+        var(--cor_principal);
+
+    color:
+        #ffffff;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.tela_configuracoes .voltar_configuracoes:hover {
+
+    background:
+        var(--cor_principal_hover);
+
+    border-color:
+        var(--cor_principal_hover);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   MENSAGENS
+   ========================================================= */
+
+.tela_configuracoes .mensagens_flash {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-bottom: 20px;
+}
+
+
+.tela_configuracoes .mensagem_flash {
+
+    padding:
+        12px 15px;
+
+    border-radius: 10px;
+
+    font-size: 14px;
+
+    line-height: 1.5;
+}
+
+
+.tela_configuracoes .mensagem_flash.erro {
+
+    border:
+        1px solid #e3b5b5;
+
+    background:
+        #fff1f1;
+
+    color:
+        #a33;
+}
+
+
+.tela_configuracoes .mensagem_flash.sucesso {
+
+    border:
+        1px solid #b8dcbc;
+
+    background:
+        #f0faf1;
+
+    color:
+        #34703a;
+}
+
+
+/* =========================================================
+   LISTA
+   ========================================================= */
+
+.tela_configuracoes .lista_configuracoes {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+/* =========================================================
+   CARD
+   ========================================================= */
+
+.tela_configuracoes .item_configuracao {
+
+    width: 100%;
+
+    background:
+        var(--cor_card);
+
+    border:
+        1px solid var(--cor_borda);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.05);
+
+    overflow: hidden;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+.tela_configuracoes .item_configuracao[open] {
+
+    border-color:
+        #d8c9df;
+
+    box-shadow:
+        0 7px 24px rgba(0, 0, 0, 0.07);
+}
+
+
+/* =========================================================
+   CABEÇALHO DO CARD
+   ========================================================= */
+
+.tela_configuracoes .item_configuracao summary {
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 16px;
+
+    min-height: 78px;
+
+    padding:
+        18px 24px;
+
+    box-sizing: border-box;
+
+    list-style: none;
+
+    cursor: pointer;
+
+    user-select: none;
+
+    transition:
+        background-color 0.2s ease;
+}
+
+
+.tela_configuracoes .item_configuracao
+summary::-webkit-details-marker {
+
+    display: none;
+}
+
+
+.tela_configuracoes .item_configuracao
+summary::after {
+
+    content:
+        "⌄";
+
+    margin-left: auto;
+
+    color:
+        var(--cor_principal);
+
+    font-size: 20px;
+
+    opacity: 0.65;
+
+    transition:
+        transform 0.2s ease;
+}
+
+
+.tela_configuracoes .item_configuracao[open]
+summary::after {
+
+    transform:
+        rotate(180deg);
+}
+
+
+.tela_configuracoes .item_configuracao
+summary:hover {
+
+    background:
+        var(--cor_card_hover);
+}
+
+
+/* =========================================================
+   ÍCONE
+   ========================================================= */
+
+.tela_configuracoes .icone_configuracao {
+
+    width: 48px;
+
+    height: 48px;
+
+    min-width: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        #e5d5eb;
+
+    font-size: 22px;
+}
+
+
+/* =========================================================
+   TEXTO
+   ========================================================= */
+
+.tela_configuracoes .texto_configuracao {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    min-width: 0;
+}
+
+
+.tela_configuracoes .texto_configuracao strong {
+
+    color:
+        var(--cor_texto);
+
+    font-size: 16px;
+
+    font-weight: 700;
+}
+
+
+.tela_configuracoes .texto_configuracao span {
+
+    color:
+        var(--cor_texto_suave);
+
+    font-size: 13px;
+
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   CONTEÚDO INTERNO
+   ========================================================= */
+
+.tela_configuracoes .conteudo_configuracao {
+
+    padding:
+        0 24px 24px;
+
+    border-top:
+        1px solid var(--cor_borda);
+}
+
+
+/* =========================================================
+   OPÇÕES
+   ========================================================= */
+
+.tela_configuracoes .opcao_configuracao {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    padding:
+        20px 0;
+
+    border-bottom:
+        1px solid var(--cor_borda);
+}
+
+
+.tela_configuracoes .opcao_configuracao:last-of-type {
+
+    border-bottom:
+        none;
+}
+
+
+.tela_configuracoes .opcao_configuracao strong {
+
+    display: block;
+
+    margin-bottom: 5px;
+
+    color:
+        var(--cor_texto);
+
+    font-size: 15px;
+}
+
+
+.tela_configuracoes .opcao_configuracao p {
+
+    max-width: 650px;
+
+    margin: 0;
+
+    color:
+        var(--cor_texto_suave);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   BOTÕES
+   ========================================================= */
+
+.tela_configuracoes .botao_configuracao {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 40px;
+
+    padding:
+        0 16px;
+
+    border:
+        1px solid var(--cor_principal);
+
+    border-radius: 9px;
+
+    background:
+        var(--cor_principal);
+
+    color:
+        #ffffff;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.tela_configuracoes .botao_configuracao:hover {
+
+    background:
+        var(--cor_principal_hover);
+
+    border-color:
+        var(--cor_principal_hover);
+
+    transform:
+        translateY(-1px);
+}
+
+
+.tela_configuracoes .botao_configuracao:active {
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   STATUS
+   ========================================================= */
+
+.tela_configuracoes .status_configuracao {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 32px;
+
+    padding:
+        0 12px;
+
+    border-radius: 20px;
+
+    background:
+        #f7eddc;
+
+    color:
+        #9a6a2c;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   INFORMAÇÕES
+   ========================================================= */
+
+.tela_configuracoes .informacao_configuracao {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+    padding:
+        18px 0;
+
+    border-bottom:
+        1px solid var(--cor_borda);
+}
+
+
+.tela_configuracoes .informacao_configuracao span {
+
+    color:
+        var(--cor_texto_suave);
+
+    font-size: 12px;
+}
+
+
+.tela_configuracoes .informacao_configuracao strong {
+
+    color:
+        var(--cor_texto);
+
+    font-size: 15px;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   AVISOS DE SEGURANÇA
+   ========================================================= */
+
+.tela_configuracoes .aviso_seguranca {
+
+    margin-top: 18px;
+
+    padding:
+        14px 16px;
+
+    border:
+        1px solid #ddcce4;
+
+    border-radius: 10px;
+
+    background:
+        #f7f0fa;
+
+    color:
+        #704b80;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.tela_configuracoes .aviso_seguranca.destaque {
+
+    margin-top: 20px;
+}
+
+
+/* =========================================================
+   EXPORTAÇÃO
+   ========================================================= */
+
+.tela_configuracoes .informacoes_exportacao {
+
+    margin-top: 18px;
+
+    padding:
+        16px;
+
+    border:
+        1px solid #dfd2e3;
+
+    border-radius: 10px;
+
+    background:
+        #faf7fb;
+
+    color:
+        var(--cor_texto);
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.tela_configuracoes .informacoes_exportacao strong {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+}
+
+
+.tela_configuracoes .informacoes_exportacao ul {
+
+    margin: 0;
+
+    padding-left: 20px;
+}
+
+
+.tela_configuracoes .informacoes_exportacao li {
+
+    margin-bottom: 5px;
+}
+
+
+/* =========================================================
+   ÁREA DE PERIGO
+   ========================================================= */
+
+.tela_configuracoes .configuracao_perigo {
+
+    border-color:
+        #efcaca;
+}
+
+
+.tela_configuracoes .configuracao_perigo
+.icone_configuracao {
+
+    background:
+        #fff1f1;
+}
+
+
+.tela_configuracoes .aviso_perigo {
+
+    margin-top: 20px;
+
+    padding:
+        18px;
+
+    border:
+        1px solid #efb8b8;
+
+    border-radius: 11px;
+
+    background:
+        #fff5f5;
+
+    color:
+        #8f1d1d;
+}
+
+
+.tela_configuracoes .aviso_perigo strong {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-size: 15px;
+}
+
+
+.tela_configuracoes .aviso_perigo p {
+
+    margin:
+        0 0 10px;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+
+.tela_configuracoes .aviso_perigo p:last-child {
+
+    margin-bottom: 0;
+}
+
+
+/* =========================================================
+   BOTÃO DE PERIGO
+   ========================================================= */
+
+.tela_configuracoes .botao_perigo {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 42px;
+
+    margin-top: 18px;
+
+    padding:
+        0 18px;
+
+    border:
+        1px solid #c93030;
+
+    border-radius: 9px;
+
+    background:
+        #c93030;
+
+    color:
+        #ffffff;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+.tela_configuracoes .botao_perigo:hover {
+
+    background:
+        #a92323;
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+    .tela_configuracoes
+    .conteudo_configuracoes {
+
+        padding:
+            75px 20px 40px;
+    }
+
+
+    .tela_configuracoes
+    .cabecalho_configuracoes {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 18px;
+    }
+
+
+    .tela_configuracoes
+    .voltar_configuracoes {
+
+        width: 100%;
+    }
+
+
+    .tela_configuracoes
+    .opcao_configuracao {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    .tela_configuracoes
+    .opcao_configuracao
+    .botao_configuracao {
+
+        width: 100%;
+    }
+
+
+    .tela_configuracoes
+    .status_configuracao {
+
+        align-self: flex-start;
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .tela_configuracoes
+    .conteudo_configuracoes {
+
+        padding:
+            70px 15px 35px;
+    }
+
+
+    .tela_configuracoes
+    .cabecalho_configuracoes {
+
+        margin-bottom: 22px;
+    }
+
+
+    .tela_configuracoes
+    .cabecalho_configuracoes h1 {
+
+        font-size: 25px;
+    }
+
+
+    .tela_configuracoes
+    .cabecalho_configuracoes p {
+
+        font-size: 14px;
+    }
+
+
+    .tela_configuracoes
+    .item_configuracao {
+
+        border-radius: 12px;
+    }
+
+
+    .tela_configuracoes
+    .item_configuracao summary {
+
+        min-height: 70px;
+
+        padding:
+            15px;
+    }
+
+
+    .tela_configuracoes
+    .icone_configuracao {
+
+        width: 42px;
+
+        height: 42px;
+
+        min-width: 42px;
+
+        border-radius: 10px;
+
+        font-size: 19px;
+    }
+
+
+    .tela_configuracoes
+    .texto_configuracao strong {
+
+        font-size: 15px;
+    }
+
+
+    .tela_configuracoes
+    .texto_configuracao span {
+
+        font-size: 12px;
+    }
+
+
+    .tela_configuracoes
+    .conteudo_configuracao {
+
+        padding:
+            0 15px 18px;
+    }
+
+
+    .tela_configuracoes
+    .informacoes_exportacao {
+
+        padding:
+            14px;
+    }
+
+
+    .tela_configuracoes
+    .aviso_perigo {
+
+        padding:
+            15px;
+    }
+
+
+    .tela_configuracoes
+    .botao_perigo {
+
+        width: 100%;
+    }
+
+}
+
+
+/* =========================================================
+   CELULAR PEQUENO
+   ========================================================= */
+
+@media (max-width: 380px) {
+
+    .tela_configuracoes
+    .conteudo_configuracoes {
+
+        padding-left:
+            12px;
+
+        padding-right:
+            12px;
+    }
+
+
+    .tela_configuracoes
+    .item_configuracao summary {
+
+        gap: 11px;
+    }
+
+
+    .tela_configuracoes
+    .icone_configuracao {
+
+        width: 38px;
+
+        height: 38px;
+
+        min-width: 38px;
+
+        font-size: 17px;
+    }
+
+
+    .tela_configuracoes
+    .texto_configuracao strong {
+
+        font-size: 14px;
+    }
+
+
+    .tela_configuracoes
+    .texto_configuracao span {
+
+        font-size: 11px;
+    }
+
+}

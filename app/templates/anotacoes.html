@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Anotações</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/anotacoes.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+
+
+</head>
+
+<body>
+
+    {% include "_menu.html" %}
+
+    <main class="conteudo_principal">
+
+        <div class="cabecalho_pagina">
+
+            <div>
+
+                <span class="subtitulo_pagina">
+                    Organização pessoal
+                </span>
+
+                <h1>
+                    📝 Anotações
+                </h1>
+
+                <p>
+                    Organize tarefas, lembretes e informações
+                    importantes do seu dia a dia.
+                </p>
+
+            </div>
+
+        </div>
+
+        {% with mensagens = get_flashed_messages(
+        with_categories=true
+        ) %}
+
+        {% if mensagens %}
+
+        <div class="mensagens_flash">
+
+            {% for categoria, mensagem in mensagens %}
+
+            <div class="mensagem_flash {{ categoria }}">
+                {{ mensagem }}
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+        {% endwith %}
+
+        <section class="card_nova_anotacao">
+
+            <div class="titulo_secao_painel">
+
+                <div class="icone_secao">
+
+                    {% if anotacao_edicao %}
+                    ✏️
+                    {% else %}
+                    📝
+                    {% endif %}
+
+                </div>
+
+                <div>
+
+                    <h2>
+
+                        {% if anotacao_edicao %}
+                        Editar anotação
+                        {% else %}
+                        Nova anotação
+                        {% endif %}
+
+                    </h2>
+
+                    <p>
+
+                        {% if anotacao_edicao %}
+                        Atualize as informações da anotação.
+                        {% else %}
+                        Registre algo que você não quer esquecer.
+                        {% endif %}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <form class="form_anotacao" method="POST" {% if anotacao_edicao %} action="{{ url_for(
+                        'anotacoes.editar',
+                        anotacao_id=anotacao_edicao.id
+                    ) }}" {% else %} action="{{ url_for('anotacoes.nova') }}" {% endif %} data-form-anotacao>
+
+                <div class="campo_painel">
+
+                    <label for="titulo">
+                        Título
+                    </label>
+
+                    <input type="text" id="titulo" name="titulo" placeholder="Ex.: Comprar materiais" maxlength="200"
+                        value="{{ titulo|default('') }}" required>
+
+                    <span class="contador_titulo"></span>
+
+                </div>
+
+                <div class="campo_painel">
+
+                    <label for="conteudo">
+                        Anotação
+                    </label>
+
+                    <textarea id="conteudo" name="conteudo" rows="10" placeholder="Digite sua anotação..."
+                        required>{{ conteudo|default('') }}</textarea>
+
+                    <span class="contador_conteudo"></span>
+
+                </div>
+
+                <div class="acoes_formulario">
+
+                    <button type="submit" class="botao_adicionar_anotacao">
+
+                        {% if anotacao_edicao %}
+                        💾 Salvar alterações
+                        {% else %}
+                        💾 Salvar anotação
+                        {% endif %}
+
+                    </button>
+
+                    {% if anotacao_edicao %}
+
+                    <a href="{{ url_for('anotacoes.listar') }}" class="botao_secundario" data-sair-anotacao>
+                        Cancelar edição
+                    </a>
+
+                    {% endif %}
+
+                </div>
+
+            </form>
+
+        </section>
+
+        <section class="secao_anotacoes">
+
+            <div class="cabecalho_secao">
+
+                <div>
+
+                    <h2>
+                        Minhas anotações
+                    </h2>
+
+                    <p>
+                        Seus lembretes pessoais ficam
+                        organizados aqui.
+                    </p>
+
+                </div>
+
+                <div class="acoes_anotacoes">
+
+                    <span class="contador_anotacoes">
+
+                        {{ anotacoes|length }}
+
+                        {% if anotacoes|length == 1 %}
+                        anotação
+                        {% else %}
+                        anotações
+                        {% endif %}
+
+                    </span>
+
+                    <a href="#lixeira" class="botao_secundario">
+                        🗑️ Lixeira
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="grade_anotacoes">
+
+                {% if anotacoes %}
+
+                {% for anotacao in anotacoes %}
+
+                <article class="card_anotacao" data-anotacao-id="{{ anotacao.id }}">
+
+                    <div class="cabecalho_anotacao">
+
+                        <div class="icone_anotacao">
+                            📝
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                {{ anotacao.titulo }}
+                            </h3>
+
+                            <span>
+                                {{
+                                anotacao.atualizado_em
+                                or anotacao.criado_em
+                                }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="conteudo_anotacao">
+
+                        <p>
+                            {{ anotacao.conteudo }}
+                        </p>
+
+                    </div>
+
+                    <div class="acoes_anotacao">
+
+                        <a href="{{ url_for(
+                                        'anotacoes.editar',
+                                        anotacao_id=anotacao.id
+                                    ) }}" class="botao_acao">
+                            ✏️ Editar
+                        </a>
+
+                        <form method="POST" action="{{ url_for(
+                                        'anotacoes.excluir',
+                                        anotacao_id=anotacao.id
+                                    ) }}" class="form_acao">
+
+                            <button type="submit" class="botao_acao botao_excluir"
+                                data-confirmar="Deseja mover esta anotação para a lixeira?">
+                                🗑️ Excluir
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </article>
+
+                {% endfor %}
+
+                {% else %}
+
+                <div class="estado_vazio">
+
+                    <div class="icone_estado_vazio">
+                        📝
+                    </div>
+
+                    <h3>
+                        Nenhuma anotação
+                    </h3>
+
+                    <p>
+                        Crie sua primeira anotação para
+                        começar a organizar seus lembretes.
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+        <section class="secao_anotacoes" id="lixeira">
+
+            <div class="cabecalho_secao">
+
+                <div>
+
+                    <h2>
+                        🗑️ Lixeira
+                    </h2>
+
+                    <p>
+                        Anotações excluídas podem ser restauradas.
+                    </p>
+
+                </div>
+
+                <div class="acoes_anotacoes">
+
+                    <span class="contador_anotacoes">
+
+                        {{ anotacoes_excluidas|length }}
+
+                        {% if anotacoes_excluidas|length == 1 %}
+                        anotação
+                        {% else %}
+                        anotações
+                        {% endif %}
+
+                    </span>
+
+                </div>
+
+            </div>
+
+            <div class="grade_anotacoes">
+
+                {% if anotacoes_excluidas %}
+
+                {% for anotacao in anotacoes_excluidas %}
+
+                <article class="card_anotacao" data-anotacao-id="{{ anotacao.id }}">
+
+                    <div class="cabecalho_anotacao">
+
+                        <div class="icone_anotacao">
+                            🗑️
+                        </div>
+
+                        <div>
+
+                            <h3>
+                                {{ anotacao.titulo }}
+                            </h3>
+
+                            <span>
+                                Excluída em:
+                                {{ anotacao.excluido_em }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="conteudo_anotacao">
+
+                        <p>
+                            {{ anotacao.conteudo }}
+                        </p>
+
+                    </div>
+
+                    <div class="acoes_anotacao">
+
+                        <form method="POST" action="{{ url_for(
+                                        'anotacoes.restaurar',
+                                        anotacao_id=anotacao.id
+                                    ) }}" class="form_acao">
+
+                            <button type="submit" class="botao_acao botao_restaurar"
+                                data-confirmar="Deseja restaurar esta anotação?">
+                                ♻️ Restaurar
+                            </button>
+
+                        </form>
+
+                    </div>
+
+                </article>
+
+                {% endfor %}
+
+                {% else %}
+
+                <div class="estado_vazio">
+
+                    <div class="icone_estado_vazio">
+                        🗑️
+                    </div>
+
+                    <h3>
+                        A lixeira está vazia
+                    </h3>
+
+                    <p>
+                        Nenhuma anotação excluída no momento.
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+        <section class="card_info">
+
+            <div class="icone_info">
+                💡
+            </div>
+
+            <div>
+
+                <h3>
+                    Sobre suas anotações
+                </h3>
+
+                <p>
+                    Suas anotações são particulares e ficam
+                    vinculadas à sua conta.
+                </p>
+
+                <p>
+                    Ao excluir uma anotação, ela será enviada
+                    para a lixeira e poderá ser restaurada
+                    posteriormente.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+    <script src="{{ url_for('static', filename='js/anotacoes.js') }}" defer></script>
+
+        <script src="{{ url_for('static', filename='js/menu.js') }}" defer></script>
+
+
+</body>
+
+</html>

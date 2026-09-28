@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Editar cliente
+    </title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/editar_clientes.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+</head>
+
+
+<body class="tela_editar_clientes">
+
+    {% include "_menu.html" %}
+
+
+    <main class="conteudo_editar_clientes">
+
+        <header class="cabecalho_pagina">
+
+            <div>
+
+                <span class="icone_titulo">
+                    👥
+                </span>
+
+                <div>
+
+                    <h1>
+                        Editar cliente
+                    </h1>
+
+                    <p>
+                        Atualize os dados e o endereço do cliente.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <section class="formulario_clientes">
+
+            <form method="POST" action="{{ url_for('clientes.editar', cliente_id=cliente.id) }}">
+
+                <div class="grupo_formulario">
+
+                    <h2>
+                        Dados do cliente
+                    </h2>
+
+
+                    <div class="linha_campos">
+
+                        <div class="campo_formulario campo_largo">
+
+                            <label for="nome">
+                                Nome
+                            </label>
+
+                            <input type="text" id="nome" name="nome" value="{{ cliente.nome }}" maxlength="150"
+                                required>
+
+                        </div>
+
+
+                        <div class="campo_formulario">
+
+                            <label for="telefone">
+                                Telefone
+                            </label>
+
+                            <input type="tel" id="telefone" name="telefone" value="{{ cliente.telefone }}"
+                                maxlength="20" required>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="grupo_formulario">
+
+                    <h2>
+                        Endereço
+                    </h2>
+
+
+                    <div class="linha_campos">
+
+                        <!-- =================================================
+     CEP
+================================================== -->
+
+                        <div class="campo_formulario campo_cep">
+
+                            <label for="cep">
+                                CEP
+                            </label>
+
+
+                            <div class="campo_cep_linha">
+
+                                <input type="text" id="cep" name="cep" placeholder="Ex.: 69101-230" maxlength="9"
+                                    inputmode="numeric" autocomplete="postal-code"
+                                    value="{{ dados.cep if dados else '' }}">
+
+
+                                <button type="button" id="btnBuscarCep" class="btn_secundario">
+                                    Buscar CEP
+                                </button>
+
+                            </div>
+
+
+                            <!-- OPÇÃO PARA QUEM NÃO SABE O CEP -->
+
+                            <label for="cep_nao_informado" class="opcao_cep">
+
+                                <input type="checkbox" id="cep_nao_informado" name="cep_nao_informado" value="1">
+
+                                <span>
+                                    Não sei o CEP
+                                </span>
+
+                            </label>
+
+
+                            <small id="ajuda_cep">
+
+                                Se você souber o CEP, informe acima para
+                                preencher o endereço automaticamente.
+                                Caso não saiba, marque "Não sei o CEP"
+                                e preencha o endereço manualmente.
+
+                            </small>
+
+                        </div>
+
+
+                        <div class="campo_formulario">
+
+                            <label for="estado">
+                                Estado
+                            </label>
+
+                            <input type="text" id="estado" name="estado" value="{{ cliente.estado }}" maxlength="2"
+                                required>
+
+                        </div>
+
+
+                        <div class="campo_formulario campo_largo">
+
+                            <label for="cidade">
+                                Cidade
+                            </label>
+
+                            <input type="text" id="cidade" name="cidade" value="{{ cliente.cidade }}" maxlength="100"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="linha_campos">
+
+                        <div class="campo_formulario campo_extra_largo">
+
+                            <label for="rua">
+                                Rua
+                            </label>
+
+                            <input type="text" id="rua" name="rua" value="{{ cliente.rua }}" maxlength="200" required>
+
+                        </div>
+
+
+                        <div class="campo_formulario">
+
+                            <label for="numero">
+                                Número
+                            </label>
+
+                            <input type="text" id="numero" name="numero" value="{{ cliente.numero or '' }}"
+                                maxlength="20">
+
+                            <small>
+                                Opcional.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="linha_campos">
+
+                        <div class="campo_formulario">
+
+                            <label for="bairro">
+                                Bairro
+                            </label>
+
+                            <input type="text" id="bairro" name="bairro" value="{{ cliente.bairro }}" maxlength="100"
+                                required>
+
+                        </div>
+
+
+                        <div class="campo_formulario campo_largo">
+
+                            <label for="complemento">
+                                Complemento
+                            </label>
+
+                            <input type="text" id="complemento" name="complemento"
+                                value="{{ cliente.complemento or '' }}" maxlength="150">
+
+                            <small>
+                                Opcional.
+                            </small>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="acoes_formulario">
+
+                    <a href="{{ url_for('clientes.listar') }}" class="btn_secundario">
+                        Cancelar
+                    </a>
+
+
+                    <button type="submit" class="btn_principal">
+                        Salvar alterações
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <section class="aviso_clientes">
+
+            <span class="icone_aviso">
+                ℹ️
+            </span>
+
+
+            <div>
+
+                <strong>
+                    Atenção ao alterar o endereço
+                </strong>
+
+                <p>
+                    Alterar o endereço do cliente não altera automaticamente
+                    os endereços que já foram registrados no histórico de pedidos.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <footer class="rodape_sistema">
+
+        <p class="rodape_direitos">
+            Sistema de Encomendas de Amigurumis
+        </p>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+    <script src="{{ url_for('static', filename='js/menu.js') }}" defer></script>
+
+</body>
+
+</html>

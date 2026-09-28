@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Histórico do pagamento
+    </title>
+
+
+    <!-- =====================================================
+         CSS GERAL
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/style.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         CSS DA TELA
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/historico_pagamento.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         CSS DO MENU
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/menu.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body class="tela_historico_pagamento">
+
+
+    {% include "_menu.html" %}
+
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="conteudo_principal">
+
+
+        <!-- =================================================
+             CABEÇALHO
+        ================================================== -->
+
+        <div class="cabecalho_pagina">
+
+            <div>
+
+                <span class="subtitulo_pagina">
+                    Controle financeiro
+                </span>
+
+
+                <h1>
+                    📋 Histórico do pagamento
+                </h1>
+
+
+                <p>
+                    Consulte os recebimentos e devoluções
+                    registrados para este pagamento.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('pagamentos.listar') }}"
+                class="botao_secundario"
+            >
+                ← Voltar para pagamentos
+            </a>
+
+        </div>
+
+
+        <!-- =================================================
+             RESUMO
+        ================================================== -->
+
+        <section class="resumo_historico">
+
+
+            <!-- CLIENTE -->
+
+            <div class="card_resumo_historico">
+
+                <span class="icone_resumo_historico">
+                    👤
+                </span>
+
+
+                <div>
+
+                    <span>
+                        Cliente
+                    </span>
+
+
+                    <strong>
+
+                        {{ pagamento.item_pedido.pedido.cliente_nome_snapshot }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- AMIGURUMI -->
+
+            <div class="card_resumo_historico">
+
+                <span class="icone_resumo_historico">
+                    🧸
+                </span>
+
+
+                <div>
+
+                    <span>
+                        Amigurumi
+                    </span>
+
+
+                    <strong>
+
+                        {{ pagamento.item_pedido.amigurumi.produto }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- VALOR -->
+
+            <div class="card_resumo_historico">
+
+                <span class="icone_resumo_historico">
+                    💰
+                </span>
+
+
+                <div>
+
+                    <span>
+                        Valor total
+                    </span>
+
+
+                    <strong>
+
+                        R$
+                        {{
+                            "%.2f"|format(
+                                (
+                                    pagamento.item_pedido.preco_unitario
+                                    *
+                                    pagamento.item_pedido.quantidade
+                                )|float
+                            )|replace(".", ",")
+                        }}
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             STATUS DO PAGAMENTO
+        ================================================== -->
+
+        <section class="card_status_historico">
+
+
+            <div class="status_info">
+
+                <span>
+                    Status do pagamento
+                </span>
+
+
+                {% if pagamento.status.value == "pendente" %}
+
+                    <strong class="status_pendente">
+                        ⏳ Pendente
+                    </strong>
+
+                {% elif pagamento.status.value == "parcial" %}
+
+                    <strong class="status_parcial">
+                        🟡 Parcial
+                    </strong>
+
+                {% elif pagamento.status.value == "pago" %}
+
+                    <strong class="status_pago">
+                        🟢 Pago
+                    </strong>
+
+                {% else %}
+
+                    <strong>
+                        {{ pagamento.status.value }}
+                    </strong>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="status_info">
+
+                <span>
+                    Quantidade
+                </span>
+
+                <strong>
+                    {{ pagamento.item_pedido.quantidade }}
+                </strong>
+
+            </div>
+
+
+            <div class="status_info">
+
+                <span>
+                    Movimentações
+                </span>
+
+                <strong>
+                    {{ movimentacoes|length }}
+                </strong>
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             HISTÓRICO
+        ================================================== -->
+
+        <section class="card_historico">
+
+
+            <!-- CABEÇALHO -->
+
+            <div class="cabecalho_historico">
+
+                <div>
+
+                    <span class="subtitulo_historico">
+                        Movimentações financeiras
+                    </span>
+
+
+                    <h2>
+                        Histórico
+                    </h2>
+
+
+                    <p>
+                        Todos os recebimentos e devoluções
+                        registrados para este pagamento.
+                    </p>
+
+                </div>
+
+
+                <span class="contador_historico">
+
+                    {{ movimentacoes|length }}
+
+                    {% if movimentacoes|length == 1 %}
+                        movimentação
+                    {% else %}
+                        movimentações
+                    {% endif %}
+
+                </span>
+
+            </div>
+
+
+            <!-- =================================================
+                 LISTA
+            ================================================== -->
+
+            {% if movimentacoes %}
+
+                <div class="lista_movimentacoes">
+
+
+                    {% for movimentacao in movimentacoes %}
+
+
+                        <article
+                            class="
+                                movimentacao
+                                {% if movimentacao.tipo.value == 'recebimento' %}
+                                    recebimento
+                                {% elif movimentacao.tipo.value == 'devolucao' %}
+                                    devolucao
+                                {% endif %}
+                            "
+                        >
+
+
+                            <!-- ÍCONE -->
+
+                            <div class="icone_movimentacao">
+
+                                {% if movimentacao.tipo.value == "recebimento" %}
+
+                                    💰
+
+                                {% elif movimentacao.tipo.value == "devolucao" %}
+
+                                    ↩️
+
+                                {% else %}
+
+                                    💳
+
+                                {% endif %}
+
+                            </div>
+
+
+                            <!-- CONTEÚDO -->
+
+                            <div class="conteudo_movimentacao">
+
+
+                                <div class="linha_movimentacao">
+
+
+                                    <div>
+
+                                        {% if movimentacao.tipo.value == "recebimento" %}
+
+                                            <h3>
+                                                Recebimento
+                                            </h3>
+
+                                        {% elif movimentacao.tipo.value == "devolucao" %}
+
+                                            <h3>
+                                                Devolução
+                                            </h3>
+
+                                        {% else %}
+
+                                            <h3>
+                                                {{ movimentacao.tipo.value|title }}
+                                            </h3>
+
+                                        {% endif %}
+
+
+                                        <span class="data_movimentacao">
+
+                                            {% if movimentacao.data_movimentacao %}
+
+                                                {{ movimentacao.data_movimentacao.strftime(
+                                                    "%d/%m/%Y"
+                                                ) }}
+
+                                                {% if movimentacao.data_movimentacao.strftime("%H:%M") != "00:00" %}
+
+                                                    às
+
+                                                    {{ movimentacao.data_movimentacao.strftime(
+                                                        "%H:%M"
+                                                    ) }}
+
+                                                {% endif %}
+
+                                            {% else %}
+
+                                                Data não informada
+
+                                            {% endif %}
+
+                                        </span>
+
+                                    </div>
+
+
+                                    <strong class="valor_movimentacao">
+
+                                        {% if movimentacao.tipo.value == "devolucao" %}
+
+                                            −
+
+                                        {% else %}
+
+                                            +
+
+                                        {% endif %}
+
+                                        R$
+                                        {{
+                                            "%.2f"|format(
+                                                movimentacao.valor|float
+                                            )|replace(".", ",")
+                                        }}
+
+                                    </strong>
+
+
+                                </div>
+
+
+                                {% if movimentacao.observacao %}
+
+                                    <div class="observacao_movimentacao">
+
+                                        <span>
+                                            Observação
+                                        </span>
+
+                                        <p>
+                                            {{ movimentacao.observacao }}
+                                        </p>
+
+                                    </div>
+
+                                {% endif %}
+
+
+                            </div>
+
+                        </article>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <!-- =================================================
+                     ESTADO VAZIO
+                ================================================== -->
+
+                <div class="estado_vazio">
+
+
+                    <div class="icone_estado_vazio">
+                        💰
+                    </div>
+
+
+                    <strong>
+                        Nenhuma movimentação registrada
+                    </strong>
+
+
+                    <span>
+                        Ainda não existem recebimentos ou
+                        devoluções registrados para este pagamento.
+                    </span>
+
+
+                    <a
+                        href="{{ url_for('pagamentos.listar') }}"
+                        class="botao_principal"
+                    >
+                        ← Voltar para pagamentos
+                    </a>
+
+
+                </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+        <!-- =================================================
+             AVISO
+        ================================================== -->
+
+        <section class="card_info">
+
+            <span class="icone_info">
+                ℹ️
+            </span>
+
+
+            <div>
+
+                <h3>
+                    Histórico financeiro
+                </h3>
+
+
+                <p>
+                    Cada recebimento ou devolução é registrado
+                    separadamente para manter o histórico do pagamento.
+                </p>
+
+
+                <p>
+                    Os valores apresentados aqui representam as
+                    movimentações efetivamente registradas.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='script.js'
+        ) }}"
+        defer
+    ></script>
+
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/menu.js'
+        ) }}"
+        defer
+    ></script>
+
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/historico_pagamento.js'
+        ) }}"
+        defer
+    ></script>
+
+
+</body>
+
+</html>

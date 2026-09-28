@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Nova Encomenda</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/nova_encomenda.css') }}"
+    >
+</head>
+
+<body class="nova_encomenda">
+
+    <!-- =====================================================
+         BARRA SUPERIOR
+    ====================================================== -->
+
+    <header class="barra_superior">
+
+        <div class="topo_esquerda">
+
+            <button
+                type="button"
+                class="btn_menu"
+                id="btn_menu"
+                aria-label="Abrir menu"
+                aria-expanded="false"
+                aria-controls="menuLateral"
+            >
+                ☰
+            </button>
+
+            <div class="titulo_topo">
+                Nova encomenda
+            </div>
+
+        </div>
+
+        <div class="nome_sistema">
+            🧶 Amigurumis
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         SOBREPOSIÇÃO DO MENU
+    ====================================================== -->
+
+    <div
+        class="sobreposicao_menu"
+        id="sobreposicao_menu"
+        aria-hidden="true"
+    ></div>
+
+
+    <!-- =====================================================
+         MENU LATERAL
+    ====================================================== -->
+
+    <aside
+        class="menu_lateral"
+        id="menuLateral"
+        aria-label="Menu principal"
+    >
+
+        <button
+            type="button"
+            class="btn_fechar_menu"
+            id="btnFecharMenu"
+            aria-label="Fechar menu"
+        >
+            ✕
+        </button>
+
+
+        <!-- PERFIL -->
+
+        <div class="perfil_menu">
+
+            <div class="foto_perfil_menu">
+
+                {% if usuario and usuario.foto_perfil %}
+
+                    <img
+                        src="{{ url_for('static', filename=usuario.foto_perfil) }}"
+                        alt="Foto de perfil"
+                    >
+
+                {% else %}
+
+                    <span aria-hidden="true">
+                        👤
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+
+            <div class="dados_perfil_menu">
+
+                <strong>
+                    {{ usuario.nome if usuario else 'Usuário' }}
+                </strong>
+
+                <span>
+                    Conta ativa
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVEGAÇÃO -->
+
+        <nav
+            class="navegacao_menu"
+            aria-label="Navegação principal"
+        >
+
+            <a
+                href="{{ url_for('main.dashboard') }}"
+                class="menu_item"
+            >
+                <span class="menu_icone">🏠</span>
+                <span class="menu_texto">Dashboard</span>
+            </a>
+
+
+            <a
+                href="{{ url_for('clientes.listar') }}"
+                class="menu_item"
+            >
+                <span class="menu_icone">👥</span>
+                <span class="menu_texto">Clientes</span>
+            </a>
+
+
+            <a
+                href="{{ url_for('amigurumis.listar') }}"
+                class="menu_item"
+            >
+                <span class="menu_icone">🧸</span>
+                <span class="menu_texto">Amigurumis</span>
+            </a>
+
+
+            <a
+                href="{{ url_for('pedidos.novo') }}"
+                class="menu_item ativo"
+                aria-current="page"
+            >
+                <span class="menu_icone">➕</span>
+                <span class="menu_texto">Nova encomenda</span>
+            </a>
+
+
+            <a
+                href="{{ url_for('pedidos.selecionar_edicao') }}"
+                class="menu_item"
+            >
+                <span class="menu_icone">✏️</span>
+                <span class="menu_texto">Editar encomenda</span>
+            </a>
+
+
+            <a
+                href="{{ url_for('pedidos.listar') }}"
+                class="menu_item"
+            >
+                <span class="menu_icone">📦</span>
+                <span class="menu_texto">Pedidos</span>
+            </a>
+
+
+            <a
+                href="{{ url_for('pedidos.finalizados') }}"
+                class="menu_item"
+            >
+                <span class="menu_icone">✅</span>
+                <span class="menu_texto">Pedidos finalizados</span>
+            </a>
+
+
+            <!-- Rotas ainda não confirmadas -->
+
+            <a
+                href="#"
+                class="menu_item menu_indisponivel"
+                title="Rota ainda não definida"
+            >
+                <span class="menu_icone">💰</span>
+                <span class="menu_texto">Pagamentos</span>
+            </a>
+
+
+            <a
+                href="#"
+                class="menu_item menu_indisponivel"
+                title="Rota ainda não definida"
+            >
+                <span class="menu_icone">📝</span>
+                <span class="menu_texto">Anotações</span>
+            </a>
+
+
+            <a
+                href="#"
+                class="menu_item menu_indisponivel"
+                title="Rota ainda não definida"
+            >
+                <span class="menu_icone">📊</span>
+                <span class="menu_texto">Relatórios</span>
+            </a>
+
+
+            <a
+                href="#"
+                class="menu_item menu_indisponivel"
+                title="Rota ainda não definida"
+            >
+                <span class="menu_icone">🛠️</span>
+                <span class="menu_texto">Suporte</span>
+            </a>
+
+        </nav>
+
+
+        <!-- SAIR -->
+
+        <div class="menu_rodape">
+
+            <a
+                href="{{ url_for('auth.logout') }}"
+                class="menu_item menu_sair"
+            >
+                <span class="menu_icone">🚪</span>
+                <span class="menu_texto">Sair</span>
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- =====================================================
+         CONTEÚDO
+    ====================================================== -->
+
+    <main class="conteudo_nova_encomenda">
+
+
+        <!-- CABEÇALHO -->
+
+        <section class="cabecalho_pagina">
+
+            <span class="rotulo_pagina">
+                ENCOMENDAS
+            </span>
+
+            <h1>
+                Nova encomenda
+            </h1>
+
+            <p>
+                Cadastre uma nova encomenda para um cliente.
+            </p>
+
+        </section>
+
+
+        <!-- MENSAGENS -->
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+            {% if mensagens %}
+
+                <section
+                    class="mensagens_flash"
+                    aria-live="polite"
+                >
+
+                    {% for categoria, mensagem in mensagens %}
+
+                        <div class="mensagem_flash {{ categoria }}">
+                            {{ mensagem }}
+                        </div>
+
+                    {% endfor %}
+
+                </section>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- =================================================
+             FORMULÁRIO
+        ================================================== -->
+
+        <form
+            action="{{ url_for('pedidos.novo') }}"
+            method="POST"
+            class="formulario_encomenda"
+        >
+
+            {% if csrf_token is defined %}
+
+                <input
+                    type="hidden"
+                    name="csrf_token"
+                    value="{{ csrf_token() }}"
+                >
+
+            {% endif %}
+
+
+            <!-- =================================================
+                 CARD 01
+            ================================================== -->
+
+            <section class="card_formulario">
+
+                <div class="cabecalho_card">
+
+                    <div>
+
+                        <span class="numero_card">
+                            01
+                        </span>
+
+                        <div>
+
+                            <h2>
+                                Informações da encomenda
+                            </h2>
+
+                            <p>
+                                Defina o cliente, nome e data do pedido.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="grade_campos">
+
+
+                    <!-- NOME -->
+
+                    <div class="campo campo_largo">
+
+                        <label for="nome">
+                            Nome da encomenda
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nome"
+                            name="nome"
+                            maxlength="150"
+                            value="{{ dados.get('nome', [''])|first if dados else '' }}"
+                            placeholder="Ex.: Encomenda de aniversário"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- CLIENTE -->
+
+                    <div class="campo">
+
+                        <label for="cliente_id">
+                            Cliente
+                            <span>*</span>
+                        </label>
+
+                        <select
+                            id="cliente_id"
+                            name="cliente_id"
+                            required
+                        >
+
+                            <option value="">
+                                Selecione o cliente
+                            </option>
+
+
+                            {% set cliente_selecionado =
+                                dados.get('cliente_id', [''])|first
+                                if dados else ''
+                            %}
+
+
+                            {% for cliente in clientes %}
+
+                                <option
+                                    value="{{ cliente.id }}"
+                                    {% if cliente_selecionado == cliente.id|string %}
+                                        selected
+                                    {% endif %}
+                                >
+                                    {{ cliente.nome }}
+                                </option>
+
+                            {% endfor %}
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DATA -->
+
+                    <div class="campo">
+
+                        <label for="data_pedido">
+                            Data do pedido
+                            <span>*</span>
+                        </label>
+
+                        <input
+                            type="date"
+                            id="data_pedido"
+                            name="data_pedido"
+                            value="{{ dados.get('data_pedido', [''])|first if dados else '' }}"
+                            required
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- FORMA DE RECEBIMENTO -->
+
+                <div class="forma_recebimento">
+
+                    <div class="titulo_secao">
+
+                        <h3>
+                            Forma de recebimento
+                        </h3>
+
+                        <span>
+                            Escolha como o cliente receberá o pedido.
+                        </span>
+
+                    </div>
+
+
+                    {% set forma_atual =
+                        dados.get('forma_recebimento', ['a_definir'])|first
+                        if dados else 'a_definir'
+                    %}
+
+
+                    <div class="opcoes_recebimento">
+
+
+                        <label class="opcao_recebimento">
+
+                            <input
+                                type="radio"
+                                name="forma_recebimento"
+                                value="a_definir"
+                                {% if forma_atual == 'a_definir' %}
+                                    checked
+                                {% endif %}
+                                required
+                            >
+
+                            <span>
+
+                                <strong>
+                                    A definir
+                                </strong>
+
+                                <small>
+                                    Ainda não decidido
+                                </small>
+
+                            </span>
+
+                        </label>
+
+
+                        <label class="opcao_recebimento">
+
+                            <input
+                                type="radio"
+                                name="forma_recebimento"
+                                value="entrega"
+                                {% if forma_atual == 'entrega' %}
+                                    checked
+                                {% endif %}
+                            >
+
+                            <span>
+
+                                <strong>
+                                    Entrega
+                                </strong>
+
+                                <small>
+                                    Entregar ao cliente
+                                </small>
+
+                            </span>
+
+                        </label>
+
+
+                        <label class="opcao_recebimento">
+
+                            <input
+                                type="radio"
+                                name="forma_recebimento"
+                                value="retirada"
+                                {% if forma_atual == 'retirada' %}
+                                    checked
+                                {% endif %}
+                            >
+
+                            <span>
+
+                                <strong>
+                                    Retirada
+                                </strong>
+
+                                <small>
+                                    Cliente irá retirar
+                                </small>
+
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 CARD 02
+            ================================================== -->
+
+            <section class="card_formulario">
+
+                <div class="cabecalho_card">
+
+                    <div>
+
+                        <span class="numero_card">
+                            02
+                        </span>
+
+                        <div>
+
+                            <h2>
+                                Itens da encomenda
+                            </h2>
+
+                            <p>
+                                Adicione um ou mais amigurumis ao pedido.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div id="lista_amigurumis">
+
+
+                    {% if itens_form %}
+
+                        {% for item in itens_form %}
+
+                            <div class="item_encomenda">
+
+                                <div class="cabecalho_item">
+
+                                    <div>
+
+                                        <span class="item_rotulo">
+                                            ITEM {{ loop.index }}
+                                        </span>
+
+                                        <h3>
+                                            Amigurumi {{ loop.index }}
+                                        </h3>
+
+                                    </div>
+
+
+                                    <button
+                                        type="button"
+                                        class="btn_remover_amigurumi"
+                                    >
+                                        Remover
+                                    </button>
+
+                                </div>
+
+
+                                <div class="grade_campos">
+
+
+                                    <div class="campo campo_largo">
+
+                                        <label>
+                                            Nome do amigurumi
+                                            <span>*</span>
+                                        </label>
+
+                                        <input
+                                            type="text"
+                                            name="produto[]"
+                                            value="{{ item.get('produto', '') }}"
+                                            placeholder="Ex.: Pernalonga"
+                                            required
+                                        >
+
+                                    </div>
+
+
+                                    <div class="campo">
+
+                                        <label>
+                                            Quantidade
+                                            <span>*</span>
+                                        </label>
+
+                                        <input
+                                            type="number"
+                                            name="quantidade[]"
+                                            min="1"
+                                            value="{{ item.get('quantidade', '1') }}"
+                                            required
+                                        >
+
+                                    </div>
+
+
+                                    <div class="campo">
+
+                                        <label>
+                                            Tamanho (cm)
+                                            <span>*</span>
+                                        </label>
+
+                                        <input
+                                            type="number"
+                                            name="tamanho[]"
+                                            min="0.1"
+                                            step="0.1"
+                                            value="{{ item.get('tamanho', '') }}"
+                                            placeholder="Ex.: 20"
+                                            required
+                                        >
+
+                                    </div>
+
+
+                                    <div class="campo">
+
+                                        <label>
+                                            Tipo
+                                            <span>*</span>
+                                        </label>
+
+                                        <select
+                                            name="tipo[]"
+                                            required
+                                        >
+
+                                            <option value="">
+                                                Selecione
+                                            </option>
+
+                                            <option
+                                                value="chaveiro"
+                                                {% if item.get('tipo') == 'chaveiro' %}
+                                                    selected
+                                                {% endif %}
+                                            >
+                                                Chaveiro
+                                            </option>
+
+                                            <option
+                                                value="decoracao"
+                                                {% if item.get('tipo') == 'decoracao' %}
+                                                    selected
+                                                {% endif %}
+                                            >
+                                                Decoração
+                                            </option>
+
+                                        </select>
+
+                                    </div>
+
+
+                                    <div class="campo">
+
+                                        <label>
+                                            Preço unitário
+                                            <span>*</span>
+                                        </label>
+
+                                        <input
+                                            type="number"
+                                            name="preco_unitario[]"
+                                            min="0.01"
+                                            step="0.01"
+                                            value="{{ item.get('preco_unitario', '') }}"
+                                            placeholder="Ex.: 35.00"
+                                            required
+                                        >
+
+                                    </div>
+
+
+                                    <div class="campo">
+
+                                        <label>
+                                            Data prevista de entrega
+                                            <span>*</span>
+                                        </label>
+
+                                        <input
+                                            type="date"
+                                            name="data_entrega_prevista[]"
+                                            value="{{ item.get('data_entrega_prevista', '') }}"
+                                            required
+                                        >
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        {% endfor %}
+
+
+                    {% else %}
+
+
+                        <!-- PRIMEIRO ITEM -->
+
+                        <div class="item_encomenda">
+
+                            <div class="cabecalho_item">
+
+                                <div>
+
+                                    <span class="item_rotulo">
+                                        ITEM 1
+                                    </span>
+
+                                    <h3>
+                                        Amigurumi 1
+                                    </h3>
+
+                                </div>
+
+
+                                <button
+                                    type="button"
+                                    class="btn_remover_amigurumi"
+                                >
+                                    Remover
+                                </button>
+
+                            </div>
+
+
+                            <div class="grade_campos">
+
+
+                                <div class="campo campo_largo">
+
+                                    <label>
+                                        Nome do amigurumi
+                                        <span>*</span>
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        name="produto[]"
+                                        list="lista_produtos"
+                                        placeholder="Ex.: Pernalonga"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <div class="campo">
+
+                                    <label>
+                                        Quantidade
+                                        <span>*</span>
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        name="quantidade[]"
+                                        min="1"
+                                        value="1"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <div class="campo">
+
+                                    <label>
+                                        Tamanho (cm)
+                                        <span>*</span>
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        name="tamanho[]"
+                                        min="0.1"
+                                        step="0.1"
+                                        placeholder="Ex.: 20"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <div class="campo">
+
+                                    <label>
+                                        Tipo
+                                        <span>*</span>
+                                    </label>
+
+                                    <select
+                                        name="tipo[]"
+                                        required
+                                    >
+
+                                        <option value="">
+                                            Selecione
+                                        </option>
+
+                                        <option value="chaveiro">
+                                            Chaveiro
+                                        </option>
+
+                                        <option value="decoracao">
+                                            Decoração
+                                        </option>
+
+                                    </select>
+
+                                </div>
+
+
+                                <div class="campo">
+
+                                    <label>
+                                        Preço unitário
+                                        <span>*</span>
+                                    </label>
+
+                                    <input
+                                        type="number"
+                                        name="preco_unitario[]"
+                                        min="0.01"
+                                        step="0.01"
+                                        placeholder="Ex.: 35.00"
+                                        required
+                                    >
+
+                                </div>
+
+
+                                <div class="campo">
+
+                                    <label>
+                                        Data prevista de entrega
+                                        <span>*</span>
+                                    </label>
+
+                                    <input
+                                        type="date"
+                                        name="data_entrega_prevista[]"
+                                        required
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- ADICIONAR ITEM -->
+
+                <button
+                    type="button"
+                    id="btnAdicionarAmigurumi"
+                    class="btn_adicionar_amigurumi"
+                >
+                    + Adicionar outro amigurumi
+                </button>
+
+            </section>
+
+
+            <!-- =================================================
+                 AÇÕES
+            ================================================== -->
+
+            <div class="acoes_formulario">
+
+                <a
+                    href="{{ url_for('pedidos.listar') }}"
+                    class="btn_secundario"
+                >
+                    Cancelar
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="btn_registrar_encomenda"
+                >
+                    Registrar encomenda
+                </button>
+
+            </div>
+
+        </form>
+
+    </main>
+
+    <!-- =====================================================
+         MODAL DE REMOÇÃO
+    ====================================================== -->
+
+    <div
+        id="modalConfirmacao"
+        class="modal_confirmacao"
+        aria-hidden="true"
+    >
+
+        <div
+            class="caixa_confirmacao"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="tituloConfirmacao"
+        >
+
+            <div class="icone_confirmacao">
+                🗑️
+            </div>
+
+            <h2 id="tituloConfirmacao">
+                Remover amigurumi?
+            </h2>
+
+            <p>
+                Tem certeza que deseja remover este item da encomenda?
+            </p>
+
+
+            <div class="acoes_confirmacao">
+
+                <button
+                    type="button"
+                    id="btnCancelarRemocao"
+                    class="btn_cancelar_remocao"
+                >
+                    Cancelar
+                </button>
+
+
+                <button
+                    type="button"
+                    id="btnConfirmarRemocao"
+                    class="btn_confirmar_remocao"
+                >
+                    Remover
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JAVASCRIPT EXISTENTE -->
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+    <!-- =====================================================
+         JAVASCRIPT DO MENU
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/menu.js'
+        ) }}"
+        defer
+    ></script>
+    
+    <!-- =====================================================
+         JAVASCRIPT DO PEDIDOS
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/pedidos.js'
+        ) }}"
+        defer
+    ></script>
+</body>
+
+</html>

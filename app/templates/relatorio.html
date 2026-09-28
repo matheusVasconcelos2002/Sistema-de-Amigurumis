@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Relatórios </title>
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/relatorio.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+
+
+</head>
+
+
+<body class="relatorio">
+
+    {% include "_menu.html" %}
+
+
+    <!-- ==================================================
+         CONTEÚDO PRINCIPAL
+    ================================================== -->
+
+    <main class="conteudo_principal">
+
+
+        <!-- ==================================================
+             CABEÇALHO
+        ================================================== -->
+
+        <section class="cabecalho_pagina">
+
+            <div>
+
+                <span class="subtitulo_pagina">
+                    Análise do sistema
+                </span>
+
+
+                <h1>
+                    📊 Relatórios
+                </h1>
+
+
+                <p>
+                    Consulte pedidos, pagamentos,
+                    entregas e atrasos.
+                </p>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ==================================================
+             MENSAGENS
+        ================================================== -->
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+        {% if mensagens %}
+
+        <div class="mensagens_flash">
+
+            {% for categoria, mensagem in mensagens %}
+
+            <div class="mensagem_flash {{ categoria }}">
+                {{ mensagem }}
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+        {% endwith %}
+
+
+
+        <!-- ==================================================
+             FILTROS
+        ================================================== -->
+
+        <section class="card_filtros">
+
+
+            <div class="titulo_card">
+
+                <h2>
+                    Filtros
+                </h2>
+
+                <p>
+                    Refine os resultados do relatório.
+                </p>
+
+            </div>
+
+
+
+            <form method="GET" action="{{ url_for('relatorios.listar') }}" class="form_filtros">
+
+
+                <!-- CLIENTE -->
+
+                <div class="campo_filtro campo_largo">
+
+                    <label for="cliente_id">
+                        Cliente
+                    </label>
+
+
+                    <select name="cliente_id" id="cliente_id">
+
+                        <option value="">
+                            Todos os clientes
+                        </option>
+
+
+                        {% for cliente in clientes %}
+
+                        <option value="{{ cliente.id }}" {% if filtros.cliente_id==cliente.id %} selected {% endif %}>
+
+                            {{ cliente.nome }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- AMIGURUMI -->
+
+                <div class="campo_filtro campo_largo">
+
+                    <label for="amigurumi_id">
+                        Amigurumi
+                    </label>
+
+
+                    <select name="amigurumi_id" id="amigurumi_id">
+
+                        <option value="">
+                            Todos os amigurumis
+                        </option>
+
+
+                        {% for amigurumi in amigurumis %}
+
+                        <option value="{{ amigurumi.id }}" {% if filtros.amigurumi_id==amigurumi.id %} selected {% endif
+                            %}>
+
+                            {{ amigurumi.produto }}
+
+                        </option>
+
+                        {% endfor %}
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- TIPO -->
+
+                <div class="campo_filtro">
+
+                    <label for="tipo">
+                        Tipo
+                    </label>
+
+
+                    <input type="text" id="tipo" name="tipo" placeholder="Ex.: chaveiro"
+                        value="{{ filtros.tipo or '' }}">
+
+                </div>
+
+
+
+                <!-- STATUS -->
+
+                <div class="campo_filtro">
+
+                    <label for="status">
+                        Status
+                    </label>
+
+
+                    <select name="status" id="status">
+
+                        <option value="">
+                            Todos os status
+                        </option>
+
+
+                        <option value="a_fazer" {% if filtros.status=='a_fazer' %} selected {% endif %}>
+                            A fazer
+                        </option>
+
+
+                        <option value="sendo_feito" {% if filtros.status=='sendo_feito' %} selected {% endif %}>
+                            Sendo feito
+                        </option>
+
+
+                        <option value="finalizado" {% if filtros.status=='finalizado' %} selected {% endif %}>
+                            Finalizado
+                        </option>
+
+
+                        <option value="entregue" {% if filtros.status=='entregue' %} selected {% endif %}>
+                            Entregue
+                        </option>
+
+
+                        <option value="cancelado" {% if filtros.status=='cancelado' %} selected {% endif %}>
+                            Cancelado
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- PAGAMENTO -->
+
+                <div class="campo_filtro">
+
+                    <label for="pagamento">
+                        Pagamento
+                    </label>
+
+
+                    <select name="pagamento" id="pagamento">
+
+                        <option value="">
+                            Todos os pagamentos
+                        </option>
+
+
+                        <option value="pago" {% if filtros.pagamento=='pago' %} selected {% endif %}>
+                            Pago
+                        </option>
+
+
+                        <option value="parcial" {% if filtros.pagamento=='parcial' %} selected {% endif %}>
+                            Parcial
+                        </option>
+
+
+                        <option value="pendente" {% if filtros.pagamento=='pendente' %} selected {% endif %}>
+                            Pendente
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- SITUAÇÃO -->
+
+                <div class="campo_filtro">
+
+                    <label for="situacao">
+                        Registros
+                    </label>
+
+
+                    <select name="situacao" id="situacao">
+
+                        <option value="ativos" {% if filtros.situacao=='ativos' %} selected {% endif %}>
+                            Ativos
+                        </option>
+
+
+                        <option value="excluidos" {% if filtros.situacao=='excluidos' %} selected {% endif %}>
+                            Excluídos
+                        </option>
+
+
+                        <option value="todos" {% if filtros.situacao=='todos' %} selected {% endif %}>
+                            Todos
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+
+                <!-- DATA INICIAL -->
+
+                <div class="campo_filtro">
+
+                    <label for="data_inicial">
+                        Data inicial
+                    </label>
+
+
+                    <input type="date" id="data_inicial" name="data_inicial" value="{{ filtros.data_inicial or '' }}">
+
+                </div>
+
+
+
+                <!-- DATA FINAL -->
+
+                <div class="campo_filtro">
+
+                    <label for="data_final">
+                        Data final
+                    </label>
+
+
+                    <input type="date" id="data_final" name="data_final" value="{{ filtros.data_final or '' }}">
+
+                </div>
+
+
+
+                <!-- ATRASADOS -->
+
+                <div class="campo_checkbox">
+
+                    <label>
+
+                        <input type="checkbox" name="atrasados" value="on" {% if filtros.atrasados %} checked {% endif
+                            %}>
+
+                        Apenas atrasados
+
+                    </label>
+
+                </div>
+
+
+
+                <!-- BOTÕES -->
+
+                <div class="botoes_filtro">
+
+                    <button type="submit" class="btn_filtrar">
+                        Filtrar
+                    </button>
+
+
+                    <a href="{{ url_for('relatorios.listar') }}" class="btn_limpar">
+                        Limpar
+                    </a>
+
+
+                    <a href="{{ url_for(
+                            'relatorios.exportar_excel',
+                            **request.args.to_dict()
+                        ) }}" class="btn_exportar">
+                        📊 Exportar Excel
+                    </a>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+
+        <!-- ==================================================
+             RESUMO
+        ================================================== -->
+
+        <section class="resumo">
+
+
+            <div class="card_resumo">
+
+                <h3>
+                    Pedidos
+                </h3>
+
+
+                <strong>
+                    {{ resumo.total_pedidos }}
+                </strong>
+
+            </div>
+
+
+
+            <div class="card_resumo">
+
+                <h3>
+                    Itens
+                </h3>
+
+
+                <strong>
+                    {{ resumo.quantidade_itens }}
+                </strong>
+
+            </div>
+
+
+
+            <div class="card_resumo">
+
+                <h3>
+                    Entregues
+                </h3>
+
+
+                <strong>
+                    {{ resumo.total_entregues }}
+                </strong>
+
+            </div>
+
+
+
+            <div class="card_resumo">
+
+                <h3>
+                    Atrasados
+                </h3>
+
+
+                <strong>
+                    {{ resumo.total_atrasados }}
+                </strong>
+
+            </div>
+
+
+
+            <div class="card_resumo">
+
+                <h3>
+                    Valor recebido
+                </h3>
+
+
+                <strong>
+
+                    R$
+
+                    {{
+                    "%.2f"|format(
+                    resumo.valor_recebido
+                    )|replace(".", ",")
+                    }}
+
+                </strong>
+
+            </div>
+
+
+
+            <div class="card_resumo">
+
+                <h3>
+                    Valor restante
+                </h3>
+
+
+                <strong>
+
+                    R$
+
+                    {{
+                    "%.2f"|format(
+                    resumo.valor_restante
+                    )|replace(".", ",")
+                    }}
+
+                </strong>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ==================================================
+             RESULTADOS
+        ================================================== -->
+
+        <section class="card_resultados">
+
+
+            <div class="titulo_card">
+
+                <h2>
+                    Resultados
+                </h2>
+
+
+                <p>
+
+                    {{ resultados|length }}
+                    item(ns) encontrado(s).
+
+                </p>
+
+            </div>
+
+
+
+            <div class="tabela_container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Pedido
+                            </th>
+
+                            <th>
+                                Cliente
+                            </th>
+
+                            <th>
+                                Amigurumi
+                            </th>
+
+                            <th>
+                                Qtd.
+                            </th>
+
+                            <th>
+                                Tamanho
+                            </th>
+
+                            <th>
+                                Tipo
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Pagamento
+                            </th>
+
+                            <th>
+                                Total
+                            </th>
+
+                            <th>
+                                Recebido
+                            </th>
+
+                            <th>
+                                Devolvido
+                            </th>
+
+                            <th>
+                                Líquido
+                            </th>
+
+                            <th>
+                                Restante
+                            </th>
+
+                            <th>
+                                Pedido em
+                            </th>
+
+                            <th>
+                                Entrega prevista
+                            </th>
+
+                            <th>
+                                Entrega realizada
+                            </th>
+
+                            <th>
+                                Atraso
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody>
+
+
+                        {% if resultados %}
+
+
+                        {% for resultado in resultados %}
+
+                        <tr>
+
+
+                            <td>
+                                {{ resultado.pedido_nome }}
+                            </td>
+
+
+                            <td>
+                                {{ resultado.cliente_nome }}
+                            </td>
+
+
+                            <td>
+                                {{ resultado.amigurumi_nome }}
+                            </td>
+
+
+                            <td>
+                                {{ resultado.quantidade }}
+                            </td>
+
+
+                            <td>
+                                {{ resultado.tamanho }}
+                            </td>
+
+
+                            <td>
+                                {{ resultado.tipo }}
+                            </td>
+
+
+
+                            <!-- STATUS -->
+
+                            <td>
+
+                                {% if resultado.status_texto == 'a_fazer' %}
+
+                                <span class="status status_pendente">
+                                    A fazer
+                                </span>
+
+                                {% elif resultado.status_texto == 'sendo_feito' %}
+
+                                <span class="status">
+                                    Sendo feito
+                                </span>
+
+                                {% elif resultado.status_texto == 'finalizado' %}
+
+                                <span class="status status_pronto">
+                                    Finalizado
+                                </span>
+
+                                {% elif resultado.status_texto == 'entregue' %}
+
+                                <span class="status status_entregue">
+                                    Entregue
+                                </span>
+
+                                {% else %}
+
+                                <span class="status">
+                                    Cancelado
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- PAGAMENTO -->
+
+                            <td>
+
+                                {% if resultado.status_pagamento.value == 'pago' %}
+
+                                <span class="status pagamento_pago">
+                                    Pago
+                                </span>
+
+                                {% elif resultado.status_pagamento.value == 'parcial' %}
+
+                                <span class="status pagamento_parcial">
+                                    Parcial
+                                </span>
+
+                                {% else %}
+
+                                <span class="status pagamento_pendente">
+                                    Pendente
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- VALORES -->
+
+                            <td>
+
+                                R$
+
+                                {{
+                                "%.2f"|format(
+                                resultado.valor_total
+                                )|replace(".", ",")
+                                }}
+
+                            </td>
+
+
+                            <td>
+
+                                R$
+
+                                {{
+                                "%.2f"|format(
+                                resultado.valor_recebido
+                                )|replace(".", ",")
+                                }}
+
+                            </td>
+
+
+                            <td>
+
+                                R$
+
+                                {{
+                                "%.2f"|format(
+                                resultado.valor_devolvido
+                                )|replace(".", ",")
+                                }}
+
+                            </td>
+
+
+                            <td>
+
+                                R$
+
+                                {{
+                                "%.2f"|format(
+                                resultado.valor_efetivo
+                                )|replace(".", ",")
+                                }}
+
+                            </td>
+
+
+                            <td>
+
+                                R$
+
+                                {{
+                                "%.2f"|format(
+                                resultado.valor_restante
+                                )|replace(".", ",")
+                                }}
+
+                            </td>
+
+
+
+                            <!-- DATAS -->
+
+                            <td>
+
+                                {% if resultado.data_pedido %}
+
+                                {{
+                                resultado.data_pedido.strftime(
+                                '%d/%m/%Y'
+                                )
+                                }}
+
+                                {% else %}
+
+                                -
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+
+                                {% if resultado.data_prevista_entrega %}
+
+                                {{
+                                resultado.data_prevista_entrega.strftime(
+                                '%d/%m/%Y'
+                                )
+                                }}
+
+                                {% else %}
+
+                                -
+
+                                {% endif %}
+
+                            </td>
+
+
+                            <td>
+
+                                {% if resultado.data_entrega %}
+
+                                {{
+                                resultado.data_entrega.strftime(
+                                '%d/%m/%Y %H:%M'
+                                )
+                                }}
+
+                                {% else %}
+
+                                -
+
+                                {% endif %}
+
+                            </td>
+
+
+
+                            <!-- ATRASO -->
+
+                            <td>
+
+                                {% if resultado.atrasado %}
+
+                                <span class="status atraso_sim">
+                                    Atrasado
+                                </span>
+
+                                {% else %}
+
+                                <span class="status atraso_nao">
+                                    No prazo
+                                </span>
+
+                                {% endif %}
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+
+                        {% else %}
+
+                        <tr>
+
+                            <td colspan="17" class="sem_resultados">
+
+                                <div class="sem_resultados_icone">
+                                    📊
+                                </div>
+
+
+                                <strong>
+                                    Nenhum resultado encontrado
+                                </strong>
+
+
+                                <p>
+                                    Ajuste os filtros para consultar
+                                    outros pedidos.
+                                </p>
+
+                            </td>
+
+                        </tr>
+
+                        {% endif %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+
+    <script src="{{ url_for('static', filename='js/relatorio.js') }}" defer></script>
+
+    <script src="{{ url_for('static', filename='js/menu.js') }}" defer></script>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Editar {{ amigurumi.produto }}
+    </title>
+
+
+    <!-- =====================================================
+         CSS PRINCIPAL
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/style.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         CSS DO MENU
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/menu.css'
+        ) }}"
+    >
+
+
+    <!-- =====================================================
+         CSS DA TELA
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for(
+            'static',
+            filename='css/editar_amigurumis.css'
+        ) }}"
+    >
+
+</head>
+
+
+<body class="tela_editar_amigurumi">
+
+
+    <!-- =====================================================
+         MENU
+    ====================================================== -->
+
+    {% include "_menu.html" %}
+
+
+    <!-- =====================================================
+         CONTEÚDO PRINCIPAL
+    ====================================================== -->
+
+    <main class="conteudo_editar_amigurumi">
+
+
+        <!-- =================================================
+             CABEÇALHO
+        ================================================== -->
+
+        <header class="cabecalho_editar">
+
+            <div>
+
+                <span class="rotulo_editar">
+                    AMIGURUMIS
+                </span>
+
+                <h1>
+                    Editar amigurumi
+                </h1>
+
+                <p>
+                    Altere as informações do seu amigurumi.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('amigurumis.listar') }}"
+                class="btn_secundario"
+            >
+                ← Voltar para amigurumis
+            </a>
+
+        </header>
+
+
+        <!-- =================================================
+             MENSAGENS
+        ================================================== -->
+
+        {% with mensagens = get_flashed_messages(
+            with_categories=true
+        ) %}
+
+            {% if mensagens %}
+
+                <section class="mensagens">
+
+                    {% for categoria, mensagem in mensagens %}
+
+                        <div class="mensagem {{ categoria }}">
+                            {{ mensagem }}
+                        </div>
+
+                    {% endfor %}
+
+                </section>
+
+            {% endif %}
+
+        {% endwith %}
+
+
+        <!-- =================================================
+             CARD PRINCIPAL
+        ================================================== -->
+
+        <section class="card_editar">
+
+
+            <!-- =================================================
+                 INFORMAÇÕES
+            ================================================== -->
+
+            <div class="titulo_secao_editar">
+
+                <h2>
+                    Informações do amigurumi
+                </h2>
+
+                <p>
+                    Atualize o nome ou adicione novas mídias.
+                </p>
+
+            </div>
+
+
+            <!-- =================================================
+                 FORMULÁRIO
+            ================================================== -->
+
+            <form
+                method="POST"
+                action="{{ url_for(
+                    'amigurumis.editar',
+                    amigurumi_id=amigurumi.id
+                ) }}"
+                enctype="multipart/form-data"
+                class="formulario_editar"
+            >
+
+
+                <!-- =================================================
+                     NOME
+                ================================================== -->
+
+                <div class="campo_editar">
+
+                    <label for="produto">
+                        Nome do amigurumi
+                    </label>
+
+                    <input
+                        type="text"
+                        id="produto"
+                        name="produto"
+                        value="{{ amigurumi.produto }}"
+                        maxlength="150"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- =================================================
+                     MÍDIAS CADASTRADAS
+                ================================================== -->
+
+                {% if amigurumi.midias %}
+
+                    <section class="secao_midias">
+
+                        <div class="titulo_secao_midias">
+
+                            <h2>
+                                Mídias cadastradas
+                            </h2>
+
+                            <p>
+                                Imagens e vídeos associados a este
+                                amigurumi.
+                            </p>
+
+                        </div>
+
+
+                        <div class="galeria_midias">
+
+                            {% for midia in amigurumi.midias %}
+
+                                <article class="midia_item">
+
+                                    <div class="midia_visual">
+
+                                        {% if midia.tipo.value == 'imagem' %}
+
+                                            <img
+                                                src="{{ url_for(
+                                                    'static',
+                                                    filename=midia.arquivo
+                                                ) }}"
+                                                alt="{{
+                                                    midia.nome_original
+                                                    or
+                                                    'Imagem do amigurumi'
+                                                }}"
+                                            >
+
+                                        {% else %}
+
+                                            <video controls>
+
+                                                <source
+                                                    src="{{ url_for(
+                                                        'static',
+                                                        filename=midia.arquivo
+                                                    ) }}"
+                                                    type="video/mp4"
+                                                >
+
+                                                Seu navegador não suporta
+                                                vídeos.
+
+                                            </video>
+
+                                        {% endif %}
+
+                                    </div>
+
+
+                                    <div class="midia_acoes">
+
+                                        <span class="nome_midia">
+
+                                            {{
+                                                midia.nome_original
+                                                or
+                                                'Mídia do amigurumi'
+                                            }}
+
+                                        </span>
+
+
+                                        <a
+                                            href="{{ url_for(
+                                                'static',
+                                                filename=midia.arquivo
+                                            ) }}"
+                                            download="{{
+                                                midia.nome_original
+                                                or
+                                                'midia_amigurumi'
+                                            }}"
+                                            class="btn_download"
+                                        >
+                                            ⬇️ Baixar
+                                        </a>
+
+                                    </div>
+
+                                </article>
+
+                            {% endfor %}
+
+                        </div>
+
+                    </section>
+
+                {% endif %}
+
+
+                <!-- =================================================
+                     ADICIONAR NOVA MÍDIA
+                ================================================== -->
+
+                <div class="campo_editar">
+
+                    <label for="imagem">
+                        Adicionar nova mídia
+                    </label>
+
+                    <input
+                        type="file"
+                        id="imagem"
+                        name="imagem"
+                        accept=".jpg,.jpeg,.png,.webp,image/jpeg,image/png,image/webp"
+                    >
+
+                    <small>
+                        Você pode adicionar uma nova imagem ao
+                        amigurumi.
+                        Formatos aceitos: JPG, JPEG, PNG e WEBP.
+                        Tamanho máximo: 15 MB.
+                    </small>
+
+                </div>
+
+
+                <!-- =================================================
+                     AÇÕES
+                ================================================== -->
+
+                <div class="acoes_editar">
+
+                    <a
+                        href="{{ url_for('amigurumis.listar') }}"
+                        class="btn_secundario"
+                    >
+                        Cancelar
+                    </a>
+
+
+                    <button
+                        type="submit"
+                        class="btn_principal"
+                    >
+                        Salvar alterações
+                    </button>
+
+                </div>
+
+            </form>
+
+        </section>
+
+
+        <!-- =================================================
+             AVISO
+        ================================================== -->
+
+        <section class="aviso_editar">
+
+            <span class="icone_aviso_editar">
+                ℹ️
+            </span>
+
+            <div>
+
+                <strong>
+                    Atenção
+                </strong>
+
+                <p>
+                    Ao excluir este amigurumi, ele será enviado
+                    para a área de excluídos e poderá ser
+                    restaurado posteriormente.
+                </p>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT GERAL
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/script.js'
+        ) }}"
+        defer
+    ></script>
+
+
+    <!-- =====================================================
+         JAVASCRIPT DOS AMIGURUMIS
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/amigurumis.js'
+        ) }}"
+        defer
+    ></script>
+
+
+    <!-- =====================================================
+         JAVASCRIPT DO MENU
+    ====================================================== -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/menu.js'
+        ) }}"
+        defer
+    ></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1249 @@
+/* =========================================================
+   TELA DE AMIGURUMIS
+   ÁLBUM DE FOTOS / CATÁLOGO
+========================================================= */
+
+
+/* =========================================================
+   01. ESTRUTURA PRINCIPAL
+========================================================= */
+
+.tela_amigurumis {
+    min-height: 100vh;
+
+    background-color: var(--cor-fundo);
+}
+
+
+.tela_amigurumis .conteudo_principal {
+    width: 100%;
+    min-height: 100vh;
+
+    margin-left: var(--largura-menu);
+
+    padding:
+        calc(var(--altura-topo) + 30px)
+        35px
+        45px;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   02. CABEÇALHO
+========================================================= */
+
+.tela_amigurumis .cabecalho_pagina {
+    width: 100%;
+    max-width: 1200px;
+
+    margin:
+        0 auto 25px;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.tela_amigurumis .rotulo_pagina {
+    display: inline-block;
+
+    margin-bottom: 8px;
+
+    padding:
+        5px
+        10px;
+
+    border-radius:
+        var(--raio-pequeno);
+
+    background-color:
+        var(--cor-primaria-clara);
+
+    color:
+        var(--cor-primaria-escura);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1px;
+}
+
+
+.tela_amigurumis .cabecalho_pagina h1 {
+    margin:
+        0 0 6px;
+
+    color:
+        var(--cor-texto);
+
+    font-size: 30px;
+
+    line-height: 1.2;
+}
+
+
+.tela_amigurumis .cabecalho_pagina p {
+    margin: 0;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size: 14px;
+}
+
+
+/* =========================================================
+   03. BOTÃO PRINCIPAL
+========================================================= */
+
+.tela_amigurumis .btn_principal {
+    min-height: 42px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        10px
+        18px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid
+        var(--cor-primaria);
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        var(--cor-primaria);
+
+    color:
+        var(--cor-branca);
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background-color var(--transicao),
+        transform var(--transicao);
+}
+
+
+.tela_amigurumis .btn_principal:hover {
+    background-color:
+        var(--cor-primaria-escura);
+
+    transform:
+        translateY(-1px);
+}
+
+
+/* =========================================================
+   04. MENSAGENS
+========================================================= */
+
+.tela_amigurumis .mensagens {
+    width: 100%;
+    max-width: 1200px;
+
+    margin:
+        0 auto 20px;
+}
+
+
+.tela_amigurumis .mensagem {
+    width: 100%;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   05. AVISO DE UPLOAD
+========================================================= */
+
+.tela_amigurumis .aviso_upload {
+    width: 100%;
+    max-width: 1200px;
+
+    margin:
+        0 auto 25px;
+
+    padding:
+        17px
+        19px;
+
+    box-sizing: border-box;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+    border:
+        1px solid
+        var(--cor-primaria-clara);
+
+    border-radius:
+        var(--raio-grande);
+
+    background-color:
+        #F3EEF4;
+
+    box-shadow:
+        var(--sombra-card);
+}
+
+
+.tela_amigurumis .aviso_upload_icone {
+    width: 42px;
+    height: 42px;
+
+    flex: 0 0 42px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        var(--cor-primaria-clara);
+
+    font-size: 20px;
+}
+
+
+.tela_amigurumis .aviso_upload_texto {
+    min-width: 0;
+}
+
+
+.tela_amigurumis .aviso_upload_texto strong {
+    color:
+        var(--cor-primaria-escura);
+
+    font-size: 13px;
+}
+
+
+.tela_amigurumis .aviso_upload_texto p {
+    margin:
+        4px 0;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size: 12px;
+}
+
+
+.tela_amigurumis .aviso_upload_texto p strong {
+    color:
+        var(--cor-texto);
+
+    font-size: inherit;
+}
+
+
+.tela_amigurumis .aviso_upload_texto small {
+    color:
+        var(--cor-texto-claro);
+
+    font-size: 10px;
+}
+
+
+/* =========================================================
+   06. ABAS
+========================================================= */
+
+.tela_amigurumis .abas_amigurumis {
+    width: 100%;
+    max-width: 1200px;
+
+    margin:
+        0 auto 25px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    border-bottom:
+        1px solid
+        var(--cor-borda);
+}
+
+
+.tela_amigurumis .aba_amigurumi {
+    position: relative;
+
+    padding:
+        12px
+        15px;
+
+    border: none;
+
+    border-bottom:
+        3px solid
+        transparent;
+
+    background: transparent;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+}
+
+
+.tela_amigurumis .aba_amigurumi:hover {
+    color:
+        var(--cor-primaria-escura);
+}
+
+
+.tela_amigurumis .aba_amigurumi.ativa {
+    border-bottom-color:
+        var(--cor-primaria);
+
+    color:
+        var(--cor-primaria-escura);
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   07. PAINÉIS
+========================================================= */
+
+.tela_amigurumis .painel_aba {
+    width: 100%;
+    max-width: 1200px;
+
+    margin:
+        0 auto 30px;
+
+    display: none;
+}
+
+
+.tela_amigurumis .painel_aba.ativo {
+    display: block;
+}
+
+
+/* =========================================================
+   08. TÍTULO DA SEÇÃO
+========================================================= */
+
+.tela_amigurumis .titulo_secao {
+    width: 100%;
+
+    margin-bottom: 16px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+
+.tela_amigurumis .titulo_secao h2 {
+    margin:
+        0 0 4px;
+
+    color:
+        var(--cor-texto);
+
+    font-size: 19px;
+}
+
+
+.tela_amigurumis .titulo_secao p {
+    margin: 0;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size: 12px;
+}
+
+
+.tela_amigurumis .contador_amigurumis {
+    width: 34px;
+    height: 34px;
+
+    flex: 0 0 34px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background-color:
+        var(--cor-primaria-clara);
+
+    color:
+        var(--cor-primaria-escura);
+
+    font-size: 11px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================================
+   09. ÁLBUM
+========================================================= */
+
+/*
+   IMPORTANTE:
+   O grid tem tamanho definido.
+   Não deixamos o navegador esticar o card.
+*/
+
+.tela_amigurumis .grid_amigurumis {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(0, 1fr)
+        );
+
+    gap: 20px;
+
+    align-items: start;
+
+    box-sizing: border-box;
+}
+
+
+/* =========================================================
+   10. CARD DO AMIGURUMI
+========================================================= */
+
+.tela_amigurumis .card_amigurumi {
+    width: 100%;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+
+    background-color:
+        var(--cor-branca);
+
+    border:
+        1px solid
+        var(--cor-borda);
+
+    border-radius:
+        var(--raio-grande);
+
+    box-shadow:
+        0 3px 12px
+        rgba(58, 38, 65, 0.06);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+
+.tela_amigurumis .card_amigurumi:hover {
+    transform:
+        translateY(-3px);
+
+    border-color:
+        var(--cor-primaria-clara);
+
+    box-shadow:
+        0 8px 24px
+        rgba(58, 38, 65, 0.10);
+}
+
+
+/* =========================================================
+   11. IMAGEM
+========================================================= */
+
+/*
+   AQUI ESTÁ A PRINCIPAL CORREÇÃO.
+
+   Não usamos aspect-ratio.
+
+   A imagem possui altura FIXA de 270px,
+   impedindo que ela cresça para ocupar
+   toda a página.
+*/
+
+.tela_amigurumis .imagem_amigurumi {
+    width: 100%;
+
+    height: 270px;
+
+    flex: 0 0 270px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    box-sizing: border-box;
+
+    background-color:
+        var(--cor-fundo);
+}
+
+
+.tela_amigurumis .imagem_amigurumi img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+
+    object-position: center;
+
+    transition:
+        transform 0.35s ease;
+}
+
+
+.tela_amigurumis .card_amigurumi:hover
+.imagem_amigurumi img {
+    transform:
+        scale(1.035);
+}
+
+
+/* =========================================================
+   12. SEM IMAGEM
+========================================================= */
+
+.tela_amigurumis .sem_imagem {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 6px;
+
+    background-color:
+        var(--cor-fundo);
+
+    color:
+        var(--cor-texto-claro);
+
+    text-align: center;
+}
+
+
+.tela_amigurumis .sem_imagem span {
+    font-size: 42px;
+
+    opacity: 0.70;
+}
+
+
+.tela_amigurumis .sem_imagem p {
+    margin: 0;
+
+    color:
+        var(--cor-texto-claro);
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   13. INFORMAÇÕES
+========================================================= */
+
+.tela_amigurumis .info_amigurumi {
+    width: 100%;
+
+    min-width: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    box-sizing: border-box;
+
+    padding:
+        16px;
+}
+
+
+.tela_amigurumis .info_amigurumi h3 {
+    margin:
+        0 0 13px;
+
+    color:
+        var(--cor-texto);
+
+    font-size: 16px;
+
+    font-weight: 750;
+
+    line-height: 1.3;
+
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================================================
+   14. ESTATÍSTICAS
+========================================================= */
+
+.tela_amigurumis .dados_amigurumi {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 8px;
+
+    margin-bottom: 14px;
+}
+
+
+.tela_amigurumis .dado_amigurumi {
+    min-width: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        8px;
+
+    box-sizing: border-box;
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        var(--cor-fundo-claro);
+}
+
+
+.tela_amigurumis .dado_icone {
+    width: 29px;
+    height: 29px;
+
+    flex: 0 0 29px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius:
+        var(--raio-pequeno);
+
+    background-color:
+        var(--cor-primaria-clara);
+
+    font-size: 13px;
+}
+
+
+.tela_amigurumis .dado_amigurumi small {
+    display: block;
+
+    margin-bottom: 2px;
+
+    color:
+        var(--cor-texto-claro);
+
+    font-size: 9px;
+}
+
+
+.tela_amigurumis .dado_amigurumi strong {
+    display: block;
+
+    color:
+        var(--cor-texto);
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   15. BOTÕES
+========================================================= */
+
+.tela_amigurumis .acoes_amigurumi {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 7px;
+
+    margin-top: auto;
+}
+
+
+.tela_amigurumis .acoes_amigurumi a,
+.tela_amigurumis .acoes_amigurumi button {
+    min-height: 36px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        8px
+        9px;
+
+    box-sizing: border-box;
+
+    border-radius:
+        var(--raio-medio);
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    text-decoration: none;
+
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   16. VER GALERIA
+========================================================= */
+
+.tela_amigurumis .btn_secundario {
+    border:
+        1px solid
+        var(--cor-borda);
+
+    background-color:
+        var(--cor-branca);
+
+    color:
+        var(--cor-texto-secundario);
+}
+
+
+.tela_amigurumis .btn_secundario:hover {
+    border-color:
+        var(--cor-primaria);
+
+    background-color:
+        var(--cor-primaria-clara);
+
+    color:
+        var(--cor-primaria-escura);
+}
+
+
+/* =========================================================
+   17. EDITAR
+========================================================= */
+
+.tela_amigurumis .btn_editar {
+    border:
+        1px solid
+        var(--cor-primaria);
+
+    background-color:
+        var(--cor-primaria);
+
+    color:
+        var(--cor-branca);
+}
+
+
+.tela_amigurumis .btn_editar:hover {
+    background-color:
+        var(--cor-primaria-escura);
+}
+
+
+/* =========================================================
+   18. EXCLUIR
+========================================================= */
+
+.tela_amigurumis
+.formulario_excluir_amigurumi {
+    grid-column:
+        1 / -1;
+
+    margin: 0;
+}
+
+
+.tela_amigurumis .btn_excluir {
+    width: 100%;
+
+    border:
+        1px solid
+        #e4caca;
+
+    background-color:
+        transparent;
+
+    color:
+        #8a3e3e;
+}
+
+
+.tela_amigurumis .btn_excluir:hover {
+    background-color:
+        #fff3f3;
+
+    border-color:
+        #d6aaaa;
+}
+
+
+/* =========================================================
+   19. CARD EXCLUÍDO
+========================================================= */
+
+.tela_amigurumis .card_excluido {
+    opacity: 0.88;
+}
+
+
+.tela_amigurumis .card_excluido
+.imagem_amigurumi {
+    filter:
+        saturate(0.75);
+}
+
+
+.tela_amigurumis .texto_excluido {
+    margin:
+        0 0 14px;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size: 12px;
+}
+
+
+.tela_amigurumis .formulario_restaurar {
+    width: 100%;
+
+    grid-column:
+        1 / -1;
+
+    margin: 0;
+}
+
+
+.tela_amigurumis .btn_restaurar {
+    width: 100%;
+
+    min-height: 36px;
+
+    border:
+        1px solid
+        var(--cor-primaria);
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        var(--cor-primaria);
+
+    color:
+        var(--cor-branca);
+
+    font-family: inherit;
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+
+.tela_amigurumis .btn_restaurar:hover {
+    background-color:
+        var(--cor-primaria-escura);
+}
+
+
+/* =========================================================
+   20. ESTADO VAZIO
+========================================================= */
+
+.tela_amigurumis .estado_vazio {
+    width: 100%;
+
+    min-height: 320px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        40px
+        20px;
+
+    box-sizing: border-box;
+
+    text-align: center;
+
+    border:
+        1px dashed
+        var(--cor-borda);
+}
+
+
+.tela_amigurumis .estado_vazio_icone {
+    width: 70px;
+    height: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-bottom: 15px;
+
+    border-radius: 50%;
+
+    background-color:
+        var(--cor-primaria-clara);
+
+    font-size: 32px;
+}
+
+
+.tela_amigurumis .estado_vazio h3 {
+    margin:
+        0 0 7px;
+
+    color:
+        var(--cor-texto);
+
+    font-size: 17px;
+}
+
+
+.tela_amigurumis .estado_vazio p {
+    max-width: 400px;
+
+    margin:
+        0 0 18px;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size: 12px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   21. AVISO FINAL
+========================================================= */
+
+.tela_amigurumis .aviso_clientes {
+    width: 100%;
+    max-width: 1200px;
+
+    margin:
+        25px auto 0;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 12px;
+
+    padding:
+        15px
+        18px;
+
+    box-sizing: border-box;
+
+    border:
+        1px solid
+        var(--cor-borda);
+
+    border-radius:
+        var(--raio-medio);
+
+    background-color:
+        var(--cor-fundo-claro);
+}
+
+
+.tela_amigurumis .icone_aviso {
+    width: 32px;
+    height: 32px;
+
+    flex: 0 0 32px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background-color:
+        var(--cor-primaria-clara);
+}
+
+
+.tela_amigurumis .aviso_clientes strong {
+    display: block;
+
+    margin-bottom: 4px;
+
+    color:
+        var(--cor-texto);
+
+    font-size: 12px;
+}
+
+
+.tela_amigurumis .aviso_clientes p {
+    margin: 0;
+
+    color:
+        var(--cor-texto-secundario);
+
+    font-size: 11px;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   22. DESKTOP GRANDE
+========================================================= */
+
+@media (min-width: 1400px) {
+
+    .tela_amigurumis .grid_amigurumis {
+        grid-template-columns:
+            repeat(4, minmax(0, 1fr));
+    }
+
+
+    .tela_amigurumis .imagem_amigurumi {
+        height: 250px;
+
+        flex-basis: 250px;
+    }
+
+}
+
+
+/* =========================================================
+   23. TABLET / DESKTOP MENOR
+========================================================= */
+
+@media (max-width: 1100px) {
+
+    .tela_amigurumis .grid_amigurumis {
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+    }
+
+
+    .tela_amigurumis .imagem_amigurumi {
+        height: 230px;
+
+        flex-basis: 230px;
+    }
+
+}
+
+
+/* =========================================================
+   24. TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+    .tela_amigurumis .conteudo_principal {
+        margin-left: 0;
+
+        padding:
+            calc(var(--altura-topo) + 25px)
+            20px
+            35px;
+    }
+
+
+    .tela_amigurumis .grid_amigurumis {
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+
+}
+
+
+/* =========================================================
+   25. CELULAR
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .tela_amigurumis .conteudo_principal {
+        padding:
+            calc(var(--altura-topo) + 20px)
+            14px
+            30px;
+    }
+
+
+    .tela_amigurumis .cabecalho_pagina {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+
+    .tela_amigurumis
+    .cabecalho_pagina
+    .btn_principal {
+        width: 100%;
+    }
+
+
+    .tela_amigurumis .aviso_upload {
+        align-items: flex-start;
+    }
+
+
+    .tela_amigurumis .grid_amigurumis {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+
+    .tela_amigurumis .card_amigurumi {
+        width: 100%;
+    }
+
+
+    .tela_amigurumis .imagem_amigurumi {
+        height: 260px;
+
+        flex-basis: 260px;
+    }
+
+}
+
+
+/* =========================================================
+   26. CELULAR PEQUENO
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .tela_amigurumis .imagem_amigurumi {
+        height: 220px;
+
+        flex-basis: 220px;
+    }
+
+
+    .tela_amigurumis .dados_amigurumi {
+        grid-template-columns: 1fr;
+    }
+
+
+    .tela_amigurumis .acoes_amigurumi {
+        grid-template-columns: 1fr;
+    }
+
+
+    .tela_amigurumis
+    .formulario_excluir_amigurumi {
+        grid-column: auto;
+    }
+
+}

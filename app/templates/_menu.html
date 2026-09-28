@@ -1,0 +1,274 @@
+<!-- =========================================================
+     BOTÃO PARA ABRIR O MENU
+========================================================= -->
+
+<button
+    type="button"
+    class="btn_abrir_menu"
+    id="btnAbrirMenu"
+    aria-label="Abrir menu"
+    aria-controls="menuLateral"
+    aria-expanded="false"
+>
+    ☰
+</button>
+
+
+<!-- =========================================================
+     SOBREPOSIÇÃO
+========================================================= -->
+
+<div
+    class="sobreposicao_menu"
+    id="sobreposicaoMenu"
+    aria-hidden="true"
+></div>
+
+
+<!-- =========================================================
+     MENU LATERAL
+========================================================= -->
+
+<aside
+    class="menu_lateral"
+    id="menuLateral"
+    aria-label="Menu principal"
+>
+
+    <!-- BOTÃO FECHAR -->
+
+    <button
+        type="button"
+        class="btn_fechar_menu"
+        id="btnFecharMenu"
+        aria-label="Fechar menu"
+    >
+        ✕
+    </button>
+
+
+    <!-- =====================================================
+         PERFIL / IDENTIDADE
+    ====================================================== -->
+
+    <div class="logo_menu">
+
+        <div class="perfil_menu">
+
+            <a
+                href="{{ url_for('perfil.listar') }}"
+                class="perfil_menu_link"
+                title="Meu perfil"
+            >
+
+                <div class="foto_perfil_menu">
+
+                    {% if usuario and usuario.foto_perfil %}
+
+                        <img
+                            src="{{ url_for('static', filename='fotos_perfil/' ~ usuario.foto_perfil) }}"
+                            alt="Foto de perfil"
+                            class="foto_menu"
+                        >
+
+                    {% else %}
+
+                        <div class="foto_menu foto_menu_padrao">
+                            👤
+                        </div>
+
+                    {% endif %}
+
+                </div>
+
+
+                <div class="dados_menu">
+
+                    <strong>
+                        {{ usuario.nome if usuario else "Usuário" }}
+                    </strong>
+
+                    <span>
+                        Meu perfil
+                    </span>
+
+                </div>
+
+            </a>
+
+        </div>
+
+
+        <div class="logo_sistema">
+
+            <h1>
+                Amigurumis
+            </h1>
+
+            <p>
+                Sistema de pedidos
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MENU PRINCIPAL
+    ====================================================== -->
+
+    <nav
+        class="menu navegacao_menu menu_navegacao"
+        aria-label="Menu principal"
+    >
+
+        <a
+            href="{{ url_for('main.dashboard') }}"
+            class="menu_item {% if request.endpoint == 'main.dashboard' %}ativo{% endif %}"
+            title="Dashboard"
+        >
+            <span class="menu_icone">🏠</span>
+            <span class="menu_texto">Dashboard</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('perfil.listar') }}"
+            class="menu_item {% if request.endpoint == 'perfil.listar' %}ativo{% endif %}"
+            title="Meu perfil"
+        >
+            <span class="menu_icone">👤</span>
+            <span class="menu_texto">Meu perfil</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('clientes.listar') }}"
+            class="menu_item {% if request.endpoint == 'clientes.listar' %}ativo{% endif %}"
+            title="Clientes"
+        >
+            <span class="menu_icone">👥</span>
+            <span class="menu_texto">Clientes</span>
+        </a>
+
+        <a
+            href="{{ url_for('amigurumis.listar') }}"
+            class="menu_item {% if request.endpoint == 'amigurumis.listar' %}ativo{% endif %}"
+            title="Amigurumis"
+        >
+            <span class="menu_icone">🧸</span>
+            <span class="menu_texto">Amigurumis</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('pedidos.novo') }}"
+            class="menu_item"
+            title="Nova encomenda"
+        >
+            <span class="menu_icone">➕</span>
+            <span class="menu_texto">Nova encomenda</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('pedidos.selecionar_edicao') }}"
+            class="menu_item"
+            title="Editar encomenda"
+        >
+            <span class="menu_icone">✏️</span>
+            <span class="menu_texto">Editar encomenda</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('pedidos.listar') }}"
+            class="menu_item {% if request.endpoint == 'pedidos.listar' %}ativo{% endif %}"
+            title="Pedidos"
+        >
+            <span class="menu_icone">📦</span>
+            <span class="menu_texto">Pedidos</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('pedidos.finalizados') }}"
+            class="menu_item {% if request.endpoint == 'pedidos.finalizados' %}ativo{% endif %}"
+            title="Pedidos finalizados"
+        >
+            <span class="menu_icone">✅</span>
+            <span class="menu_texto">Pedidos finalizados</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('pagamentos.listar') }}"
+            class="menu_item {% if request.endpoint == 'pagamentos.listar' %}ativo{% endif %}"
+            title="Pagamentos"
+        >
+            <span class="menu_icone">💰</span>
+            <span class="menu_texto">Pagamentos</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('anotacoes.listar') }}"
+            class="menu_item {% if request.endpoint == 'anotacoes.listar' %}ativo{% endif %}"
+            title="Anotações"
+        >
+            <span class="menu_icone">📝</span>
+            <span class="menu_texto">Anotações</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('relatorios.listar') }}"
+            class="menu_item {% if request.endpoint == 'relatorios.listar' %}ativo{% endif %}"
+            title="Relatórios"
+        >
+            <span class="menu_icone">📊</span>
+            <span class="menu_texto">Relatórios</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('suporte.listar') }}"
+            class="menu_item {% if request.endpoint == 'suporte.listar' %}ativo{% endif %}"
+            title="Suporte"
+        >
+            <span class="menu_icone">🛠️</span>
+            <span class="menu_texto">Suporte</span>
+        </a>
+
+
+        <a
+            href="{{ url_for('configuracoes.listar') }}"
+            class="menu_item {% if request.endpoint == 'configuracoes.listar' %}ativo{% endif %}"
+            title="Configurações"
+        >
+            <span class="menu_icone">⚙️</span>
+            <span class="menu_texto">Configurações</span>
+        </a>
+
+    </nav>
+
+
+    <!-- =====================================================
+         SAIR
+    ====================================================== -->
+
+    <div class="menu_rodape">
+
+        <a
+            href="{{ url_for('auth.logout') }}"
+            class="menu_item sair"
+            title="Sair"
+        >
+            <span class="menu_icone">🚪</span>
+            <span class="menu_texto">Sair</span>
+        </a>
+
+    </div>
+
+</aside>

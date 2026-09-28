@@ -1,0 +1,320 @@
+<!-- =========================================================
+     TELA: SELECIONAR ENCOMENDA PARA EDIÇÃO
+
+     Esta tela é responsável por listar as encomendas
+     disponíveis para edição.
+
+     Fluxo:
+     Menu "Editar encomenda"
+            ↓
+     selecionar_edicao_pedido.html
+            ↓
+     Usuário escolhe uma encomenda
+            ↓
+     editar_encomenda.html
+
+     IMPORTANTE:
+     Esta tela NÃO edita diretamente a encomenda.
+     Ela serve apenas para selecionar qual encomenda
+     será editada.
+========================================================= -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Selecionar Encomenda</title>
+
+
+    <!-- CSS GERAL -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+
+    <!-- CSS ESPECÍFICO -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/selecionar_edicao_pedido.css') }}">
+
+    <!-- CSS MENU-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/menu.css') }}">
+
+</head>
+
+
+<body class="tela_selecionar_edicao">
+
+
+    {% include "_menu.html" %}
+
+
+    <main class="conteudo_principal">
+
+
+        <!-- =====================================================
+             CABEÇALHO
+        ====================================================== -->
+
+        <header class="cabecalho_pagina">
+
+            <div>
+
+                <span class="subtitulo_pagina">
+                    Encomendas
+                </span>
+
+                <h1>
+                    Editar encomenda
+                </h1>
+
+                <p>
+                    Selecione uma encomenda para alterar seus dados.
+                </p>
+
+            </div>
+
+
+            <a href="{{ url_for('pedidos.listar') }}" class="botao_secundario">
+                ← Voltar
+            </a>
+
+        </header>
+
+
+
+        <!-- =====================================================
+             MENSAGENS
+        ====================================================== -->
+
+        {% with mensagens = get_flashed_messages(with_categories=true) %}
+
+        {% if mensagens %}
+
+        <div class="mensagens_flash">
+
+            {% for categoria, mensagem in mensagens %}
+
+            <div class="mensagem_flash {{ categoria }}">
+                {{ mensagem }}
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        {% endif %}
+
+        {% endwith %}
+
+
+
+        <!-- =====================================================
+             LISTA DE ENCOMENDAS
+        ====================================================== -->
+
+        <section class="card_formulario">
+
+
+            <div class="cabecalho_card">
+
+                <div>
+
+                    <h2>
+                        Encomendas disponíveis
+                    </h2>
+
+                    <p>
+                        Escolha a encomenda que deseja editar.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            {% if pedidos %}
+
+
+            <div class="lista_pedidos_edicao">
+
+
+                {% for pedido in pedidos %}
+
+                <article class="pedido_edicao">
+
+
+                    <!-- INFORMAÇÕES -->
+
+                    <div class="informacoes_pedido_edicao">
+
+                        <div class="identificacao_pedido">
+
+                            <span class="subtitulo_pedido">
+                                Encomenda #{{ pedido.id }}
+                            </span>
+
+                            <h3>
+                                {{ pedido.nome or 'Sem nome' }}
+                            </h3>
+
+                        </div>
+
+
+                        <div class="dados_pedido_edicao">
+
+                            <div>
+
+                                <span class="rotulo_dado">
+                                    Cliente
+                                </span>
+
+                                <strong>
+                                    {{ pedido.cliente_nome_snapshot or 'Não informado' }}
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="rotulo_dado">
+                                    Data
+                                </span>
+
+                                <strong>
+
+                                    {% if pedido.data_pedido %}
+
+                                    {{ pedido.data_pedido.strftime('%d/%m/%Y') }}
+
+                                    {% else %}
+
+                                    Não informada
+
+                                    {% endif %}
+
+                                </strong>
+
+                            </div>
+
+
+                            <div>
+
+                                <span class="rotulo_dado">
+                                    Forma de recebimento
+                                </span>
+
+                                <strong>
+
+                                    {% if pedido.forma_recebimento %}
+
+                                    {% if pedido.forma_recebimento.value == 'entrega' %}
+
+                                    Entrega
+
+                                    {% elif pedido.forma_recebimento.value == 'retirada' %}
+
+                                    Retirada
+
+                                    {% else %}
+
+                                    A definir
+
+                                    {% endif %}
+
+                                    {% else %}
+
+                                    A definir
+
+                                    {% endif %}
+
+                                </strong>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- AÇÃO -->
+
+                    <div class="acoes_pedido_edicao">
+
+                        <a href="{{ url_for(
+                                        'pedidos.editar',
+                                        pedido_id=pedido.id
+                                    ) }}" class="botao_principal">
+                            ✏️ Editar
+                        </a>
+
+                    </div>
+
+
+                </article>
+
+                {% endfor %}
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- =================================================
+                     ESTADO VAZIO
+                ================================================== -->
+
+            <div class="estado_vazio">
+
+                <div class="icone_estado_vazio">
+                    📦
+                </div>
+
+                <h3>
+                    Nenhuma encomenda disponível
+                </h3>
+
+                <p>
+                    Não existem encomendas disponíveis para edição.
+                </p>
+
+
+                <a href="{{ url_for('pedidos.listar') }}" class="botao_principal">
+                    Voltar para pedidos
+                </a>
+
+            </div>
+
+
+            {% endif %}
+
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT GERAL
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
+
+    <!-- =====================================================
+         JAVASCRIPT DO MENU
+    ====================================================== -->
+
+    <script src="{{ url_for('static', filename='js/menu.js') }}" defer></script>
+
+
+</body>
+
+</html>
